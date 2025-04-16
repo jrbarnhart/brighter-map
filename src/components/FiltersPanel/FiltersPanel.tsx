@@ -2,7 +2,6 @@ import { ArrowLeftToLine } from "lucide-react";
 import { Button } from "../ui/button";
 import type { SetStateAction } from "react";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router";
 
 type FiltersPanelProps = {
   open: boolean;
@@ -28,9 +27,6 @@ export default function FiltersPanel({ open, setOpen }: FiltersPanelProps) {
       >
         <ArrowLeftToLine />
       </Button>
-      <Link to="/monsters">Monsters</Link>
-      <Link to="/resources">Resources</Link>
-      <Link to="/">Home</Link>
       <p>Filter Names</p>
       <p>Filter Monsters</p>
       <p>Filter Resources</p>
