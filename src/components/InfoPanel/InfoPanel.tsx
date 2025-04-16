@@ -2,6 +2,7 @@ import { ArrowRightToLine } from "lucide-react";
 import { Button } from "../ui/button";
 import type { SetStateAction } from "react";
 import { cn } from "@/lib/utils";
+import { Outlet } from "react-router";
 
 type InfoPanelProps = {
   open: boolean;
@@ -26,7 +27,7 @@ export default function InfoPanel({ open, setOpen }: InfoPanelProps) {
       >
         <ArrowRightToLine />
       </Button>
-      <p>Info Stuff</p>
+      <Outlet />
     </aside>
   );
 }
