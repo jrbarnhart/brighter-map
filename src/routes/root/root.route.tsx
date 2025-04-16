@@ -1,7 +1,5 @@
-import FiltersPanel from "@/components/FiltersPanel/FiltersPanel";
-import InfoPanel from "@/components/InfoPanel/InfoPanel";
-import MapControls from "@/components/MapControls/MapControls";
-import WorldMap from "@/components/WorldMap/WorldMap";
+import MapApp from "@/components/MapApp/MapApp";
+
 // import useLazyQueries from "@/lib/hooks/useLazyQueries";
 import { baseMapDataQueryOptions } from "@/queries/baseMapData/baseMapDataQueryOptions";
 import { useQuery } from "@tanstack/react-query";
@@ -18,25 +16,20 @@ function RootRoute() {
   // Lazy data loading
   //const { data: lazyData, handlers: lazyHandlers } = useLazyQueries();
 
+  // TODO: Replace with loading interface
   if (isLoading) return <p>Loading...</p>;
 
+  // TODO: Throw an error after error boundary established with react router
   if (isError || !data) return <p>Error!</p>;
 
   return (
-    <div
-      id="app-container"
-      className="relative h-svh w-svw flex overflow-hidden"
-    >
-      <FiltersPanel open={filtersOpen} setOpen={setFiltersOpen} />
-      <div className="w-full absolute top-0 right-0 z-10 p-8">
-        <MapControls
-          setFiltersOpen={setFiltersOpen}
-          setInfoOpen={setInfoOpen}
-        />
-      </div>
-      <WorldMap baseMapData={data} />
-      <InfoPanel open={infoOpen} setOpen={setInfoOpen} />
-    </div>
+    <MapApp
+      baseMapData={data}
+      filtersOpen={filtersOpen}
+      setFiltersOpen={setFiltersOpen}
+      infoOpen={infoOpen}
+      setInfoOpen={setInfoOpen}
+    />
   );
 }
 
