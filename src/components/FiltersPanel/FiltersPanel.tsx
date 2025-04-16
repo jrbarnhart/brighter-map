@@ -3,12 +3,42 @@ import { Button } from "../ui/button";
 import type { SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 
+export type FiltersState = {
+  showNames: boolean;
+  setShowNames: React.Dispatch<SetStateAction<boolean>>;
+  showMonsters: boolean;
+  setShowMonsters: React.Dispatch<SetStateAction<boolean>>;
+  showResources: boolean;
+  setShowResources: React.Dispatch<SetStateAction<boolean>>;
+  showPortal: boolean;
+  setShowPortal: React.Dispatch<SetStateAction<boolean>>;
+  showStorage: boolean;
+  setShowStorage: React.Dispatch<SetStateAction<boolean>>;
+};
+
 type FiltersPanelProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  filtersState: FiltersState;
 };
 
-export default function FiltersPanel({ open, setOpen }: FiltersPanelProps) {
+export default function FiltersPanel({
+  open,
+  setOpen,
+  filtersState,
+}: FiltersPanelProps) {
+  const {
+    showNames,
+    setShowNames,
+    showMonsters,
+    setShowMonsters,
+    showResources,
+    setShowResources,
+    showPortal,
+    setShowPortal,
+    showStorage,
+    setShowStorage,
+  } = filtersState;
   return (
     <aside
       className={cn(
@@ -27,7 +57,9 @@ export default function FiltersPanel({ open, setOpen }: FiltersPanelProps) {
       >
         <ArrowLeftToLine />
       </Button>
-      <p>Filter Names</p>
+      <Button className="cursor-pointer bg-blue-800 hover:bg-blue-700">
+        <p>Filter Names</p>
+      </Button>
       <p>Filter Monsters</p>
       <p>Filter Resources</p>
     </aside>

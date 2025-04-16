@@ -1,3 +1,4 @@
+import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 import MapApp from "@/components/MapApp/MapApp";
 
 // import useLazyQueries from "@/lib/hooks/useLazyQueries";
@@ -13,6 +14,25 @@ function RootRoute() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
+  // Filters state
+  const [showNames, setShowNames] = useState(true);
+  const [showMonsters, setShowMonsters] = useState(true);
+  const [showResources, setShowResources] = useState(true);
+  const [showPortal, setShowPortal] = useState(true);
+  const [showStorage, setShowStorage] = useState(true);
+  const filtersState: FiltersState = {
+    showNames,
+    setShowNames,
+    showMonsters,
+    setShowMonsters,
+    showPortal,
+    setShowPortal,
+    showResources,
+    setShowResources,
+    showStorage,
+    setShowStorage,
+  };
+
   // Lazy data loading
   //const { data: lazyData, handlers: lazyHandlers } = useLazyQueries();
 
@@ -26,6 +46,7 @@ function RootRoute() {
     <MapApp
       baseMapData={data}
       filtersOpen={filtersOpen}
+      filtersState={filtersState}
       setFiltersOpen={setFiltersOpen}
       infoOpen={infoOpen}
       setInfoOpen={setInfoOpen}
