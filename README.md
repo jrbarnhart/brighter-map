@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# Brighter Map
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Brighter Map** is a web application that allows users to explore, search, and filter information displayed on the game map from the massively multiplayer online role-playing game (MMO) _Brighter Shores_. Built with modern web technologies, it provides an interactive and intuitive way to access game data.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is built using the following key technologies:
 
-## Expanding the ESLint configuration
+- **[Vite](https://vitejs.dev/)**: A next-generation frontend tooling that provides an extremely fast development experience.
+- **[TypeScript](https://www.typescriptlang.org/)**: A statically typed superset of JavaScript that enhances code maintainability and developer productivity.
+- **[React](https://react.dev/)**: A popular JavaScript library for building user interfaces or UI components.
+- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)**: A React renderer for Three.js, enabling the creation of interactive 3D graphics in the browser.
+- **[TanStack Query (React Query)](https://tanstack.com/query/latest)**: A powerful asynchronous state management library for fetching, caching, synchronizing and updating data in React applications.
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for rapid UI development.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Interactive Map Exploration**: Browse the Brighter Shores game world with pan and zoom capabilities.
+- **Search Functionality**: Quickly find specific locations, NPCs, items, or other data points on the map.
+- **Filtering Options**: Filter displayed information based on various categories (e.g., quest givers, resource nodes, points of interest).
+- **Data Integration**: Fetches real-time (or near real-time) game data from the [Brighter API](https://brshapi.com).
+- **Responsive Design**: Provides a seamless experience across different devices and screen sizes.
+- **2D Map Representation**: Leverages React Three Fiber for performant, component-based rendering of the map.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To run Brighter Map locally, follow these steps:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/jrbarnhart/brighter-map.git
+    cd brighter-map
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  **Start the development server:**
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+
+    This will start the Vite development server, and you can usually access the application at `http://localhost:5173` (or a similar address displayed in your terminal).
+
+## Usage
+
+Once the application is running, you can:
+
+- **Pan and Zoom:** Use your mouse or touch gestures to navigate the Brighter Shores map.
+- **Search:** Enter keywords into the search bar to find specific entities on the map.
+- **Filter:** Use the provided filter options to display only the types of information you are interested in.
+- **Interact:** Click on map markers or points of interest to view detailed information fetched from the Brighter API.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
