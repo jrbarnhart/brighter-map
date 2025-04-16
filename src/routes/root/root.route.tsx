@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router";
 
-function App() {
+function RootRoute() {
   return (
     <div className="h-full w-full flex">
       <div className="h-full w-1/2 bg-amber-500 flex flex-col items-center justify-center">
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default RootRoute;
