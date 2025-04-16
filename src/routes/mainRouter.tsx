@@ -9,7 +9,6 @@ export default function Router() {
           <Route path="/monsters" element={<div>Monster info</div>} />
           <Route path="/resources" element={<div>Resource info</div>} />
         </Route>
-        <Route path="/notchild" element={<div>Not a child!</div>} />
       </Routes>
     </BrowserRouter>
   );
