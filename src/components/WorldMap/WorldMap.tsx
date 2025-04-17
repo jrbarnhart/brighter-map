@@ -6,10 +6,12 @@ import type { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import useCombinedData from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
 import { useNavigate } from "react-router";
+import { SetStateAction } from "react";
 
 type WorldMapProps = {
   baseMapData: BaseMapData;
   filtersState: FiltersState;
+  setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 
 function Controls() {
@@ -27,7 +29,11 @@ function Controls() {
   );
 }
 
-export default function WorldMap({ baseMapData, filtersState }: WorldMapProps) {
+export default function WorldMap({
+  baseMapData,
+  filtersState,
+  setInfoOpen,
+}: WorldMapProps) {
   const combinedRoomData = useCombinedData({ baseMapData });
   const navigate = useNavigate();
 
@@ -44,6 +50,7 @@ export default function WorldMap({ baseMapData, filtersState }: WorldMapProps) {
           <group
             key={`${roomData.name}-${roomData.id.toString()}`}
             onClick={() => {
+              setInfoOpen(true);
               void navigate(`/rooms/${roomData.id.toString()}`);
             }}
           >
