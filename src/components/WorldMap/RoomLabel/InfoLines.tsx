@@ -8,10 +8,10 @@ import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 const INFO_COLORS = {
   monster: "#ff7777", // Red for monsters
-  resource: "#77dd77", // Green for resources
+  resource: "#86fc86", // Green for resources
   portal: "#77bbff", // Blue for portals
-  storage: "#bb77ff", // Purple for storage/rifts
-  obelisk: "#ffdd77", // Yellow for obelisks
+  storage: "#c386fc", // Purple for storage/rifts
+  obelisk: "#ffc94d", // Yellow for obelisks
 };
 
 type InfoLinesProps = {
