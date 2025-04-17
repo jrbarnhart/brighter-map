@@ -64,13 +64,13 @@ export default function MonsterDetails() {
           </InfoLink>
         ))}
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="grid grid-cols-[min-content_1fr] gap-4 items-center whitespace-nowrap">
         <p>Attacks: {data.attackElement}</p>
         <div className="h-10 w-10">{iconMap[data.attackElement]}</div>
-      </div>
-      <div className="flex gap-2 items-center">
         <p>Immune to: {data.immuneElement}</p>
         <div className="h-10 w-10">{iconMap[data.immuneElement]}</div>
+        <p>Vulnerable to: {data.vulnerableElement}</p>
+        <div className="h-10 w-10">{iconMap[data.vulnerableElement]}</div>
       </div>
     </div>
   );
