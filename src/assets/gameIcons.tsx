@@ -12,7 +12,7 @@ export function Arborae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
@@ -82,7 +82,7 @@ export function Cryonae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <path
         stroke="#5aaff2"
@@ -144,7 +144,7 @@ export function Infernae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
@@ -172,7 +172,7 @@ export function Necromae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
@@ -247,7 +247,7 @@ export function Tempestae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
@@ -289,7 +289,7 @@ export function Impact({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
@@ -329,7 +329,7 @@ export function Passive({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <g paintOrder="fill markers stroke">
         <circle
@@ -369,7 +369,7 @@ export function Guard({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
@@ -460,7 +460,7 @@ export function Forager({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <defs>
         <linearGradient id="d">
@@ -694,7 +694,7 @@ export function Fisher({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <defs>
         <radialGradient
@@ -941,7 +941,7 @@ export function Hopeport({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
-      className="game-icon"
+      className="h-full w-min"
     >
       <circle
         cx="16.933"
