@@ -4,12 +4,13 @@ import {
   Impact,
   Infernae,
   Necromae,
+  Passive,
   Tempestae,
 } from "@/assets/gameIcons";
 import { components } from "@/lib/types/apiTypes";
 import { MonsterByIdQueryOptions } from "@/queries/monsters/monstersQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import { XCircle } from "lucide-react";
+import { TriangleAlert, XCircle } from "lucide-react";
 import { useParams } from "react-router";
 import InfoLink from "../InfoLink/InfoLink";
 
@@ -52,6 +53,19 @@ export default function MonsterDetails() {
   return (
     <div className="text-white">
       <h2 className="font-bold text-2xl">{data.name}</h2>
+      <div className="flex items-center gap-3 h-10">
+        {data.passive ? (
+          <>
+            <Passive />
+            <p>Passive </p>
+          </>
+        ) : (
+          <>
+            <TriangleAlert className="h-full w-min text-red-500" />
+            <p>Aggressive </p>
+          </>
+        )}
+      </div>
       <h3>Region: {data.region.name}</h3>
       <div>
         {data.rooms.map((r) => (
@@ -64,13 +78,16 @@ export default function MonsterDetails() {
           </InfoLink>
         ))}
       </div>
-      <div className="grid grid-cols-[min-content_1fr] gap-4 items-center whitespace-nowrap">
-        <p>Attacks: {data.attackElement}</p>
+      <div className="grid grid-cols-[min-content_min-content_1fr] gap-4 items-center whitespace-nowrap">
+        <p>Attacks: </p>
         <div className="h-10 w-10">{iconMap[data.attackElement]}</div>
-        <p>Immune to: {data.immuneElement}</p>
+        {data.attackElement}
+        <p>Immune to: </p>
         <div className="h-10 w-10">{iconMap[data.immuneElement]}</div>
-        <p>Vulnerable to: {data.vulnerableElement}</p>
+        {data.immuneElement}
+        <p>Vulnerable to: </p>
         <div className="h-10 w-10">{iconMap[data.vulnerableElement]}</div>
+        {data.vulnerableElement}
       </div>
     </div>
   );
