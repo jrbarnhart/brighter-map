@@ -13,13 +13,13 @@ export default function InfoPanel({ open, setOpen }: InfoPanelProps) {
   return (
     <aside
       className={cn(
-        "flex flex-col gap-3 p-6 shrink-0 transition-transform duration-300 ease-in-out z-20",
-        "absolute top-0 bottom-0 right-0 bg-background border-l md:w-96 w-full",
-        open ? "translate-x-0" : "translate-x-full"
+        "flex flex-col gap-3 p-6 shrink-0 transition-transform duration-300 ease-in-out z-20 absolute top-0 bottom-0 right-0 bg-stone-900 w-full", // Mobile
+        open ? "translate-x-0" : "translate-x-full", // Translate if open
+        "md:border-l md:w-96" // Desktop
       )}
     >
       <Button
-        className="self-end w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-200 hover:bg-gray-300"
+        className="self-end w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-700 hover:bg-gray-500"
         onClick={() => {
           setOpen(false);
         }}

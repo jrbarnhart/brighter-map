@@ -69,14 +69,13 @@ export default function FiltersPanel({
   return (
     <aside
       className={cn(
-        "flex flex-col gap-3 p-6 w-full shrink-0 transition-transform duration-300 ease-in-out z-20",
-        "absolute left-0 top-0 bottom-0 right-0 bg-background border-r", // Mobile
+        "flex flex-col gap-3 p-6 w-full shrink-0 transition-transform duration-300 ease-in-out z-20 absolute left-0 top-0 bottom-0 right-0 bg-stone-900", // Mobile
         open ? "translate-x-0" : "-translate-x-full", // Translate if open
-        "md:w-60" // Desktop
+        "md:w-60 md:border-r" // Desktop
       )}
     >
       <Button
-        className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-200 hover:bg-gray-300"
+        className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-700 hover:bg-gray-500"
         onClick={() => {
           setOpen(false);
         }}
