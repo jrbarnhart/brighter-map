@@ -9,7 +9,7 @@ import {
 import { components } from "@/lib/types/apiTypes";
 import { MonsterByIdQueryOptions } from "@/queries/monsters/monstersQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import { X } from "lucide-react";
+import { XCircle } from "lucide-react";
 import { useParams } from "react-router";
 import InfoLink from "../InfoLink/InfoLink";
 
@@ -46,7 +46,7 @@ export default function MonsterDetails() {
     NECROMAE: <Necromae />,
     TEMPESTAE: <Tempestae />,
     IMPACT: <Impact />,
-    NONE: <X />,
+    NONE: <XCircle className="h-full w-min" />,
   };
 
   return (
