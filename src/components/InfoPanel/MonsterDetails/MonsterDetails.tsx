@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { TriangleAlert, XCircle } from "lucide-react";
 import { useParams } from "react-router";
 import InfoLink from "../InfoLink/InfoLink";
+import React from "react";
 
 export default function MonsterDetails() {
   const { id } = useParams();
@@ -68,26 +69,35 @@ export default function MonsterDetails() {
       </div>
       <h3>Region: {data.region.name}</h3>
       <div>
-        {data.rooms.map((r) => (
-          <InfoLink
-            to={`/rooms/${r.id.toString()}`}
-            key={`${r.name}-${r.id.toString()}`}
-            variant="room"
-          >
-            {r.name}
-          </InfoLink>
+        {data.rooms.map((r, index) => (
+          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+            <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
+              {r.name}
+            </InfoLink>
+            {index < data.rooms.length - 1 && ", "}
+          </React.Fragment>
         ))}
       </div>
       <div className="grid grid-cols-[min-content_min-content_1fr] gap-4 items-center whitespace-nowrap">
-        <p>Attacks: </p>
+        <h3>Attacks: </h3>
         <div className="h-10 w-10">{iconMap[data.attackElement]}</div>
         {data.attackElement}
-        <p>Immune to: </p>
+        <h3>Immune to: </h3>
         <div className="h-10 w-10">{iconMap[data.immuneElement]}</div>
         {data.immuneElement}
-        <p>Vulnerable to: </p>
+        <h3>Vulnerable to: </h3>
         <div className="h-10 w-10">{iconMap[data.vulnerableElement]}</div>
         {data.vulnerableElement}
+      </div>
+      <div>
+        <h3>Variants:</h3>
+        {data.variants.map((v) => (
+          <React.Fragment key={`${v.name}-${v.id.toString()}`}>
+            <p>
+              {v.name} {data.name}
+            </p>
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
