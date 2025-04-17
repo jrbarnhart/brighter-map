@@ -53,16 +53,16 @@ export default function MonsterDetails() {
   return (
     <div className="text-white">
       <h2 className="font-bold text-2xl">{data.name}</h2>
-      <div className="flex items-center gap-3 h-10">
+      <div className="flex items-center gap-3 h-8">
         {data.passive ? (
           <>
-            <Passive />
             <p>Passive </p>
+            <Passive />
           </>
         ) : (
           <>
-            <TriangleAlert className="h-full w-min text-red-500" />
             <p>Aggressive </p>
+            <TriangleAlert className="h-full w-min text-red-500" />
           </>
         )}
       </div>
