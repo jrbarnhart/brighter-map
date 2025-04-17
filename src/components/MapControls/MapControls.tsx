@@ -1,13 +1,13 @@
-import { BookOpen, ListFilterPlus, Search } from 'lucide-react'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import { Label } from '../ui/label'
-import type { SetStateAction } from 'react'
+import { BookOpen, ListFilterPlus, Search } from "lucide-react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import type { SetStateAction } from "react";
 
 type MapSearchBar = {
-  setFiltersOpen: React.Dispatch<SetStateAction<boolean>>
-  setInfoOpen: React.Dispatch<SetStateAction<boolean>>
-}
+  setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
+  setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
+};
 
 export default function MapControls({
   setFiltersOpen,
@@ -22,7 +22,7 @@ export default function MapControls({
         aria-label="Open Filters Panel"
         className="cursor-pointer bg-sky-800 hover:bg-sky-600 md:h-14 md:w-14"
         onClick={() => {
-          setFiltersOpen(true)
+          setFiltersOpen(true);
         }}
       >
         <ListFilterPlus aria-hidden />
@@ -44,11 +44,11 @@ export default function MapControls({
         aria-label="Open Info Panel"
         className="cursor-pointer bg-green-800 hover:bg-green-600 md:h-14 md:w-14"
         onClick={() => {
-          setInfoOpen(true)
+          setInfoOpen(true);
         }}
       >
         <BookOpen aria-hidden />
       </Button>
     </div>
-  )
+  );
 }
