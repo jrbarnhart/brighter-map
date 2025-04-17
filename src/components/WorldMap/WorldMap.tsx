@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { MapControls } from "@react-three/drei";
 import React from "react";
 import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
@@ -15,7 +15,10 @@ type WorldMapProps = {
 function Controls() {
   const { invalidate } = useThree();
   return (
-    <OrbitControls
+    <MapControls
+      screenSpacePanning={true}
+      panSpeed={1.5}
+      zoomSpeed={1.5}
       enableRotate={false}
       onChange={() => {
         invalidate();
