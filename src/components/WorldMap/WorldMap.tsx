@@ -14,11 +14,7 @@ type WorldMapProps = {
   setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 
-type ControlsProps = {
-  enabled: boolean;
-};
-
-function Controls({ enabled }: ControlsProps) {
+function Controls() {
   const { invalidate } = useThree();
 
   return (
@@ -27,7 +23,6 @@ function Controls({ enabled }: ControlsProps) {
       panSpeed={1.5}
       zoomSpeed={1.5}
       enableRotate={false}
-      enabled={enabled}
       onChange={() => {
         invalidate();
       }}
@@ -42,17 +37,17 @@ export default function WorldMap({
 }: WorldMapProps) {
   const combinedRoomData = useCombinedData({ baseMapData });
   const navigate = useNavigate();
-  const [controlsEnabled, setControlsEnabled] = useState(true);
+
+  const [blockEvents, setBlockEvents] = useState(false);
 
   const handleRoomClick = (roomId: string) => {
+    setBlockEvents(true);
     setInfoOpen(true);
-    setControlsEnabled(false);
     void navigate(`/rooms/${roomId}`);
 
-    // Re-enable controls after animation completes
     setTimeout(() => {
-      setControlsEnabled(true);
-    }, 500); // Adjust timing to match your animation duration
+      setBlockEvents(false);
+    }, 300);
   };
 
   return (
@@ -63,7 +58,7 @@ export default function WorldMap({
         frameloop="demand"
       >
         <ambientLight />
-        <Controls enabled={controlsEnabled} />
+        <Controls />
         {combinedRoomData.map((roomData) => (
           <group
             key={`${roomData.name}-${roomData.id.toString()}`}
@@ -76,6 +71,12 @@ export default function WorldMap({
           </group>
         ))}
       </Canvas>
+      {blockEvents && (
+        <div
+          className="absolute inset-0 z-50"
+          style={{ pointerEvents: "all" }}
+        />
+      )}
     </div>
   );
 }
