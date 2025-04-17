@@ -7,6 +7,7 @@ import type { CombinedRoomData } from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 const INFO_COLORS = {
+  // Should match variables in styles.css for consistency
   monster: "#ff7777", // Red for monsters
   resource: "#86fc86", // Green for resources
   portal: "#77bbff", // Blue for portals
