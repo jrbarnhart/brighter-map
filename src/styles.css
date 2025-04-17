@@ -79,6 +79,13 @@
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
   --sidebar-border: oklch(0.923 0.003 48.717);
   --sidebar-ring: oklch(0.709 0.01 56.259);
+
+  /* Info Colors */
+  --monster: oklch(72.99% 0.166 22.05);
+  --resource: oklch(89.5% 0.19 143.78);
+  --portal: oklch(77.4% 0.12 249.62);
+  --storage: oklch(72.78% 0.174 306.41);
+  --obelisk: oklch(86.25% 0.149 84.65);
 }
 
 .dark {
