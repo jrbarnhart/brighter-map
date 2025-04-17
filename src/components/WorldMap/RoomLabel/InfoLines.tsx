@@ -53,7 +53,7 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
     if (portal && showPortal) lines.push({ text: "🌐Portal", type: "portal" });
     if (rift && showStorage) lines.push({ text: "🌀Storage", type: "storage" });
     if (obelisk && showObelisk)
-      lines.push({ text: "🗿Obelisk", type: "obelisk" });
+      lines.push({ text: "🏛️Obelisk", type: "obelisk" });
 
     return lines;
   }, [
