@@ -34,7 +34,7 @@ export default function WorldMap({ baseMapData, filtersState }: WorldMapProps) {
         className="bg-stone-800"
         frameloop="demand"
       >
-        <ambientLight />
+        <ambientLight intensity={100} />
         <Controls />
         {combinedRoomData.map((roomData) => (
           <React.Fragment key={`${roomData.name}-${roomData.id.toString()}`}>
