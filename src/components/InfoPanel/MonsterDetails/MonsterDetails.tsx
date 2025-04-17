@@ -15,9 +15,9 @@ import InfoLink from "../InfoLink/InfoLink";
 
 export default function MonsterDetails() {
   const { id } = useParams();
-  const { data, isLoading, error } = useQuery(
-    MonsterByIdQueryOptions(id || -1)
-  ); // -1 b/c all real ids are +
+  const idNum = Number(id);
+
+  const { data, isLoading, error } = useQuery(MonsterByIdQueryOptions(idNum));
 
   if (isLoading) {
     return (
@@ -64,9 +64,13 @@ export default function MonsterDetails() {
           </InfoLink>
         ))}
       </div>
-      <div className="flex items-center">
+      <div className="flex gap-2 items-center">
         <p>Attacks: {data.attackElement}</p>
-        {iconMap[data.attackElement]}
+        <div className="h-10 w-10">{iconMap[data.attackElement]}</div>
+      </div>
+      <div className="flex gap-2 items-center">
+        <p>Immune to: {data.immuneElement}</p>
+        <div className="h-10 w-10">{iconMap[data.immuneElement]}</div>
       </div>
     </div>
   );
