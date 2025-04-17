@@ -40,7 +40,6 @@ export default function WorldMap({
 
   const [blockEvents, setBlockEvents] = useState(false);
   const clickStartPositionRef = useRef<{ x: number; y: number } | null>(null);
-  const [dist, setDist] = useState({ x: 0, y: 0 });
 
   const handleRoomClick = (roomId: string, event: ThreeEvent<MouseEvent>) => {
     // If this wasn't a simple click (was a drag), do nothing
@@ -51,7 +50,6 @@ export default function WorldMap({
       const dy = Math.abs(
         event.nativeEvent.clientY - clickStartPositionRef.current.y
       );
-      setDist({ x: dx, y: dy });
 
       // If moved more than threshold in world units, consider it a drag
       if (dx > 5 || dy > 5) {
@@ -105,11 +103,6 @@ export default function WorldMap({
           style={{ pointerEvents: "all" }}
         />
       )}
-      <div className="absolute top-0 left-0">
-        <p>
-          Moved: X:{dist.x}, Y:{dist.y}
-        </p>
-      </div>
     </div>
   );
 }
