@@ -6,7 +6,7 @@ import type { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import useCombinedData from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
 import { useNavigate } from "react-router";
-import { SetStateAction } from "react";
+import { SetStateAction, useState } from "react";
 
 type WorldMapProps = {
   baseMapData: BaseMapData;
@@ -14,14 +14,20 @@ type WorldMapProps = {
   setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 
-function Controls() {
+type ControlsProps = {
+  enabled: boolean;
+};
+
+function Controls({ enabled }: ControlsProps) {
   const { invalidate } = useThree();
+
   return (
     <MapControls
       screenSpacePanning={true}
       panSpeed={1.5}
       zoomSpeed={1.5}
       enableRotate={false}
+      enabled={enabled}
       onChange={() => {
         invalidate();
       }}
@@ -36,6 +42,18 @@ export default function WorldMap({
 }: WorldMapProps) {
   const combinedRoomData = useCombinedData({ baseMapData });
   const navigate = useNavigate();
+  const [controlsEnabled, setControlsEnabled] = useState(true);
+
+  const handleRoomClick = (roomId: string) => {
+    setInfoOpen(true);
+    setControlsEnabled(false);
+    void navigate(`/rooms/${roomId}`);
+
+    // Re-enable controls after animation completes
+    setTimeout(() => {
+      setControlsEnabled(true);
+    }, 500); // Adjust timing to match your animation duration
+  };
 
   return (
     <div id="canvas-container" className="h-full w-full">
@@ -45,13 +63,12 @@ export default function WorldMap({
         frameloop="demand"
       >
         <ambientLight />
-        <Controls />
+        <Controls enabled={controlsEnabled} />
         {combinedRoomData.map((roomData) => (
           <group
             key={`${roomData.name}-${roomData.id.toString()}`}
             onClick={() => {
-              setInfoOpen(true);
-              void navigate(`/rooms/${roomData.id.toString()}`);
+              handleRoomClick(roomData.id.toString());
             }}
           >
             <RoomShape roomData={roomData} />
