@@ -7,16 +7,23 @@ type InfoLinkProps = {
   children: React.ReactNode;
   to: string;
   variant: InfoLinkVariants;
+  className?: string;
 };
 
-export default function InfoLink({ children, to, variant }: InfoLinkProps) {
+export default function InfoLink({
+  children,
+  to,
+  variant,
+  className,
+}: InfoLinkProps) {
   return (
     <Link
       to={to}
       className={cn(
-        "", // Defaults
+        "underline font-bold text-orange-300 hover:brightness-125", // Defaults
         variant === "room" && "", // Room
-        variant === "monster" && "" // Monster
+        variant === "monster" && "text-monster", // Monster
+        className // User added
       )}
     >
       {children}
