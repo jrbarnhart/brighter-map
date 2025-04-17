@@ -1,4 +1,4 @@
-import { ArrowLeftToLine } from "lucide-react";
+import { ArrowLeftToLine, Ban, Check } from "lucide-react";
 import { Button } from "../ui/button";
 import type { SetStateAction } from "react";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,29 @@ type FiltersPanelProps = {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   filtersState: FiltersState;
 };
+
+type BoolButtonProps = {
+  children: React.ReactNode;
+  state: boolean;
+  setState: React.Dispatch<SetStateAction<boolean>>;
+};
+
+function BoolToggleButton({ children, state, setState }: BoolButtonProps) {
+  return (
+    <Button
+      className={cn(
+        "flex justify-start cursor-pointer bg-sky-800 hover:bg-sky-600",
+        !state && "bg-gray-500 hover:bg-gray-700"
+      )}
+      onClick={() => {
+        setState((prev) => !prev);
+      }}
+    >
+      {state ? <Check /> : <Ban />}
+      {children}
+    </Button>
+  );
+}
 
 export default function FiltersPanel({
   open,
@@ -57,11 +80,21 @@ export default function FiltersPanel({
       >
         <ArrowLeftToLine />
       </Button>
-      <Button className="cursor-pointer bg-blue-800 hover:bg-blue-700">
-        <p>Filter Names</p>
-      </Button>
-      <p>Filter Monsters</p>
-      <p>Filter Resources</p>
+      <BoolToggleButton state={showNames} setState={setShowNames}>
+        Show Names
+      </BoolToggleButton>
+      <BoolToggleButton state={showMonsters} setState={setShowMonsters}>
+        Show Monsters
+      </BoolToggleButton>
+      <BoolToggleButton state={showResources} setState={setShowResources}>
+        Show Resources
+      </BoolToggleButton>
+      <BoolToggleButton state={showPortal} setState={setShowPortal}>
+        Show Portal
+      </BoolToggleButton>
+      <BoolToggleButton state={showStorage} setState={setShowStorage}>
+        Show Storage
+      </BoolToggleButton>
     </aside>
   );
 }
