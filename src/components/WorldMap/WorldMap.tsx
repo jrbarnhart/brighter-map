@@ -5,9 +5,11 @@ import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
 import type { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import useCombinedData from "@/lib/hooks/useCombinedData";
+import { FiltersState } from "../FiltersPanel/FiltersPanel";
 
 type WorldMapProps = {
   baseMapData: BaseMapData;
+  filtersState: FiltersState;
 };
 
 function Controls() {
@@ -22,9 +24,7 @@ function Controls() {
   );
 }
 
-export default function WorldMap({ ...props }: WorldMapProps) {
-  const { baseMapData } = props;
-
+export default function WorldMap({ baseMapData, filtersState }: WorldMapProps) {
   const combinedRoomData = useCombinedData({ baseMapData });
 
   return (
@@ -38,7 +38,7 @@ export default function WorldMap({ ...props }: WorldMapProps) {
         {combinedRoomData.map((roomData) => (
           <React.Fragment key={`${roomData.name}-${roomData.id.toString()}`}>
             <RoomShape roomData={roomData} />
-            <RoomLabel roomData={roomData} />
+            <RoomLabel roomData={roomData} filtersState={filtersState} />
           </React.Fragment>
         ))}
       </Canvas>

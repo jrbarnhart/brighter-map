@@ -38,7 +38,7 @@ export default function MapApp({
           setInfoOpen={setInfoOpen}
         />
       </div>
-      <WorldMap baseMapData={baseMapData} />
+      <WorldMap baseMapData={baseMapData} filtersState={filtersState} />
       <InfoPanel open={infoOpen} setOpen={setInfoOpen} />
     </div>
   );
