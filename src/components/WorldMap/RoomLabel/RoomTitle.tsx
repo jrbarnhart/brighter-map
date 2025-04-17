@@ -3,10 +3,9 @@ import { useMemo } from "react";
 
 type RoomTitleProps = {
   name: string;
-  showNames: boolean;
 };
 
-export default function RoomTitle({ name, showNames }: RoomTitleProps) {
+export default function RoomTitle({ name }: RoomTitleProps) {
   // Config Constants
   const OFFSET_Y = 0.2;
   const BG_Z = 0;
@@ -38,10 +37,7 @@ export default function RoomTitle({ name, showNames }: RoomTitleProps) {
   return (
     <>
       {/* Title Background */}
-      <mesh
-        position={[0, -bgDimensions.height / 2 + OFFSET_Y, BG_Z]}
-        visible={showNames}
-      >
+      <mesh position={[0, -bgDimensions.height / 2 + OFFSET_Y, BG_Z]}>
         <RoundedBox
           args={[bgDimensions.width, bgDimensions.height, TEXT_Z - 0.01]}
           radius={0.15}
@@ -57,7 +53,6 @@ export default function RoomTitle({ name, showNames }: RoomTitleProps) {
         anchorX="center"
         anchorY="top"
         fontWeight="bold"
-        visible={showNames}
       >
         {name}
       </Text>

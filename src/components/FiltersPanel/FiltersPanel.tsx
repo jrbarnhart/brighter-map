@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils";
 export type FiltersState = {
   showLabels: boolean;
   setShowLabels: React.Dispatch<SetStateAction<boolean>>;
-  showNames: boolean;
-  setShowNames: React.Dispatch<SetStateAction<boolean>>;
   showMonsters: boolean;
   setShowMonsters: React.Dispatch<SetStateAction<boolean>>;
   showResources: boolean;
@@ -57,8 +55,6 @@ export default function FiltersPanel({
   const {
     showLabels,
     setShowLabels,
-    showNames,
-    setShowNames,
     showMonsters,
     setShowMonsters,
     showResources,
@@ -90,9 +86,6 @@ export default function FiltersPanel({
       </Button>
       <BoolToggleButton state={showLabels} setState={setShowLabels}>
         Show Labels
-      </BoolToggleButton>
-      <BoolToggleButton state={showNames} setState={setShowNames}>
-        Show Names
       </BoolToggleButton>
       <BoolToggleButton state={showMonsters} setState={setShowMonsters}>
         Show Monsters

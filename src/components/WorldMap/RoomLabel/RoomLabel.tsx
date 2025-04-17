@@ -12,7 +12,7 @@ type RoomLabelProps = {
 
 export default function RoomLabel({ roomData, filtersState }: RoomLabelProps) {
   const { name, id, originOffset, points, labelOffset } = roomData;
-  const { showLabels, showNames } = filtersState;
+  const { showLabels } = filtersState;
 
   // Calculate lable position
   const adjustedPoints: Array<[number, number]> = useMemo(() => {
@@ -49,7 +49,7 @@ export default function RoomLabel({ roomData, filtersState }: RoomLabelProps) {
         position={[labelX, labelY, labelZ]}
         visible={showLabels}
       >
-        <RoomTitle name={name} showNames={showNames} />
+        <RoomTitle name={name} />
         <InfoLines roomData={roomData} filtersState={filtersState} />
       </group>
     </>
