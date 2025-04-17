@@ -15,12 +15,15 @@ function RootRoute() {
   const [infoOpen, setInfoOpen] = useState(false);
 
   // Filters state
+  const [showLabels, setShowLabels] = useState(true);
   const [showNames, setShowNames] = useState(true);
   const [showMonsters, setShowMonsters] = useState(true);
   const [showResources, setShowResources] = useState(true);
   const [showPortal, setShowPortal] = useState(true);
   const [showStorage, setShowStorage] = useState(true);
   const filtersState: FiltersState = {
+    showLabels,
+    setShowLabels,
     showNames,
     setShowNames,
     showMonsters,

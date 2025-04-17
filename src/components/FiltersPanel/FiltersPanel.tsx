@@ -4,6 +4,8 @@ import type { SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 
 export type FiltersState = {
+  showLabels: boolean;
+  setShowLabels: React.Dispatch<SetStateAction<boolean>>;
   showNames: boolean;
   setShowNames: React.Dispatch<SetStateAction<boolean>>;
   showMonsters: boolean;
@@ -51,6 +53,8 @@ export default function FiltersPanel({
   filtersState,
 }: FiltersPanelProps) {
   const {
+    showLabels,
+    setShowLabels,
     showNames,
     setShowNames,
     showMonsters,
@@ -80,6 +84,9 @@ export default function FiltersPanel({
       >
         <ArrowLeftToLine />
       </Button>
+      <BoolToggleButton state={showLabels} setState={setShowLabels}>
+        Show Labels
+      </BoolToggleButton>
       <BoolToggleButton state={showNames} setState={setShowNames}>
         Show Names
       </BoolToggleButton>
