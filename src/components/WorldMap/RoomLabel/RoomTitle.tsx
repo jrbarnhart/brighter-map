@@ -1,4 +1,4 @@
-import { Text } from "@react-three/drei";
+import { RoundedBox, Text } from "@react-three/drei";
 import { useMemo } from "react";
 
 type RoomTitleProps = {
@@ -10,7 +10,7 @@ export default function RoomTitle({ name, showNames }: RoomTitleProps) {
   // Config Constants
   const OFFSET_Y = 0.2;
   const BG_Z = 0;
-  const TEXT_Z = 0.01;
+  const TEXT_Z = 0.3;
   const FONT_HEIGHT = 0.5;
   const AVERAGE_FONT_WIDTH = 0.6;
   const PADDING_Y = 0.2;
@@ -42,12 +42,16 @@ export default function RoomTitle({ name, showNames }: RoomTitleProps) {
         position={[0, -bgDimensions.height / 2 + OFFSET_Y, BG_Z]}
         visible={showNames}
       >
-        <planeGeometry args={[bgDimensions.width, bgDimensions.height]} />
-        <meshBasicMaterial color="white" opacity={1} />
+        <RoundedBox
+          args={[bgDimensions.width, bgDimensions.height, TEXT_Z - 0.01]}
+          radius={0.15}
+        >
+          <meshBasicMaterial color="#ffe02e" />
+        </RoundedBox>
       </mesh>
       {/* Room name */}
       <Text
-        position={[0, OFFSET_Y, TEXT_Z]}
+        position={[0, OFFSET_Y + -0.1, TEXT_Z]}
         fontSize={FONT_HEIGHT}
         color="black"
         anchorX="center"
