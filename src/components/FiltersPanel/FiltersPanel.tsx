@@ -94,13 +94,13 @@ export default function FiltersPanel({
         Show Resources
       </BoolToggleButton>
       <BoolToggleButton state={showPortal} setState={setShowPortal}>
-        Show Portal
+        Show Portals
       </BoolToggleButton>
       <BoolToggleButton state={showStorage} setState={setShowStorage}>
         Show Storage
       </BoolToggleButton>
       <BoolToggleButton state={showObelisk} setState={setShowObelisk}>
-        Show Obelisk
+        Show Obelisks
       </BoolToggleButton>
     </aside>
   );
