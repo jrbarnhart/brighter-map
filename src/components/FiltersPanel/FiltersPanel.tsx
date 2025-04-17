@@ -16,6 +16,8 @@ export type FiltersState = {
   setShowPortal: React.Dispatch<SetStateAction<boolean>>;
   showStorage: boolean;
   setShowStorage: React.Dispatch<SetStateAction<boolean>>;
+  showObelisk: boolean;
+  setShowObelisk: React.Dispatch<SetStateAction<boolean>>;
 };
 
 type FiltersPanelProps = {
@@ -65,6 +67,8 @@ export default function FiltersPanel({
     setShowPortal,
     showStorage,
     setShowStorage,
+    showObelisk,
+    setShowObelisk,
   } = filtersState;
   return (
     <aside
@@ -101,6 +105,9 @@ export default function FiltersPanel({
       </BoolToggleButton>
       <BoolToggleButton state={showStorage} setState={setShowStorage}>
         Show Storage
+      </BoolToggleButton>
+      <BoolToggleButton state={showObelisk} setState={setShowObelisk}>
+        Show Obelisk
       </BoolToggleButton>
     </aside>
   );

@@ -21,6 +21,7 @@ function RootRoute() {
   const [showResources, setShowResources] = useState(true);
   const [showPortal, setShowPortal] = useState(true);
   const [showStorage, setShowStorage] = useState(true);
+  const [showObelisk, setShowObelisk] = useState(true);
   const filtersState: FiltersState = {
     showLabels,
     setShowLabels,
@@ -34,6 +35,8 @@ function RootRoute() {
     setShowResources,
     showStorage,
     setShowStorage,
+    showObelisk,
+    setShowObelisk,
   };
 
   // Lazy data loading
