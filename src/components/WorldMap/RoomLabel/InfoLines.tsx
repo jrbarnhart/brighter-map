@@ -4,12 +4,17 @@
 import { Text } from "@react-three/drei";
 import { useMemo } from "react";
 import type { CombinedRoomData } from "@/lib/hooks/useCombinedData";
+import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 type InfoLinesProps = {
   roomData: CombinedRoomData;
+  filtersState: FiltersState;
 };
 
-export default function InfoLines({ roomData }: InfoLinesProps) {
+export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
+  const { showMonsters, showResources, showPortal, showStorage, showObelisk } =
+    filtersState;
+
   // Config Constants
   const OFFSET_Y = -0.7;
   const BG_Z = -0.01;
@@ -28,13 +33,26 @@ export default function InfoLines({ roomData }: InfoLinesProps) {
   const infoLines = useMemo(() => {
     const lines: Array<string> = [];
 
-    if (monsters.length) lines.push(...monsters.map((m) => `🧟${m.name}`));
-    if (resources.length) lines.push(...resources.map((r) => `🪵${r.name}`));
-    if (portal) lines.push("🌐Portal");
-    if (obelisk) lines.push("🗿Obelisk");
-    if (rift) lines.push("🌀Storage");
+    if (monsters.length && showMonsters)
+      lines.push(...monsters.map((m) => `🧟${m.name}`));
+    if (resources.length && showResources)
+      lines.push(...resources.map((r) => `🪵${r.name}`));
+    if (portal && showPortal) lines.push("🌐Portal");
+    if (rift && showStorage) lines.push("🌀Storage");
+    if (obelisk && showObelisk) lines.push("🗿Obelisk");
     return lines;
-  }, [monsters, obelisk, portal, resources, rift]);
+  }, [
+    monsters,
+    obelisk,
+    portal,
+    resources,
+    rift,
+    showMonsters,
+    showObelisk,
+    showPortal,
+    showResources,
+    showStorage,
+  ]);
 
   // Estimate background size
   const bgDimensions = useMemo(() => {
