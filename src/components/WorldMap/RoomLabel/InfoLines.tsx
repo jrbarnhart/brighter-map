@@ -11,7 +11,7 @@ const INFO_COLORS = {
   resource: "#86fc86", // Green for resources
   portal: "#77bbff", // Blue for portals
   storage: "#c386fc", // Purple for storage/rifts
-  obelisk: "#ffc94d", // Yellow for obelisks
+  obelisk: "#ffc94d", // Orange for obelisks
 };
 
 type InfoLinesProps = {
