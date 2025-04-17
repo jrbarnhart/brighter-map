@@ -15,8 +15,8 @@ export default function InfoLink({ children, to, variant }: InfoLinkProps) {
       to={to}
       className={cn(
         "", // Defaults
-        "", // Room
-        "" // Monster
+        variant === "room" && "", // Room
+        variant === "monster" && "" // Monster
       )}
     >
       {children}
