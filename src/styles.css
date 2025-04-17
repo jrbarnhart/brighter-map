@@ -44,6 +44,13 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  /* Info Colors */
+  --color-monster: oklch(72.99% 0.166 22.05);
+  --color-monster-bg: oklch(0.47 0.1603 22.05);
+  --color-resource: oklch(89.5% 0.19 143.78);
+  --color-portal: oklch(77.4% 0.12 249.62);
+  --color-storage: oklch(72.78% 0.174 306.41);
+  --color-obelisk: oklch(86.25% 0.149 84.65);
 }
 
 :root {
@@ -79,13 +86,6 @@
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
   --sidebar-border: oklch(0.923 0.003 48.717);
   --sidebar-ring: oklch(0.709 0.01 56.259);
-
-  /* Info Colors */
-  --monster: oklch(72.99% 0.166 22.05);
-  --resource: oklch(89.5% 0.19 143.78);
-  --portal: oklch(77.4% 0.12 249.62);
-  --storage: oklch(72.78% 0.174 306.41);
-  --obelisk: oklch(86.25% 0.149 84.65);
 }
 
 .dark {

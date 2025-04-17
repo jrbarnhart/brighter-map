@@ -28,14 +28,21 @@ type BoolButtonProps = {
   children: React.ReactNode;
   state: boolean;
   setState: React.Dispatch<SetStateAction<boolean>>;
+  className?: string;
 };
 
-function BoolToggleButton({ children, state, setState }: BoolButtonProps) {
+function BoolToggleButton({
+  children,
+  state,
+  setState,
+  className,
+}: BoolButtonProps) {
   return (
     <Button
       className={cn(
-        "flex justify-start cursor-pointer bg-sky-800 hover:bg-sky-600",
-        !state && "bg-gray-500 hover:bg-gray-700"
+        "flex justify-start cursor-pointer bg-gray-800 hover:bg-gray-600 border border-border",
+        className,
+        !state && "bg-gray-700 hover:bg-gray-500"
       )}
       onClick={() => {
         setState((prev) => !prev);
@@ -86,19 +93,39 @@ export default function FiltersPanel({
       <BoolToggleButton state={showLabels} setState={setShowLabels}>
         Show Labels
       </BoolToggleButton>
-      <BoolToggleButton state={showMonsters} setState={setShowMonsters}>
+      <BoolToggleButton
+        state={showMonsters}
+        setState={setShowMonsters}
+        className="bg-red-800 hover:bg-red-700"
+      >
         Show Monsters
       </BoolToggleButton>
-      <BoolToggleButton state={showResources} setState={setShowResources}>
+      <BoolToggleButton
+        state={showResources}
+        setState={setShowResources}
+        className="bg-green-800 hover:bg-green-600"
+      >
         Show Resources
       </BoolToggleButton>
-      <BoolToggleButton state={showPortal} setState={setShowPortal}>
+      <BoolToggleButton
+        state={showPortal}
+        setState={setShowPortal}
+        className="bg-sky-800 hover:bg-sky-600"
+      >
         Show Portals
       </BoolToggleButton>
-      <BoolToggleButton state={showStorage} setState={setShowStorage}>
+      <BoolToggleButton
+        state={showStorage}
+        setState={setShowStorage}
+        className="bg-purple-800 hover:bg-purple-600"
+      >
         Show Storage
       </BoolToggleButton>
-      <BoolToggleButton state={showObelisk} setState={setShowObelisk}>
+      <BoolToggleButton
+        state={showObelisk}
+        setState={setShowObelisk}
+        className="bg-yellow-600 hover:bg-yellow-500"
+      >
         Show Obelisks
       </BoolToggleButton>
     </aside>
