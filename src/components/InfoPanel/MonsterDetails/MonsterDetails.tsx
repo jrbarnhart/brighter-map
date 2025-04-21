@@ -24,7 +24,7 @@ export default function MonsterDetails() {
   if (isLoading) {
     return (
       <div>
-        <p>Loading room data...</p>
+        <p>Loading data...</p>
       </div>
     );
   }
