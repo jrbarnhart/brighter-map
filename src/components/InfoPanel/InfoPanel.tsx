@@ -1,8 +1,8 @@
-import { ArrowRightToLine } from "lucide-react";
+import { ArrowRightToLine, Home } from "lucide-react";
 import { Button } from "../ui/button";
 import type { SetStateAction } from "react";
 import { cn } from "@/lib/utils";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 
 type InfoPanelProps = {
   open: boolean;
@@ -18,15 +18,25 @@ export default function InfoPanel({ open, setOpen }: InfoPanelProps) {
         "md:border-l md:w-96" // Desktop
       )}
     >
-      <Button
-        className="self-end w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-700 hover:bg-gray-500"
-        onClick={() => {
-          setOpen(false);
-        }}
-        inert={!open ? true : undefined}
-      >
-        <ArrowRightToLine />
-      </Button>
+      <div className="flex items-center justify-between">
+        <Link
+          to={"/"}
+          aria-label="Home"
+          className="flex items-center gap-1 cursor-pointer text-white py-2 px-3 w-12 h-12 rounded-md bg-gray-700 hover:bg-gray-500"
+        >
+          <Home />
+        </Link>
+        <Button
+          aria-label="Close Info Panel"
+          className="self-end w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-700 hover:bg-gray-500"
+          onClick={() => {
+            setOpen(false);
+          }}
+          inert={!open ? true : undefined}
+        >
+          <ArrowRightToLine />
+        </Button>
+      </div>
       <Outlet />
     </aside>
   );
