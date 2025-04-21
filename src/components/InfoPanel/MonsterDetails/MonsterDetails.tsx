@@ -14,6 +14,9 @@ import { TriangleAlert, XCircle } from "lucide-react";
 import { useParams } from "react-router";
 import InfoLink from "../InfoLink/InfoLink";
 import React from "react";
+import InfoContainer from "../infoContents/InfoContainer";
+import InfoTitle from "../infoContents/InfoTitle";
+import InfoLabel from "../infoContents/InfoLabel";
 
 export default function MonsterDetails() {
   const { id } = useParams();
@@ -52,22 +55,22 @@ export default function MonsterDetails() {
   };
 
   return (
-    <div className="text-white">
-      <h2 className="font-bold text-2xl">{data.name}</h2>
+    <InfoContainer>
+      <InfoTitle>{data.name}</InfoTitle>
       <div className="flex items-center gap-3 h-8">
         {data.passive ? (
           <>
-            <p>Passive </p>
+            <InfoLabel>Passive </InfoLabel>
             <Passive />
           </>
         ) : (
           <>
-            <p>Aggressive </p>
+            <InfoLabel>Aggressive </InfoLabel>
             <TriangleAlert className="h-full w-min text-red-500" />
           </>
         )}
       </div>
-      <h3>Region: {data.region.name}</h3>
+      <InfoLabel>Region: {data.region.name}</InfoLabel>
       <div>
         {data.rooms.map((r, index) => (
           <React.Fragment key={`${r.name}-${r.id.toString()}`}>
@@ -79,18 +82,18 @@ export default function MonsterDetails() {
         ))}
       </div>
       <div className="grid grid-cols-[min-content_min-content_1fr] gap-4 items-center whitespace-nowrap">
-        <h3>Attacks: </h3>
+        <InfoLabel>Attacks: </InfoLabel>
         <div className="h-10 w-10">{iconMap[data.attackElement]}</div>
         {data.attackElement}
-        <h3>Immune to: </h3>
+        <InfoLabel>Immune to: </InfoLabel>
         <div className="h-10 w-10">{iconMap[data.immuneElement]}</div>
         {data.immuneElement}
-        <h3>Vulnerable to: </h3>
+        <InfoLabel>Vulnerable to: </InfoLabel>
         <div className="h-10 w-10">{iconMap[data.vulnerableElement]}</div>
         {data.vulnerableElement}
       </div>
       <div>
-        <h3>Variants:</h3>
+        <InfoLabel>Variants:</InfoLabel>
         {data.variants.map((v) => (
           <React.Fragment key={`${v.name}-${v.id.toString()}`}>
             <p>
@@ -99,6 +102,6 @@ export default function MonsterDetails() {
           </React.Fragment>
         ))}
       </div>
-    </div>
+    </InfoContainer>
   );
 }
