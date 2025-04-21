@@ -1509,9 +1509,15 @@ export interface components {
             resourceIds?: number[];
             questStepIds?: number[];
         };
-        NpcBaseEntity: {
+        VendorBaseEntity: {
+            id: number;
+            name?: string | null;
+            npcId: number;
+        };
+        NpcBaseEntityWithVendor: {
             id: number;
             name: string;
+            vendor?: components["schemas"]["VendorBaseEntity"];
         };
         ResourceBaseEntity: {
             id: number;
@@ -1539,7 +1545,7 @@ export interface components {
             rift: boolean;
             craftingSkills: components["schemas"]["CraftingSkillBaseEntity"][];
             monsters: components["schemas"]["MonsterBaseEntity"][];
-            npcs: components["schemas"]["NpcBaseEntity"][];
+            npcs: components["schemas"]["NpcBaseEntityWithVendor"][];
             resources: components["schemas"]["ResourceBaseEntity"][];
             questSteps: components["schemas"]["QuestStepBaseEntity"][];
         };
@@ -1825,11 +1831,6 @@ export interface components {
             skillId: number;
             skill: components["schemas"]["GatheringSkillBaseEntity"];
             passive: boolean;
-        };
-        VendorBaseEntity: {
-            id: number;
-            name?: string | null;
-            npcId: number;
         };
         DropTableBaseEntity: {
             id: number;
@@ -2211,6 +2212,10 @@ export interface components {
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
             miscItemIds?: number[];
+        };
+        NpcBaseEntity: {
+            id: number;
+            name: string;
         };
         VendorEntity: {
             id: number;
