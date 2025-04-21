@@ -39,48 +39,58 @@ export default function VendorDetails() {
         </InfoLink>
       </div>
       <InfoLabel>Stock:</InfoLabel>
-      {data.miscItems.length > 0 && <InfoLabel>Misc Items:</InfoLabel>}
-      {data.miscItems.map((i, index) => (
-        <React.Fragment
-          key={`misc-item-${i.id.toString()}-${index.toString()}`}
-        >
-          <p>{i.name}</p>
-        </React.Fragment>
-      ))}
-      {data.consumableVariants.length > 0 && (
-        <InfoLabel>Consumables:</InfoLabel>
-      )}
-      {data.consumableVariants.map((c, index) => (
-        <React.Fragment
-          key={`consumable-variant-${c.id.toString()}-${index.toString()}`}
-        >
-          <p>{c.name}</p>
-        </React.Fragment>
-      ))}
-      {data.armorVariants.length > 0 && <InfoLabel>Armor:</InfoLabel>}
-      {data.armorVariants.map((a, index) => (
-        <React.Fragment
-          key={`armor-variant-${a.id.toString()}-${index.toString()}`}
-        >
-          <p>{a.name}</p>
-        </React.Fragment>
-      ))}
-      {data.weaponVariants.length > 0 && <InfoLabel>Weapons:</InfoLabel>}
-      {data.weaponVariants.map((w, index) => (
-        <React.Fragment
-          key={`weapon-variants-${w.id.toString()}-${index.toString()}`}
-        >
-          <p>{w.name}</p>
-        </React.Fragment>
-      ))}
-      {data.resourceVariants.length > 0 && <InfoLabel>Resources:</InfoLabel>}
-      {data.resourceVariants.map((r, index) => (
-        <React.Fragment
-          key={`resource-variant-${r.id.toString()}-${index.toString()}`}
-        >
-          <p>{r.name}</p>
-        </React.Fragment>
-      ))}
+      <div>
+        {data.miscItems.length > 0 && <InfoLabel>Misc Items:</InfoLabel>}
+        {data.miscItems.map((i, index) => (
+          <React.Fragment
+            key={`misc-item-${i.id.toString()}-${index.toString()}`}
+          >
+            <p>{i.name}</p>
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        {data.consumableVariants.length > 0 && (
+          <InfoLabel>Consumables:</InfoLabel>
+        )}
+        {data.consumableVariants.map((c, index) => (
+          <React.Fragment
+            key={`consumable-variant-${c.id.toString()}-${index.toString()}`}
+          >
+            <p>{c.name}</p>
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        {data.armorVariants.length > 0 && <InfoLabel>Armor:</InfoLabel>}
+        {data.armorVariants.map((a, index) => (
+          <React.Fragment
+            key={`armor-variant-${a.id.toString()}-${index.toString()}`}
+          >
+            <p>{a.name}</p>
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        {data.weaponVariants.length > 0 && <InfoLabel>Weapons:</InfoLabel>}
+        {data.weaponVariants.map((w, index) => (
+          <React.Fragment
+            key={`weapon-variants-${w.id.toString()}-${index.toString()}`}
+          >
+            <p>{w.name}</p>
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        {data.resourceVariants.length > 0 && <InfoLabel>Resources:</InfoLabel>}
+        {data.resourceVariants.map((r, index) => (
+          <React.Fragment
+            key={`resource-variant-${r.id.toString()}-${index.toString()}`}
+          >
+            <p>{r.name}</p>
+          </React.Fragment>
+        ))}
+      </div>
     </InfoContainer>
   );
 }

@@ -45,23 +45,27 @@ export default function ResourceDetails() {
         <InfoLabel>Skill:</InfoLabel>
         <p>{data.skill.name}</p>
       </div>
-      {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
-      {data.rooms.map((r, index) => (
-        <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-          <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-            {r.name}
-          </InfoLink>
-          {index !== data.rooms.length - 1 && ", "}
-        </React.Fragment>
-      ))}
-      <InfoLabel>Variants:</InfoLabel>
-      {data.variants.map((v) => (
-        <React.Fragment key={`${v.name}-${v.id.toString()}`}>
-          <p>
-            {v.name} {data.name}
-          </p>
-        </React.Fragment>
-      ))}
+      <div>
+        {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
+        {data.rooms.map((r, index) => (
+          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+            <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
+              {r.name}
+            </InfoLink>
+            {index !== data.rooms.length - 1 && ", "}
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        <InfoLabel>Variants:</InfoLabel>
+        {data.variants.map((v) => (
+          <React.Fragment key={`${v.name}-${v.id.toString()}`}>
+            <p>
+              {v.name} {data.name}
+            </p>
+          </React.Fragment>
+        ))}
+      </div>
     </InfoContainer>
   );
 }

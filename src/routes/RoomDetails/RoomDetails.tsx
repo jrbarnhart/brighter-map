@@ -43,19 +43,17 @@ export default function RoomDetails() {
           <p>{data.craftingSkills.map((skill) => skill.name).join(", ")}</p>
         </>
       )}
-      {data.npcs.length > 0 && (
-        <>
-          <InfoLabel>NPC's:</InfoLabel>
-          {data.npcs.map((n, index) => (
-            <React.Fragment key={`${n.name}-${n.id.toString()}`}>
-              <InfoLink to={`/npcs/${n.id.toString()}`} variant="npc">
-                {n.name}
-              </InfoLink>
-              {index !== data.npcs.length - 1 && ", "}
-            </React.Fragment>
-          ))}
-        </>
-      )}
+      <div>
+        {data.npcs.length > 0 && <InfoLabel>NPC's:</InfoLabel>}
+        {data.npcs.map((n, index) => (
+          <React.Fragment key={`${n.name}-${n.id.toString()}`}>
+            <InfoLink to={`/npcs/${n.id.toString()}`} variant="npc">
+              {n.name}
+            </InfoLink>
+            {index !== data.npcs.length - 1 && ", "}
+          </React.Fragment>
+        ))}
+      </div>
       <div>
         {data.npcs.some((npc) => npc.vendor) && <InfoLabel>Vendors:</InfoLabel>}
         {data.npcs
@@ -87,21 +85,25 @@ export default function RoomDetails() {
           </React.Fragment>
         ))}
       </div>
-      {data.resources.length > 0 && <InfoLabel>Resources: </InfoLabel>}
-      {data.resources.map((r, index) => (
-        <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-          <InfoLink to={`/resources/${r.id.toString()}`} variant="resource">
-            {r.name}
-          </InfoLink>
-          {index !== data.resources.length - 1 && ", "}
-        </React.Fragment>
-      ))}
-      {data.questSteps.length > 0 && <InfoLabel>Quest Steps:</InfoLabel>}
-      {data.questSteps.map((step) => (
-        <p key={`quest-step-${step.index.toString()}-${step.id.toString()}`}>
-          {step.description}
-        </p>
-      ))}
+      <div>
+        {data.resources.length > 0 && <InfoLabel>Resources: </InfoLabel>}
+        {data.resources.map((r, index) => (
+          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+            <InfoLink to={`/resources/${r.id.toString()}`} variant="resource">
+              {r.name}
+            </InfoLink>
+            {index !== data.resources.length - 1 && ", "}
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        {data.questSteps.length > 0 && <InfoLabel>Quest Steps:</InfoLabel>}
+        {data.questSteps.map((step) => (
+          <p key={`quest-step-${step.index.toString()}-${step.id.toString()}`}>
+            {step.description}
+          </p>
+        ))}
+      </div>
     </InfoContainer>
   );
 }

@@ -65,6 +65,7 @@ export default function MonsterDetails() {
       )}
       <InfoLabel>Region: {data.region.name}</InfoLabel>
       <div>
+        {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
         {data.rooms.map((r, index) => (
           <React.Fragment key={`${r.name}-${r.id.toString()}`}>
             <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">

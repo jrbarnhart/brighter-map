@@ -32,22 +32,26 @@ export default function NpcDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
-      {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
-      {data.rooms.map((r, index) => (
-        <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-          <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-            {r.name}
-          </InfoLink>
-          {index !== data.rooms.length - 1 && ", "}
-        </React.Fragment>
-      ))}
-      {data.questSteps.length > 0 && <InfoLabel>Quest Steps</InfoLabel>}
-      {data.questSteps.map((s) => (
-        <p key={`${s.questId.toString()}-${s.id.toString()}`}>
-          {s.description} - Quest Name{" "}
-          {/* TODO: Replace with actual quest name after API update */}
-        </p>
-      ))}
+      <div>
+        {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
+        {data.rooms.map((r, index) => (
+          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+            <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
+              {r.name}
+            </InfoLink>
+            {index !== data.rooms.length - 1 && ", "}
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        {data.questSteps.length > 0 && <InfoLabel>Quest Steps</InfoLabel>}
+        {data.questSteps.map((s) => (
+          <p key={`${s.questId.toString()}-${s.id.toString()}`}>
+            {s.description} - Quest Name{" "}
+            {/* TODO: Replace with actual quest name after API update */}
+          </p>
+        ))}
+      </div>
       {data.vendor && (
         <>
           <InfoLabel>Vendor for:</InfoLabel>
