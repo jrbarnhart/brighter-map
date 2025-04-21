@@ -2,6 +2,7 @@ import { roomByIdQueryOptions } from "@/queries/rooms/roomsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import InfoLink from "../InfoLink/InfoLink";
+import React from "react";
 
 export default function RoomDetails() {
   const { id } = useParams();
@@ -41,14 +42,13 @@ export default function RoomDetails() {
       )}
       <div>
         {data.monsters.length > 0 && <p>Monsters:</p>}
-        {data.monsters.map((m) => (
-          <InfoLink
-            to={`/monsters/${m.id.toString()}`}
-            key={`${m.name}-${m.id.toString()}`}
-            variant="monster"
-          >
-            {m.name}
-          </InfoLink>
+        {data.monsters.map((m, index) => (
+          <React.Fragment key={`${m.name}-${m.id.toString()}`}>
+            <InfoLink to={`/monsters/${m.id.toString()}`} variant="monster">
+              {m.name}
+            </InfoLink>
+            {index !== data.monsters.length - 1 && ", "}
+          </React.Fragment>
         ))}
       </div>
       {data.resources.length > 0 && (
