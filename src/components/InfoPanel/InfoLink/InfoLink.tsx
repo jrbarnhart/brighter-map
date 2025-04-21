@@ -25,7 +25,7 @@ export default function InfoLink({
         variant === "monster" && "text-monster", // Monster
         variant === "vendor" && "text-teal-400", // Vendor
         variant === "npc" && "text-stone-300", // Npc
-        variant === "resource" && "text-emerald-500", // Resource
+        variant === "resource" && "text-green-500", // Resource
         className // User added
       )}
     >
