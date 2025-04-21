@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Link } from "react-router";
 
-type InfoLinkVariants = "monster" | "room" | "vendor";
+type InfoLinkVariants = "monster" | "room" | "vendor" | "npc";
 
 type InfoLinkProps = {
   children: React.ReactNode;
@@ -24,6 +24,7 @@ export default function InfoLink({
         variant === "room" && "", // Room
         variant === "monster" && "text-monster", // Monster
         variant === "vendor" && "text-teal-400", // Vendor
+        variant === "npc" && "text-stone-300",
         className // User added
       )}
     >

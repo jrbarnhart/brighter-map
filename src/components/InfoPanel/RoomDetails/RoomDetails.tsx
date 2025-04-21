@@ -46,7 +46,14 @@ export default function RoomDetails() {
       {data.npcs.length > 0 && (
         <>
           <InfoLabel>NPC's:</InfoLabel>
-          {data.npcs.map((npc) => npc.name).join(", ")}
+          {data.npcs.map((n, index) => (
+            <React.Fragment key={`${n.name}-${n.id.toString()}`}>
+              <InfoLink to={`/npcs/${n.id.toString()}`} variant="npc">
+                {n.name}
+              </InfoLink>
+              {index !== data.npcs.length - 1 && ", "}
+            </React.Fragment>
+          ))}
         </>
       )}
       <div>
