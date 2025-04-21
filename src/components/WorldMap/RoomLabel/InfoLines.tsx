@@ -22,8 +22,14 @@ type InfoLinesProps = {
 };
 
 export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
-  const { showMonsters, showResources, showPortal, showStorage, showObelisk } =
-    filtersState;
+  const {
+    showVendors,
+    showMonsters,
+    showResources,
+    showPortal,
+    showStorage,
+    showObelisk,
+  } = filtersState;
 
   // Config Constants
   const OFFSET_Y = -0.9;
@@ -43,7 +49,7 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
   const infoLines = useMemo(() => {
     const lines: Array<{ text: string; type: keyof typeof INFO_COLORS }> = [];
 
-    if (npcs.length) {
+    if (npcs.length && showVendors) {
       for (const npc of npcs) {
         if (npc.vendor?.name) {
           lines.push({ text: `💰${npc.vendor.name}`, type: "vendor" });
@@ -76,6 +82,7 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
     showPortal,
     showResources,
     showStorage,
+    showVendors,
   ]);
 
   // Estimate background size
