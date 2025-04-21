@@ -87,12 +87,15 @@ export default function RoomDetails() {
           </React.Fragment>
         ))}
       </div>
-      {data.resources.length > 0 && (
-        <>
-          <InfoLabel>Resources: </InfoLabel>
-          <p>{data.resources.map((resource) => resource.name).join(", ")}</p>
-        </>
-      )}
+      {data.resources.length > 0 && <InfoLabel>Resources: </InfoLabel>}
+      {data.resources.map((r, index) => (
+        <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+          <InfoLink to={`/resources/${r.id.toString()}`} variant="resource">
+            {r.name}
+          </InfoLink>
+          {index !== data.resources.length - 1 && ", "}
+        </React.Fragment>
+      ))}
       {data.questSteps.length > 0 && <InfoLabel>Quest Steps:</InfoLabel>}
       {data.questSteps.map((step) => (
         <p key={`quest-step-${step.index.toString()}-${step.id.toString()}`}>
