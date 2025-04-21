@@ -1,11 +1,11 @@
 import { vendorByIdQueryOptions } from "@/queries/vendors/vendorsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import InfoContainer from "../infoContents/InfoContainer";
-import InfoTitle from "../infoContents/InfoTitle";
-import InfoLabel from "../infoContents/InfoLabel";
+import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
+import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
+import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import React from "react";
-import InfoLink from "../InfoLink/InfoLink";
+import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 
 export default function VendorDetails() {
   const { id } = useParams();

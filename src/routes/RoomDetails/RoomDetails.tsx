@@ -1,11 +1,11 @@
 import { roomByIdQueryOptions } from "@/queries/rooms/roomsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import InfoLink from "../InfoLink/InfoLink";
+import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import React from "react";
-import InfoContainer from "../infoContents/InfoContainer";
-import InfoTitle from "../infoContents/InfoTitle";
-import InfoLabel from "../infoContents/InfoLabel";
+import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
+import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
+import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 
 export default function RoomDetails() {
   const { id } = useParams();

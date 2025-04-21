@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import RootRoute from "./root/root.route";
-import RoomDetails from "@/components/InfoPanel/RoomDetails/RoomDetails";
-import MonsterDetails from "@/components/InfoPanel/MonsterDetails/MonsterDetails";
+import RoomDetails from "@/routes/RoomDetails/RoomDetails";
+import MonsterDetails from "@/routes/MonsterDetails/MonsterDetails";
 import InfoPanelIndex from "@/components/InfoPanel/InfoPanelIndex";
-import VendorDetails from "@/components/InfoPanel/VendorDetails/VendorDetails";
-import NpcDetails from "@/components/InfoPanel/NpcDetails/NpcDetails";
+import VendorDetails from "@/routes/VendorDetails/VendorDetails";
+import NpcDetails from "@/routes/NpcDetails/NpcDetails";
 
 export default function Router() {
   return (
