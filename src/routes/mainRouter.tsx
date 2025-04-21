@@ -4,6 +4,7 @@ import RoomDetails from "@/components/InfoPanel/RoomDetails/RoomDetails";
 import MonsterDetails from "@/components/InfoPanel/MonsterDetails/MonsterDetails";
 import InfoPanelIndex from "@/components/InfoPanel/InfoPanelIndex";
 import VendorDetails from "@/components/InfoPanel/VendorDetails/VendorDetails";
+import NpcDetails from "@/components/InfoPanel/NpcDetails/NpcDetails";
 
 export default function Router() {
   return (
@@ -16,6 +17,7 @@ export default function Router() {
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/monsters/:id" element={<MonsterDetails />} />
           <Route path="/vendors/:id" element={<VendorDetails />} />
+          <Route path="/npcs/:id" element={<NpcDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
