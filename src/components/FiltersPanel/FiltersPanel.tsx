@@ -30,6 +30,7 @@ type BoolButtonProps = {
   children: React.ReactNode;
   state: boolean;
   setState: React.Dispatch<SetStateAction<boolean>>;
+  showLabels: boolean;
   className?: string;
 };
 
@@ -37,6 +38,7 @@ function BoolToggleButton({
   children,
   state,
   setState,
+  showLabels,
   className,
 }: BoolButtonProps) {
   return (
@@ -44,7 +46,7 @@ function BoolToggleButton({
       className={cn(
         "flex justify-start cursor-pointer bg-gray-800 hover:bg-gray-600 border border-border",
         className,
-        !state && "bg-gray-700 hover:bg-gray-500"
+        (!state || !showLabels) && "bg-gray-700 hover:bg-gray-500"
       )}
       onClick={() => {
         setState((prev) => !prev);
@@ -95,12 +97,17 @@ export default function FiltersPanel({
       >
         <ArrowLeftToLine />
       </Button>
-      <BoolToggleButton state={showLabels} setState={setShowLabels}>
+      <BoolToggleButton
+        state={showLabels}
+        setState={setShowLabels}
+        showLabels={showLabels}
+      >
         Show Labels
       </BoolToggleButton>
       <BoolToggleButton
         state={showVendors}
         setState={setShowVendors}
+        showLabels={showLabels}
         className="bg-teal-800 hover:bg-teal-600"
       >
         Show Vendors
@@ -108,6 +115,7 @@ export default function FiltersPanel({
       <BoolToggleButton
         state={showMonsters}
         setState={setShowMonsters}
+        showLabels={showLabels}
         className="bg-red-800 hover:bg-red-700"
       >
         Show Monsters
@@ -115,6 +123,7 @@ export default function FiltersPanel({
       <BoolToggleButton
         state={showResources}
         setState={setShowResources}
+        showLabels={showLabels}
         className="bg-green-800 hover:bg-green-600"
       >
         Show Resources
@@ -122,6 +131,7 @@ export default function FiltersPanel({
       <BoolToggleButton
         state={showPortal}
         setState={setShowPortal}
+        showLabels={showLabels}
         className="bg-sky-800 hover:bg-sky-600"
       >
         Show Portals
@@ -129,6 +139,7 @@ export default function FiltersPanel({
       <BoolToggleButton
         state={showStorage}
         setState={setShowStorage}
+        showLabels={showLabels}
         className="bg-purple-800 hover:bg-purple-600"
       >
         Show Storage
@@ -136,6 +147,7 @@ export default function FiltersPanel({
       <BoolToggleButton
         state={showObelisk}
         setState={setShowObelisk}
+        showLabels={showLabels}
         className="bg-yellow-600 hover:bg-yellow-500"
       >
         Show Obelisks
