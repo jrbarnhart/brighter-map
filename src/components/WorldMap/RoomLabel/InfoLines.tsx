@@ -8,6 +8,7 @@ import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 const INFO_COLORS = {
   // Should match variables in styles.css for consistency
+  vendor: "#91ede4",
   monster: "#ff7777", // Red for monsters
   resource: "#86fc86", // Green for resources
   portal: "#77bbff", // Blue for portals
@@ -36,12 +37,19 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
   const LINE_OFFSET_MOD = -0.01;
 
   // Room data properties
-  const { monsters, resources, portal, obelisk, rift, name } = roomData;
+  const { monsters, resources, portal, obelisk, rift, name, npcs } = roomData;
 
   // Construct label info lines
   const infoLines = useMemo(() => {
     const lines: Array<{ text: string; type: keyof typeof INFO_COLORS }> = [];
 
+    if (npcs.length) {
+      for (const npc of npcs) {
+        if (npc.vendor?.name) {
+          lines.push({ text: `💰${npc.vendor.name}`, type: "vendor" });
+        }
+      }
+    }
     if (monsters.length && showMonsters)
       monsters.forEach((m) =>
         lines.push({ text: `🧟${m.name}`, type: "monster" })
@@ -58,6 +66,7 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
     return lines;
   }, [
     monsters,
+    npcs,
     obelisk,
     portal,
     resources,
