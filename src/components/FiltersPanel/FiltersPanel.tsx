@@ -83,6 +83,7 @@ export default function FiltersPanel({
     >
       <Button
         className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-700 hover:bg-gray-500"
+        aria-label="Close Filters Panel"
         onClick={() => {
           setOpen(false);
         }}
