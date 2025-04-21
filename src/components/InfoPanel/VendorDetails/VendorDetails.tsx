@@ -5,6 +5,7 @@ import InfoContainer from "../infoContents/InfoContainer";
 import InfoTitle from "../infoContents/InfoTitle";
 import InfoLabel from "../infoContents/InfoLabel";
 import React from "react";
+import InfoLink from "../InfoLink/InfoLink";
 
 export default function VendorDetails() {
   const { id } = useParams();
@@ -33,7 +34,9 @@ export default function VendorDetails() {
       <InfoTitle>{data.name || data.npc.name}</InfoTitle>
       <div className="flex items-baseline gap-2">
         <InfoLabel>Npc:</InfoLabel>
-        <p>{data.npc.name}</p>
+        <InfoLink to={`/npcs/${data.npc.id.toString()}`} variant="npc">
+          {data.npc.name}
+        </InfoLink>
       </div>
       <InfoLabel>Stock:</InfoLabel>
       {data.miscItems.length > 0 && <InfoLabel>Misc Items:</InfoLabel>}
