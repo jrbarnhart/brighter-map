@@ -8,7 +8,7 @@ import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 const INFO_COLORS = {
   // Should match variables in styles.css for consistency
-  vendor: "#91ede4",
+  vendor: "#18edca",
   monster: "#ff7777", // Red for monsters
   resource: "#86fc86", // Green for resources
   portal: "#77bbff", // Blue for portals
