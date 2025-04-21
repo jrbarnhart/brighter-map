@@ -4,15 +4,17 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import type { SetStateAction } from "react";
 
-type MapSearchBar = {
+type MapControlsProps = {
   setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
   setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
+  searchRef: React.RefObject<HTMLInputElement | null>;
 };
 
 export default function MapControls({
   setFiltersOpen,
   setInfoOpen,
-}: MapSearchBar) {
+  searchRef,
+}: MapControlsProps) {
   return (
     <div
       id="map-controls-container"
@@ -34,6 +36,7 @@ export default function MapControls({
       >
         <Search aria-hidden />
         <Input
+          ref={searchRef}
           id="search"
           type="search"
           placeholder="Search..."

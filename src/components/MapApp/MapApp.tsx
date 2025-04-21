@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { SetStateAction, useRef } from "react";
 import FiltersPanel, { FiltersState } from "../FiltersPanel/FiltersPanel";
 import InfoPanel from "../InfoPanel/InfoPanel";
 import MapControls from "../MapControls/MapControls";
@@ -22,6 +22,8 @@ export default function MapApp({
   filtersState,
   baseMapData,
 }: MapAppProps) {
+  const searchRef = useRef<HTMLInputElement>(null);
+
   return (
     <div
       id="app-container"
@@ -36,6 +38,7 @@ export default function MapApp({
         <MapControls
           setFiltersOpen={setFiltersOpen}
           setInfoOpen={setInfoOpen}
+          searchRef={searchRef}
         />
       </div>
       <WorldMap
@@ -43,7 +46,7 @@ export default function MapApp({
         filtersState={filtersState}
         setInfoOpen={setInfoOpen}
       />
-      <InfoPanel open={infoOpen} setOpen={setInfoOpen} />
+      <InfoPanel open={infoOpen} setOpen={setInfoOpen} searchRef={searchRef} />
     </div>
   );
 }

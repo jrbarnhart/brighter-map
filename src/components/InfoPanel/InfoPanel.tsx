@@ -1,15 +1,26 @@
 import { ArrowRightToLine, Home } from "lucide-react";
 import { Button } from "../ui/button";
-import type { SetStateAction } from "react";
+import { type SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 import { Link, Outlet } from "react-router";
+import { InfoPanelIndexContext } from "./InfoPanelIndex";
 
 type InfoPanelProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  searchRef: React.RefObject<HTMLInputElement | null>;
 };
 
-export default function InfoPanel({ open, setOpen }: InfoPanelProps) {
+export default function InfoPanel({
+  open,
+  setOpen,
+  searchRef,
+}: InfoPanelProps) {
+  const infoPanelContext: InfoPanelIndexContext = {
+    searchRef,
+    setInfoOpen: setOpen,
+  };
+
   return (
     <aside
       className={cn(
@@ -37,7 +48,7 @@ export default function InfoPanel({ open, setOpen }: InfoPanelProps) {
           <ArrowRightToLine />
         </Button>
       </div>
-      <Outlet />
+      <Outlet context={infoPanelContext} />
     </aside>
   );
 }
