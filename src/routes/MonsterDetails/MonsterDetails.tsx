@@ -10,7 +10,7 @@ import {
 import { components } from "@/lib/types/apiTypes";
 import { monsterByIdQueryOptions } from "@/queries/monsters/monstersQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import { TriangleAlert, XCircle } from "lucide-react";
+import { XCircle } from "lucide-react";
 import { useParams } from "react-router";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import React from "react";
@@ -57,19 +57,12 @@ export default function MonsterDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
-      <div className="flex items-center gap-3 h-8">
-        {data.passive ? (
-          <>
-            <InfoLabel>Passive </InfoLabel>
-            <Passive />
-          </>
-        ) : (
-          <>
-            <InfoLabel>Aggressive </InfoLabel>
-            <TriangleAlert className="h-full w-min text-red-500" />
-          </>
-        )}
-      </div>
+      {data.passive && (
+        <div className="flex items-center gap-3 h-8">
+          <InfoLabel>Passive </InfoLabel>
+          <Passive />
+        </div>
+      )}
       <InfoLabel>Region: {data.region.name}</InfoLabel>
       <div>
         {data.rooms.map((r, index) => (
