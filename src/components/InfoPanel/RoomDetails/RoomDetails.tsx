@@ -41,6 +41,26 @@ export default function RoomDetails() {
         <p>NPC's: {data.npcs.map((npc) => npc.name).join(", ")}</p>
       )}
       <div>
+        {data.npcs.some((npc) => npc.vendor) && <p>Vendors:</p>}
+        {data.npcs
+          .filter((npc) => npc.vendor)
+          .map((npc, index, filteredArray) => (
+            <React.Fragment
+              key={`vendor-${npc.vendor?.name || "name"}-${npc.id.toString()}`}
+            >
+              <InfoLink
+                to={`/vendors/${
+                  npc.vendor?.id.toString() || "Id-Not-Provided"
+                }`}
+                variant="vendor"
+              >
+                {npc.vendor?.name || npc.name}
+              </InfoLink>
+              {index !== filteredArray.length - 1 && ", "}
+            </React.Fragment>
+          ))}
+      </div>
+      <div>
         {data.monsters.length > 0 && <p>Monsters:</p>}
         {data.monsters.map((m, index) => (
           <React.Fragment key={`${m.name}-${m.id.toString()}`}>
