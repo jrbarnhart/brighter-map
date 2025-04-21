@@ -30,7 +30,7 @@ export default function RoomDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
-      <div className="flex items-center gap-2">
+      <div className="flex items-baseline gap-2">
         <InfoLabel>Region: </InfoLabel>
         <p>{data.region.name}</p>
       </div>
