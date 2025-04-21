@@ -5,6 +5,7 @@ import MonsterDetails from "@/routes/MonsterDetails/MonsterDetails";
 import InfoPanelIndex from "@/components/InfoPanel/InfoPanelIndex";
 import VendorDetails from "@/routes/VendorDetails/VendorDetails";
 import NpcDetails from "@/routes/NpcDetails/NpcDetails";
+import ResourceDetails from "./ResourceDetails/ResourceDetails";
 
 export default function Router() {
   return (
@@ -18,6 +19,7 @@ export default function Router() {
           <Route path="/monsters/:id" element={<MonsterDetails />} />
           <Route path="/vendors/:id" element={<VendorDetails />} />
           <Route path="/npcs/:id" element={<NpcDetails />} />
+          <Route path="/resources/:id" element={<ResourceDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
