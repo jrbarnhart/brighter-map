@@ -8,7 +8,7 @@ import {
   Tempestae,
 } from "@/assets/gameIcons";
 import { components } from "@/lib/types/apiTypes";
-import { MonsterByIdQueryOptions } from "@/queries/monsters/monstersQueryOptions";
+import { monsterByIdQueryOptions } from "@/queries/monsters/monstersQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import { TriangleAlert, XCircle } from "lucide-react";
 import { useParams } from "react-router";
@@ -19,7 +19,7 @@ export default function MonsterDetails() {
   const { id } = useParams();
   const idNum = Number(id);
 
-  const { data, isLoading, error } = useQuery(MonsterByIdQueryOptions(idNum));
+  const { data, isLoading, error } = useQuery(monsterByIdQueryOptions(idNum));
 
   if (isLoading) {
     return (

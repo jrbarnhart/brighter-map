@@ -4,7 +4,7 @@ import { fetchMonsterById } from "./monsters";
 
 export const monstersKey = "monsters";
 
-export const MonsterByIdQueryOptions = (id: number | string) =>
+export const monsterByIdQueryOptions = (id: number | string) =>
   queryOptions({
     queryKey: [monstersKey.concat(id.toString())],
     staleTime: queryConfig.staleTime,
