@@ -57,24 +57,33 @@ export default function MonsterDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
+      {/* Passive */}
       {data.passive && (
         <div className="flex items-center gap-3 h-8">
           <InfoLabel>Passive </InfoLabel>
           <Passive />
         </div>
       )}
-      <InfoLabel>Region: {data.region.name}</InfoLabel>
-      <div>
-        {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
-        {data.rooms.map((r, index) => (
-          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-            <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-              {r.name}
-            </InfoLink>
-            {index < data.rooms.length - 1 && ", "}
-          </React.Fragment>
-        ))}
+      {/* Region */}
+      <div className="flex items-baseline gap-2">
+        <InfoLabel>Region: </InfoLabel>
+        <p>{data.region.name}</p>
       </div>
+      {/* Rooms */}
+      {data.rooms.length > 0 && (
+        <div>
+          <InfoLabel>Rooms:</InfoLabel>
+          {data.rooms.map((r, index) => (
+            <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+              <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
+                {r.name}
+              </InfoLink>
+              {index < data.rooms.length - 1 && ", "}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      {/* Elements */}
       <div className="grid grid-cols-[min-content_min-content_1fr] gap-4 items-center whitespace-nowrap">
         <InfoLabel>Attacks: </InfoLabel>
         <div className="h-10 w-10">{iconMap[data.attackElement]}</div>
@@ -86,6 +95,7 @@ export default function MonsterDetails() {
         <div className="h-10 w-10">{iconMap[data.vulnerableElement]}</div>
         {data.vulnerableElement}
       </div>
+      {/* Variants */}
       <div>
         <InfoLabel>Variants:</InfoLabel>
         {data.variants.map((v) => (

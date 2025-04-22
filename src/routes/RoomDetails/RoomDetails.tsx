@@ -30,80 +30,101 @@ export default function RoomDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
+      {/* Region */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>Region: </InfoLabel>
         <p>{data.region.name}</p>
       </div>
+      {/* Portal, Rift, Obelisk */}
       {data.portal && <InfoLabel>🌐 Portal</InfoLabel>}
       {data.rift && <InfoLabel>🌀 Storage Rift</InfoLabel>}
       {data.obelisk && <InfoLabel>🏛️ Obelisk</InfoLabel>}
+      {/* Crafting stations */}
       {data.craftingSkills.length > 0 && (
-        <>
+        <div>
           <InfoLabel>Crafting Stations: </InfoLabel>
           <p>{data.craftingSkills.map((skill) => skill.name).join(", ")}</p>
-        </>
+        </div>
       )}
-      <div>
-        {data.npcs.length > 0 && <InfoLabel>NPC's:</InfoLabel>}
-        {data.npcs.map((n, index) => (
-          <React.Fragment key={`${n.name}-${n.id.toString()}`}>
-            <InfoLink to={`/npcs/${n.id.toString()}`} variant="npc">
-              {n.name}
-            </InfoLink>
-            {index !== data.npcs.length - 1 && ", "}
-          </React.Fragment>
-        ))}
-      </div>
-      <div>
-        {data.npcs.some((npc) => npc.vendor) && <InfoLabel>Vendors:</InfoLabel>}
-        {data.npcs
-          .filter((npc) => npc.vendor)
-          .map((npc, index, filteredArray) => (
-            <React.Fragment
-              key={`vendor-${npc.vendor?.name || "name"}-${npc.id.toString()}`}
-            >
-              <InfoLink
-                to={`/vendors/${
-                  npc.vendor?.id.toString() || "Id-Not-Provided"
-                }`}
-                variant="vendor"
-              >
-                {npc.vendor?.name || npc.name}
+      {/* NPC's */}
+      {data.npcs.length > 0 && (
+        <div>
+          <InfoLabel>NPC's:</InfoLabel>
+          {data.npcs.map((n, index) => (
+            <React.Fragment key={`${n.name}-${n.id.toString()}`}>
+              <InfoLink to={`/npcs/${n.id.toString()}`} variant="npc">
+                {n.name}
               </InfoLink>
-              {index !== filteredArray.length - 1 && ", "}
+              {index !== data.npcs.length - 1 && ", "}
             </React.Fragment>
           ))}
-      </div>
-      <div>
-        {data.monsters.length > 0 && <InfoLabel>Monsters:</InfoLabel>}
-        {data.monsters.map((m, index) => (
-          <React.Fragment key={`${m.name}-${m.id.toString()}`}>
-            <InfoLink to={`/monsters/${m.id.toString()}`} variant="monster">
-              {m.name}
-            </InfoLink>
-            {index !== data.monsters.length - 1 && ", "}
-          </React.Fragment>
-        ))}
-      </div>
-      <div>
-        {data.resources.length > 0 && <InfoLabel>Resources: </InfoLabel>}
-        {data.resources.map((r, index) => (
-          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-            <InfoLink to={`/resources/${r.id.toString()}`} variant="resource">
-              {r.name}
-            </InfoLink>
-            {index !== data.resources.length - 1 && ", "}
-          </React.Fragment>
-        ))}
-      </div>
-      <div>
-        {data.questSteps.length > 0 && <InfoLabel>Quest Steps:</InfoLabel>}
-        {data.questSteps.map((step) => (
-          <p key={`quest-step-${step.index.toString()}-${step.id.toString()}`}>
-            {step.description}
-          </p>
-        ))}
-      </div>
+        </div>
+      )}
+      {/* Vendors */}
+      {data.npcs.some((npc) => npc.vendor) && (
+        <div>
+          <InfoLabel>Vendors:</InfoLabel>
+          {data.npcs
+            .filter((npc) => npc.vendor)
+            .map((npc, index, filteredArray) => (
+              <React.Fragment
+                key={`vendor-${
+                  npc.vendor?.name || "name"
+                }-${npc.id.toString()}`}
+              >
+                <InfoLink
+                  to={`/vendors/${
+                    npc.vendor?.id.toString() || "Id-Not-Provided"
+                  }`}
+                  variant="vendor"
+                >
+                  {npc.vendor?.name || npc.name}
+                </InfoLink>
+                {index !== filteredArray.length - 1 && ", "}
+              </React.Fragment>
+            ))}
+        </div>
+      )}
+      {data.monsters.length > 0 && (
+        <div>
+          <InfoLabel>Monsters:</InfoLabel>
+          {data.monsters.map((m, index) => (
+            <React.Fragment key={`${m.name}-${m.id.toString()}`}>
+              <InfoLink to={`/monsters/${m.id.toString()}`} variant="monster">
+                {m.name}
+              </InfoLink>
+              {index !== data.monsters.length - 1 && ", "}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      {/* Resources */}
+      {data.resources.length > 0 && (
+        <div>
+          <InfoLabel>Resources: </InfoLabel>
+          {data.resources.map((r, index) => (
+            <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+              <InfoLink to={`/resources/${r.id.toString()}`} variant="resource">
+                {r.name}
+              </InfoLink>
+              {index !== data.resources.length - 1 && ", "}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      {/* Quest Steps */}
+      {data.questSteps.length > 0 && (
+        <div>
+          <InfoLabel>Quest Steps:</InfoLabel>
+          {data.questSteps.map((step) => (
+            <p
+              key={`quest-step-${step.index.toString()}-${step.id.toString()}`}
+            >
+              {step.description}
+            </p>
+          ))}
+        </div>
+      )}
     </InfoContainer>
   );
 }

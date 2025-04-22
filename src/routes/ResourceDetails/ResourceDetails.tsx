@@ -33,29 +33,33 @@ export default function ResourceDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
-
+      {/* Passive */}
       {data.passive && (
         <div className="flex items-center gap-3 h-8">
           <InfoLabel>Passive </InfoLabel>
           <Passive />
         </div>
       )}
-
+      {/* Skill */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>Skill:</InfoLabel>
         <p>{data.skill.name}</p>
       </div>
-      <div>
-        {data.rooms.length > 0 && <InfoLabel>Rooms:</InfoLabel>}
-        {data.rooms.map((r, index) => (
-          <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-            <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-              {r.name}
-            </InfoLink>
-            {index !== data.rooms.length - 1 && ", "}
-          </React.Fragment>
-        ))}
-      </div>
+      {/* Rooms */}
+      {data.rooms.length > 0 && (
+        <div>
+          <InfoLabel>Rooms:</InfoLabel>
+          {data.rooms.map((r, index) => (
+            <React.Fragment key={`${r.name}-${r.id.toString()}`}>
+              <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
+                {r.name}
+              </InfoLink>
+              {index !== data.rooms.length - 1 && ", "}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      {/* Variants */}
       <div>
         <InfoLabel>Variants:</InfoLabel>
         {data.variants.map((v) => (
