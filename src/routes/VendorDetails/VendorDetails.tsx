@@ -39,7 +39,6 @@ export default function VendorDetails() {
           {data.npc.name}
         </InfoLink>
       </div>
-      <InfoLabel>Stock:</InfoLabel>
       {/* Misc Items */}
       {data.miscItems.length > 0 && (
         <div>
