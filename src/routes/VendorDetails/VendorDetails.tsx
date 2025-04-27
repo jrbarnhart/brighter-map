@@ -7,6 +7,14 @@ import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import React from "react";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 
+function InfoLinkContainer({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-stone-700 rounded-lg px-2.5 py-1 overflow-y-auto max-h-60">
+      {children}
+    </div>
+  );
+}
+
 export default function VendorDetails() {
   const { id } = useParams();
   const idNum = Number(id);
@@ -43,73 +51,83 @@ export default function VendorDetails() {
       {data.miscItems.length > 0 && (
         <div>
           <InfoLabel>Misc Items:</InfoLabel>
-          {data.miscItems.map((item, index) => (
-            <React.Fragment
-              key={`misc-item-${item.id.toString()}-${index.toString()}`}
-            >
-              <p>{item.name}</p>
-            </React.Fragment>
-          ))}
+          <InfoLinkContainer>
+            {data.miscItems.map((item, index) => (
+              <React.Fragment
+                key={`misc-item-${item.id.toString()}-${index.toString()}`}
+              >
+                <p>{item.name}</p>
+              </React.Fragment>
+            ))}
+          </InfoLinkContainer>
         </div>
       )}
       {/* Consumable Variants */}
       {data.consumableVariants.length > 0 && (
         <div>
           <InfoLabel>Consumables:</InfoLabel>
-          {data.consumableVariants.map((variant, index) => (
-            <React.Fragment
-              key={`consumable-variant-${variant.id.toString()}-${index.toString()}`}
-            >
-              <p>
-                {variant.name} {variant.consumable.name}
-              </p>
-            </React.Fragment>
-          ))}
+          <InfoLinkContainer>
+            {data.consumableVariants.map((variant, index) => (
+              <React.Fragment
+                key={`consumable-variant-${variant.id.toString()}-${index.toString()}`}
+              >
+                <p>
+                  {variant.name} {variant.consumable.name}
+                </p>
+              </React.Fragment>
+            ))}
+          </InfoLinkContainer>
         </div>
       )}
       {/* Armor Variants */}
       {data.armorVariants.length > 0 && (
         <div>
           <InfoLabel>Armor:</InfoLabel>
-          {data.armorVariants.map((variant, index) => (
-            <React.Fragment
-              key={`armor-variant-${variant.id.toString()}-${index.toString()}`}
-            >
-              <p>
-                {variant.name} {variant.armor.name}
-              </p>
-            </React.Fragment>
-          ))}
+          <InfoLinkContainer>
+            {data.armorVariants.map((variant, index) => (
+              <React.Fragment
+                key={`armor-variant-${variant.id.toString()}-${index.toString()}`}
+              >
+                <p>
+                  {variant.name} {variant.armor.name}
+                </p>
+              </React.Fragment>
+            ))}
+          </InfoLinkContainer>
         </div>
       )}
       {/* Weapon Variants */}
       {data.weaponVariants.length > 0 && (
         <div>
           <InfoLabel>Weapons:</InfoLabel>
-          {data.weaponVariants.map((variant, index) => (
-            <React.Fragment
-              key={`weapon-variants-${variant.id.toString()}-${index.toString()}`}
-            >
-              <p>
-                {variant.name} {variant.weapon.name}
-              </p>
-            </React.Fragment>
-          ))}
+          <InfoLinkContainer>
+            {data.weaponVariants.map((variant, index) => (
+              <React.Fragment
+                key={`weapon-variants-${variant.id.toString()}-${index.toString()}`}
+              >
+                <p>
+                  {variant.name} {variant.weapon.name}
+                </p>
+              </React.Fragment>
+            ))}
+          </InfoLinkContainer>
         </div>
       )}
       {/* Resource Variants */}
       {data.resourceVariants.length > 0 && (
         <div>
           <InfoLabel>Resources:</InfoLabel>
-          {data.resourceVariants.map((variant, index) => (
-            <React.Fragment
-              key={`resource-variant-${variant.id.toString()}-${index.toString()}`}
-            >
-              <p>
-                {variant.name} {variant.resource.name}
-              </p>
-            </React.Fragment>
-          ))}
+          <InfoLinkContainer>
+            {data.resourceVariants.map((variant, index) => (
+              <React.Fragment
+                key={`resource-variant-${variant.id.toString()}-${index.toString()}`}
+              >
+                <p>
+                  {variant.name} {variant.resource.name}
+                </p>
+              </React.Fragment>
+            ))}
+          </InfoLinkContainer>
         </div>
       )}
     </InfoContainer>
