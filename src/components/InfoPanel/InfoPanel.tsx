@@ -48,7 +48,9 @@ export default function InfoPanel({
           <ArrowRightToLine />
         </Button>
       </div>
-      <Outlet context={infoPanelContext} />
+      <div className="overflow-y-auto">
+        <Outlet context={infoPanelContext} />
+      </div>
     </aside>
   );
 }
