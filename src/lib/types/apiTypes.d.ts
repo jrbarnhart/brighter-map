@@ -2222,10 +2222,10 @@ export interface components {
             name?: string | null;
             npc: components["schemas"]["NpcBaseEntity"];
             npcId: number;
-            resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
-            consumableVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
-            weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
-            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+            resourceVariants: components["schemas"]["ResourceVariantBaseWithResourceEntity"][];
+            consumableVariants: components["schemas"]["ConsumableVariantBaseWithConsumableEntity"][];
+            weaponVariants: components["schemas"]["WeaponVariantBaseWithWeaponEntity"][];
+            armorVariants: components["schemas"]["ArmorVariantBaseWithArmorEntity"][];
             miscItems: components["schemas"]["MiscItemBaseEntity"][];
         };
         UpdateVendorDto: {
