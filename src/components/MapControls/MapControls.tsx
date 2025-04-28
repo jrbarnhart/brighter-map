@@ -2,10 +2,8 @@ import { BookOpen, ListFilterPlus, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
-import { useState, type SetStateAction } from "react";
+import { type SetStateAction } from "react";
 import useSearch from "@/lib/hooks/useSearch";
-import { FuseResult } from "fuse.js";
-import { SearchableItem } from "@/lib/types/searchTypes";
 
 type MapControlsProps = {
   setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
@@ -18,17 +16,7 @@ export default function MapControls({
   setInfoOpen,
   searchRef,
 }: MapControlsProps) {
-  const fuse = useSearch();
-
-  const [results, setResults] = useState<FuseResult<SearchableItem>[] | null>(
-    null
-  );
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!fuse) return;
-    const searchResults = fuse.search(e.target.value);
-    setResults(searchResults);
-  };
+  const { results, searchHandler } = useSearch();
 
   return (
     <div
@@ -57,7 +45,7 @@ export default function MapControls({
             type="search"
             placeholder="Search..."
             onChange={(e) => {
-              handleSearchChange(e);
+              searchHandler(e);
             }}
             className="md:max-w-80 border-l border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none"
           />

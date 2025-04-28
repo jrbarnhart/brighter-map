@@ -8,10 +8,15 @@ import { resourcesQueryOptions } from "@/queries/resources/resourcesQueryOptions
 import { roomsQueryOptions } from "@/queries/rooms/roomsQueryOptions";
 import { weaponsQueryOptions } from "@/queries/weapons/weaponsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import Fuse from "fuse.js";
+import Fuse, { FuseResult } from "fuse.js";
 import { SearchableItem, SearchData } from "../types/searchTypes";
+import { useState } from "react";
 
 export default function useSearch() {
+  const [results, setResults] = useState<FuseResult<SearchableItem>[] | null>(
+    null
+  );
+
   // Query relevant data
   const queries = {
     // Rooms
@@ -53,7 +58,7 @@ export default function useSearch() {
     !queries.npcs.data ||
     !queries.quests.data
   )
-    return undefined;
+    return { results, searchHandler: () => {} };
 
   // Put data into object for fuse searching
   const formattedRoomsData: SearchableItem[] = queries.rooms.data.map(
@@ -71,5 +76,10 @@ export default function useSearch() {
     keys: ["name"],
   });
 
-  return fuse;
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchResults = fuse.search(e.target.value);
+    setResults(searchResults);
+  };
+
+  return { results, searchHandler };
 }
