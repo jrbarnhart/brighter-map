@@ -1,8 +1,8 @@
-import { queryOptions } from '@tanstack/react-query'
-import queryConfig from '../queryConfig'
-import { fetchMiscItems } from './miscItems'
+import { queryOptions } from "@tanstack/react-query";
+import queryConfig from "../queryConfig";
+import { fetchMiscItemById, fetchMiscItems } from "./miscItems";
 
-export const miscItemsKey = 'misc-items'
+export const miscItemsKey = "misc-items";
 
 export const miscItemsQueryOptions = (enabled: boolean) =>
   queryOptions({
@@ -10,4 +10,11 @@ export const miscItemsQueryOptions = (enabled: boolean) =>
     staleTime: queryConfig.staleTime,
     queryFn: () => fetchMiscItems(),
     enabled,
-  })
+  });
+
+export const miscItemByIdQueryOptions = (id: number | string) =>
+  queryOptions({
+    queryKey: [miscItemsKey.concat(id.toString())],
+    staleTime: queryConfig.staleTime,
+    queryFn: () => fetchMiscItemById({ id }),
+  });
