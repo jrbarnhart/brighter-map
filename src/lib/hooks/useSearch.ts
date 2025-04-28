@@ -60,20 +60,94 @@ export default function useSearch() {
   )
     return { results, searchHandler: () => {} };
 
-  // Put data into object for fuse searching
-  const formattedRoomsData: SearchableItem[] = queries.rooms.data.map(
-    (room) => ({
-      ...room,
-      url: `/rooms/${room.id.toString()}`,
-      type: "room",
+  // Format data and combine into searchData
+  const formattedRooms: SearchableItem[] = queries.rooms.data.map((room) => ({
+    ...room,
+    url: `/rooms/${room.id.toString()}`,
+    type: "room",
+  }));
+  const formattedMiscItems: SearchableItem[] = queries.miscItems.data.map(
+    (miscItem) => ({
+      ...miscItem,
+      url: `/misc/${miscItem.id.toString()}`,
+      type: "miscItem",
     })
   );
-  const searchData: SearchData = [...formattedRoomsData];
+  const formattedResources: SearchableItem[] = queries.resources.data.map(
+    (resource) => ({
+      ...resource,
+      url: `/resources/${resource.id.toString()}`,
+      type: "resource",
+    })
+  );
+  const formattedConsumables: SearchableItem[] = queries.consumables.data.map(
+    (consumable) => ({
+      ...consumable,
+      url: `/consumables/${consumable.id.toString()}`,
+      type: "consumable",
+    })
+  );
+  const formattedWeapons: SearchableItem[] = queries.weapons.data.map(
+    (weapon) => ({
+      ...weapon,
+      url: `/weapons/${weapon.id.toString()}`,
+      type: "weapon",
+    })
+  );
+  const formattedArmors: SearchableItem[] = queries.armors.data.map(
+    (armor) => ({
+      ...armor,
+      url: `/armors/${armor.id.toString()}`,
+      type: "armor",
+    })
+  );
+  const formattedMonsters: SearchableItem[] = queries.monsters.data.map(
+    (monster) => ({
+      ...monster,
+      url: `/monsters/${monster.id.toString()}`,
+      type: "monster",
+    })
+  );
+  const formattedNpcs: SearchableItem[] = queries.npcs.data.map((npc) => ({
+    ...npc,
+    url: `/npcs/${npc.id.toString()}`,
+    type: "npc",
+  }));
+  const formattedVendors: SearchableItem[] = queries.npcs.data
+    .filter(
+      (npc): npc is typeof npc & { vendor: NonNullable<typeof npc.vendor> } =>
+        Boolean(npc.vendor)
+    )
+    .map((npc) => ({
+      ...npc.vendor,
+      url: `/vendors/${npc.vendor.id.toString()}`,
+      type: "vendor",
+    }));
+  const formattedQuests: SearchableItem[] = queries.quests.data.map(
+    (quest) => ({
+      ...quest,
+      url: `/quests/${quest.id.toString()}`,
+      type: "quest",
+    })
+  );
+
+  const searchData: SearchData = [
+    ...formattedRooms,
+    ...formattedMiscItems,
+    ...formattedResources,
+    ...formattedConsumables,
+    ...formattedWeapons,
+    ...formattedArmors,
+    ...formattedMonsters,
+    ...formattedNpcs,
+    ...formattedVendors,
+    ...formattedQuests,
+  ];
 
   // Create a fuse instance
   const fuse = new Fuse(searchData, {
     threshold: 0.3,
-    keys: ["name"],
+    keys: ["name", "variants.name"],
   });
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
