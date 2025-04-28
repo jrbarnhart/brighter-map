@@ -51,7 +51,7 @@ export default function MapControls({
             className="md:max-w-80 border-l border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none"
           />
         </Label>
-        {results && (
+        {results && results.length > 0 && (
           <div className="absolute pointer-events-auto grid bg-stone-900/85 px-4 py-2 max-h-40 overflow-y-auto">
             {results.map((result) => (
               <InfoLink
