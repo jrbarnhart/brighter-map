@@ -4,12 +4,11 @@ import { fetchQuestById, fetchQuests } from "./quests";
 
 export const questsKey = "quests";
 
-export const questsQueryOptions = (enabled: boolean) =>
+export const questsQueryOptions = () =>
   queryOptions({
     queryKey: [questsKey],
     staleTime: queryConfig.staleTime,
     queryFn: () => fetchQuests(),
-    enabled,
   });
 
 export const questByIdQueryOptions = (id: number | string) =>
