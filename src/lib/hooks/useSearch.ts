@@ -77,7 +77,7 @@ export default function useSearch() {
   });
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchResults = fuse.search(e.target.value);
+    const searchResults = fuse.search(e.target.value).slice(0, 10);
     setResults(searchResults);
   };
 
