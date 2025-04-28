@@ -1,12 +1,11 @@
+import { SearchDataType } from "@/lib/types/searchTypes";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router";
-
-type InfoLinkVariants = "monster" | "room" | "vendor" | "npc" | "resource";
 
 type InfoLinkProps = {
   children: React.ReactNode;
   to: string;
-  variant: InfoLinkVariants;
+  variant: SearchDataType;
   className?: string;
 };
 

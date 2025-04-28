@@ -9,6 +9,7 @@ import { roomsQueryOptions } from "@/queries/rooms/roomsQueryOptions";
 import { weaponsQueryOptions } from "@/queries/weapons/weaponsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import Fuse from "fuse.js";
+import { SearchData } from "../types/searchTypes";
 
 export default function useSearch() {
   // Query relevant data
@@ -35,7 +36,7 @@ export default function useSearch() {
 
   // Handle errors with queries
   for (const query of Object.values(queries)) {
-    if (query.isError || !query.data) {
+    if (query.isError) {
       console.error(query.error);
     }
   }
@@ -52,17 +53,18 @@ export default function useSearch() {
     !queries.npcs.data ||
     !queries.quests.data
   )
-    return () => {};
+    return undefined;
 
   // Put data into object for fuse searching
   const formattedRoomsData = queries.rooms.data.map((room) => ({
     ...room,
     url: `/rooms/${room.id.toString()}`,
   }));
-  const searchData = [...formattedRoomsData];
+  const searchData: SearchData = [...formattedRoomsData];
 
   // Create a fuse instance
   const fuse = new Fuse(searchData, {
+    threshold: 0.3,
     keys: ["name"],
   });
 
