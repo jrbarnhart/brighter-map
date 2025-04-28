@@ -4,13 +4,12 @@ import { fetchRoomById, fetchRooms } from "./rooms";
 
 export const roomsKey = "rooms";
 
-export const roomsQueryOptions = () => {
+export const roomsQueryOptions = () =>
   queryOptions({
     queryKey: [roomsKey],
     staleTime: queryConfig.staleTime,
     queryFn: () => fetchRooms(),
   });
-};
 
 export const roomByIdQueryOptions = (id: number | string) =>
   queryOptions({
