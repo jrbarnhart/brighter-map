@@ -1,5 +1,6 @@
 import { SearchDataType } from "@/lib/types/searchTypes";
 import { cn } from "@/lib/utils";
+import { SetStateAction } from "react";
 import { Link } from "react-router";
 
 type InfoLinkProps = {
@@ -7,6 +8,7 @@ type InfoLinkProps = {
   to: string;
   variant: SearchDataType;
   className?: string;
+  setInfoOpen?: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export default function InfoLink({
@@ -14,6 +16,7 @@ export default function InfoLink({
   to,
   variant,
   className,
+  setInfoOpen,
 }: InfoLinkProps) {
   return (
     <Link
@@ -27,6 +30,13 @@ export default function InfoLink({
         variant === "resource" && "text-green-500", // Resource
         className // User added
       )}
+      onClick={
+        setInfoOpen
+          ? () => {
+              setInfoOpen(true);
+            }
+          : undefined
+      }
     >
       {children}
     </Link>
