@@ -2,6 +2,24 @@ import axios from "axios";
 import { axiosClient } from "../axiosClient";
 import type { paths } from "@/lib/types/apiTypes";
 
+export async function fetchResources() {
+  // console.info('Fetching resources');
+  try {
+    const resourceQuery = await axiosClient.get<
+      paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
+    >(`/items/resources`);
+
+    return resourceQuery.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.message);
+    } else {
+      console.error(error);
+      throw new Error("An unexpected error occurred while fetching resources.");
+    }
+  }
+}
+
 export async function fetchResourceById({ id }: { id: string | number }) {
   // console.info('Fetching resource by id...');
   try {
