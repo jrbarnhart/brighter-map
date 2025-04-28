@@ -4,12 +4,11 @@ import { fetchMiscItemById, fetchMiscItems } from "./miscItems";
 
 export const miscItemsKey = "misc-items";
 
-export const miscItemsQueryOptions = (enabled: boolean) =>
+export const miscItemsQueryOptions = () =>
   queryOptions({
     queryKey: [miscItemsKey],
     staleTime: queryConfig.staleTime,
     queryFn: () => fetchMiscItems(),
-    enabled,
   });
 
 export const miscItemByIdQueryOptions = (id: number | string) =>
