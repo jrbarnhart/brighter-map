@@ -1,8 +1,15 @@
 import { queryOptions } from "@tanstack/react-query";
 import queryConfig from "../queryConfig";
-import { fetchNpcById } from "./npcs";
+import { fetchNpcById, fetchNpcs } from "./npcs";
 
 export const npcsKey = "npcs";
+
+export const npcsQueryOptions = () =>
+  queryOptions({
+    queryKey: [npcsKey],
+    staleTime: queryConfig.staleTime,
+    queryFn: () => fetchNpcs(),
+  });
 
 export const npcByIdQueryOptions = (id: number | string) =>
   queryOptions({
