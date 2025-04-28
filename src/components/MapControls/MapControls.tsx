@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { type SetStateAction } from "react";
 import useSearch from "@/lib/hooks/useSearch";
+import InfoLink from "../InfoPanel/InfoLink/InfoLink";
 
 type MapControlsProps = {
   setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
@@ -32,7 +33,7 @@ export default function MapControls({
       >
         <ListFilterPlus aria-hidden />
       </Button>
-      <div>
+      <div className="relative">
         <Label
           htmlFor="search"
           aria-label="Search"
@@ -51,9 +52,16 @@ export default function MapControls({
           />
         </Label>
         {results && (
-          <div>
+          <div className="absolute pointer-events-auto grid bg-stone-900/85 px-4 py-2 max-h-40 overflow-y-auto">
             {results.map((result) => (
-              <p key={result.item.id}>{result.item.name}</p>
+              <InfoLink
+                to={result.item.url}
+                variant={result.item.type}
+                key={`${result.item.type}-${result.item.id.toString()}`}
+                setInfoOpen={setInfoOpen}
+              >
+                {result.item.name}
+              </InfoLink>
             ))}
           </div>
         )}
