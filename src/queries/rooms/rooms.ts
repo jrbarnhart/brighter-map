@@ -34,9 +34,7 @@ export async function fetchRoomById({ id }: { id: string | number }) {
       throw new Error(error.message);
     } else {
       console.error(error);
-      throw new Error(
-        "An unexpected error occurred while fetching room by id."
-      );
+      throw new Error("An unexpected error occurred while fetching rooms.");
     }
   }
 }
