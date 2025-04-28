@@ -2,7 +2,10 @@ import { BookOpen, ListFilterPlus, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
-import type { SetStateAction } from "react";
+import { useState, type SetStateAction } from "react";
+import useSearch from "@/lib/hooks/useSearch";
+import { FuseResult } from "fuse.js";
+import { SearchableItem } from "@/lib/types/searchTypes";
 
 type MapControlsProps = {
   setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
@@ -15,6 +18,18 @@ export default function MapControls({
   setInfoOpen,
   searchRef,
 }: MapControlsProps) {
+  const fuse = useSearch();
+
+  const [results, setResults] = useState<FuseResult<SearchableItem>[] | null>(
+    null
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!fuse) return;
+    const searchResults = fuse.search(e.target.value);
+    setResults(searchResults);
+  };
+
   return (
     <div
       id="map-controls-container"
@@ -29,20 +44,32 @@ export default function MapControls({
       >
         <ListFilterPlus aria-hidden />
       </Button>
-      <Label
-        htmlFor="search"
-        aria-label="Search"
-        className="bg-background/90 border border-border rounded-lg pl-2 pointer-events-auto"
-      >
-        <Search aria-hidden />
-        <Input
-          ref={searchRef}
-          id="search"
-          type="search"
-          placeholder="Search..."
-          className="md:max-w-80 border-l border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none"
-        />
-      </Label>
+      <div>
+        <Label
+          htmlFor="search"
+          aria-label="Search"
+          className="bg-background/90 border border-border rounded-lg pl-2 pointer-events-auto"
+        >
+          <Search aria-hidden />
+          <Input
+            ref={searchRef}
+            id="search"
+            type="search"
+            placeholder="Search..."
+            onChange={(e) => {
+              handleSearchChange(e);
+            }}
+            className="md:max-w-80 border-l border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none"
+          />
+        </Label>
+        {results && (
+          <div>
+            {results.map((result) => (
+              <p key={result.item.id}>{result.item.name}</p>
+            ))}
+          </div>
+        )}
+      </div>
       <Button
         aria-label="Open Info Panel"
         className="cursor-pointer bg-green-800 hover:bg-green-600 md:h-14 md:w-14 pointer-events-auto"
