@@ -6,6 +6,7 @@ import InfoPanelIndex from "@/components/InfoPanel/InfoPanelIndex";
 import VendorDetails from "@/routes/VendorDetails/VendorDetails";
 import NpcDetails from "@/routes/NpcDetails/NpcDetails";
 import ResourceDetails from "./ResourceDetails/ResourceDetails";
+import QuestDetails from "./QuestDetails/QuestDetails";
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
           <Route path="/vendors/:id" element={<VendorDetails />} />
           <Route path="/npcs/:id" element={<NpcDetails />} />
           <Route path="/resources/:id" element={<ResourceDetails />} />
+          <Route path="/quests/:id" element={<QuestDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
