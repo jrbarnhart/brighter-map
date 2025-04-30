@@ -22,6 +22,8 @@ function Controls() {
       screenSpacePanning={true}
       panSpeed={1.5}
       zoomSpeed={1.5}
+      minDistance={20}
+      maxDistance={200}
       enableRotate={false}
       onChange={() => {
         invalidate();
