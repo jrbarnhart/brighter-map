@@ -112,7 +112,7 @@ export default function RoomDetails() {
           ))}
         </div>
       )}
-      {/* Quest Steps */}
+      {/* Quest Steps TODO: Eventually use .quest.name to reduce this to quest info links */}
       {data.questSteps.length > 0 && (
         <div>
           <InfoLabel>Quest Steps:</InfoLabel>
