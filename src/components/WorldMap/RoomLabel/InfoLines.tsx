@@ -5,6 +5,7 @@ import { Text } from "@react-three/drei";
 import { useMemo } from "react";
 import type { CombinedRoomData } from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
+import { INFO_ICONS } from "@/lib/constants/INFO_ICONS";
 
 const INFO_COLORS = {
   // Should match variables in styles.css for consistency
@@ -36,10 +37,10 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
   const BG_Z = -0.01;
   const TEXT_Z = 0.01;
   const FONT_HEIGHT = 0.5;
-  const AVERAGE_FONT_WIDTH = 0.6;
+  const AVERAGE_FONT_WIDTH = 0.625;
   const LINE_SPACING = 0.4;
   const PADDING_Y = 0.3;
-  const PADDING_X = 0.2;
+  const PADDING_X = 0.3;
   const LINE_OFFSET_MOD = -0.01;
 
   // Room data properties
@@ -47,27 +48,49 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
 
   // Construct label info lines
   const infoLines = useMemo(() => {
-    const lines: Array<{ text: string; type: keyof typeof INFO_COLORS }> = [];
+    const lines: Array<{
+      icon: string;
+      text: string;
+      type: keyof typeof INFO_COLORS;
+    }> = [];
 
     if (npcs.length && showVendors) {
       for (const npc of npcs) {
         if (npc.vendor?.name) {
-          lines.push({ text: `💰${npc.vendor.name}`, type: "vendor" });
+          lines.push({
+            icon: INFO_ICONS.vendor,
+            text: npc.vendor.name,
+            type: "vendor",
+          });
         }
       }
     }
     if (monsters.length && showMonsters)
       monsters.forEach((m) =>
-        lines.push({ text: `🧟${m.name}`, type: "monster" })
+        lines.push({ icon: INFO_ICONS.monster, text: m.name, type: "monster" })
       );
     if (resources.length && showResources)
       resources.forEach((r) =>
-        lines.push({ text: `🪵${r.name}`, type: "resource" })
+        lines.push({
+          icon: INFO_ICONS.resource,
+          text: r.name,
+          type: "resource",
+        })
       );
-    if (portal && showPortal) lines.push({ text: "🌐Portal", type: "portal" });
-    if (rift && showStorage) lines.push({ text: "🌀Storage", type: "storage" });
+    if (portal && showPortal)
+      lines.push({ icon: INFO_ICONS.portal, text: "Portal", type: "portal" });
+    if (rift && showStorage)
+      lines.push({
+        icon: INFO_ICONS.storage,
+        text: "Storage",
+        type: "storage",
+      });
     if (obelisk && showObelisk)
-      lines.push({ text: "🏛️Obelisk", type: "obelisk" });
+      lines.push({
+        icon: INFO_ICONS.obelisk,
+        text: "Obelisk",
+        type: "obelisk",
+      });
 
     return lines;
   }, [
@@ -134,7 +157,7 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
       {/* Info lines */}
       {infoLines.map((line, index) => (
         <Text
-          key={`${line.text}-${index.toString()}`}
+          key={`${line.type}-${index.toString()}`}
           position={[
             -bgDimensions.width / 2 + PADDING_X,
             OFFSET_Y - index * (FONT_HEIGHT + LINE_SPACING),
@@ -146,7 +169,7 @@ export default function InfoLines({ roomData, filtersState }: InfoLinesProps) {
           anchorX="left"
           anchorY="top"
         >
-          {line.text}
+          {`${line.icon}${line.text}`}
         </Text>
       ))}
     </>
