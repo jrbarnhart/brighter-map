@@ -23,7 +23,7 @@ function Controls() {
       panSpeed={1.5}
       zoomSpeed={1.5}
       minDistance={20}
-      maxDistance={200}
+      maxDistance={180}
       enableRotate={false}
       onChange={() => {
         invalidate();
