@@ -170,11 +170,11 @@ export default function useSearch() {
       if (!fuse) return;
       const value = e.target.value;
       setQuery(value);
-      const searchResults = fuse.search(e.target.value).slice(0, 10);
+      const searchResults = fuse.search(value).slice(0, 10);
       setResults(searchResults);
     },
     [fuse]
   );
 
-  return { results, searchHandler, query };
+  return { results, searchHandler, query, setQuery };
 }
