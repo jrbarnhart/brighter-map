@@ -49,10 +49,11 @@ export default function QuestDetails() {
             .map((step) => (
               <div
                 key={`step-${step.id.toString()}`}
-                className="flex gap-3 items-center"
+                className="grid grid-cols-[min-content_1fr] gap-3"
               >
                 <Checkbox
                   id={`step-${step.index.toString()}-id:${step.id.toString()}`}
+                  className="mt-1"
                 />
                 <Label
                   htmlFor={`step-${step.index.toString()}-id:${step.id.toString()}`}
