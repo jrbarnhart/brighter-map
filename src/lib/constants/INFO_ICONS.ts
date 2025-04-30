@@ -1,4 +1,10 @@
-export const INFO_ICONS = {
+import { SearchDataType } from "../types/searchTypes";
+
+export const INFO_ICONS: Record<SearchDataType, string> & {
+  portal: string;
+  storage: string;
+  obelisk: string;
+} = {
   monster: "🧟",
   vendor: "💰",
   resource: "🪵",
@@ -11,6 +17,5 @@ export const INFO_ICONS = {
   weapon: "⚔️",
   armor: "🛡️",
   miscItem: "📦",
+  room: "🧭",
 } as const;
-
-export type InfoIconsType = keyof typeof INFO_ICONS;
