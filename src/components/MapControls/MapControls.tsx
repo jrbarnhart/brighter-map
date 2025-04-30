@@ -1,10 +1,10 @@
 import { BookOpen, ListFilterPlus, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Label } from "../ui/label";
 import { type SetStateAction } from "react";
 import useSearch from "@/lib/hooks/useSearch";
 import InfoLink from "../InfoPanel/InfoLink/InfoLink";
+import { INFO_ICONS } from "@/lib/constants/INFO_ICONS";
 
 type MapControlsProps = {
   setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
@@ -17,7 +17,7 @@ export default function MapControls({
   setInfoOpen,
   searchRef,
 }: MapControlsProps) {
-  const { results, searchHandler } = useSearch();
+  const { query, results, searchHandler } = useSearch();
 
   return (
     <div
@@ -34,12 +34,10 @@ export default function MapControls({
         <ListFilterPlus aria-hidden />
       </Button>
       <div className="relative">
-        <Label
-          htmlFor="search"
-          aria-label="Search"
-          className="bg-background/90 border border-border rounded-lg pl-2 pointer-events-auto"
-        >
-          <Search aria-hidden />
+        <div className="flex items-center bg-background/90 border border-border rounded-lg overflow-hidden pointer-events-auto focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1">
+          <div className="pl-3 text-muted-foreground">
+            <Search aria-hidden />
+          </div>
           <Input
             ref={searchRef}
             id="search"
@@ -48,21 +46,33 @@ export default function MapControls({
             onChange={(e) => {
               searchHandler(e);
             }}
-            className="md:max-w-80 border-l border-t-0 border-r-0 border-b-0 rounded-tl-none rounded-bl-none"
+            className="flex-1 bg-transparent border-0 focus-visible:outline-none focus-visible:ring-0 placeholder:text-muted-foreground"
           />
-        </Label>
-        {results && results.length > 0 && (
-          <div className="absolute pointer-events-auto grid bg-stone-900/85 px-4 py-2 max-h-40 overflow-y-auto">
+        </div>
+
+        {query.length > 0 && results && results.length > 0 && (
+          <div className="absolute z-50 mt-1 w-full rounded-md shadow-lg ring-1 ring-border bg-stone-900/80 backdrop-blur-md overflow-y-auto max-h-52 border border-muted pointer-events-auto">
             {results.map((result) => (
-              <InfoLink
-                to={result.item.url}
-                variant={result.item.type}
+              <div
                 key={`${result.item.type}-${result.item.id.toString()}`}
-                setInfoOpen={setInfoOpen}
+                className="flex items-center gap-2 px-3 py-1.5 hover:bg-stone-700 cursor-pointer transition"
               >
-                {result.item.name}
-              </InfoLink>
+                <span>{INFO_ICONS[result.item.type]}</span>
+                <InfoLink
+                  to={result.item.url}
+                  variant={result.item.type}
+                  setInfoOpen={setInfoOpen}
+                >
+                  {result.item.name}
+                </InfoLink>
+              </div>
             ))}
+          </div>
+        )}
+
+        {query.length > 0 && results && results.length === 0 && (
+          <div className="absolute z-50 mt-1 w-full rounded-md bg-background/95 px-3 py-2 text-muted-foreground text-sm border border-muted pointer-events-auto">
+            No results found.
           </div>
         )}
       </div>
