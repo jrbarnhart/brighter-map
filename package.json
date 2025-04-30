@@ -12,6 +12,7 @@
     "get-api-types": "pnpx openapi-typescript https://brshapi.com/api-json -o ./src/lib/types/apiTypes.d.ts"
   },
   "dependencies": {
+    "@radix-ui/react-checkbox": "^1.2.3",
     "@radix-ui/react-label": "^2.1.3",
     "@radix-ui/react-slot": "^1.2.0",
     "@react-three/drei": "^10.0.6",
