@@ -41,10 +41,16 @@ export default function WorldMap({
   const navigate = useNavigate();
 
   const [blockEvents, setBlockEvents] = useState(false);
+  const clickStartRoomRef = useRef<string | null>(null);
   const clickStartPositionRef = useRef<{ x: number; y: number } | null>(null);
 
-  const handleRoomClick = (roomId: string, event: ThreeEvent<MouseEvent>) => {
-    // If this wasn't a simple click (was a drag), do nothing
+  const handleRoomClick = ({
+    roomId,
+    event,
+  }: {
+    roomId: string;
+    event: ThreeEvent<MouseEvent>;
+  }) => {
     if (clickStartPositionRef.current) {
       const dx = Math.abs(
         event.nativeEvent.clientX - clickStartPositionRef.current.x
@@ -53,12 +59,20 @@ export default function WorldMap({
         event.nativeEvent.clientY - clickStartPositionRef.current.y
       );
 
-      // If moved more than threshold in world units, consider it a drag
       if (dx > 5 || dy > 5) {
+        clickStartPositionRef.current = null;
+        clickStartRoomRef.current = null;
         return;
       }
-      clickStartPositionRef.current = null;
     }
+
+    if (clickStartRoomRef.current !== roomId) {
+      clickStartRoomRef.current = null;
+      return;
+    }
+
+    clickStartPositionRef.current = null;
+    clickStartRoomRef.current = null;
 
     setBlockEvents(true);
     setInfoOpen(true);
@@ -69,7 +83,15 @@ export default function WorldMap({
     }, 300);
   };
 
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+  const handlePointerDown = ({
+    roomId,
+    event,
+  }: {
+    roomId: string;
+    event: ThreeEvent<PointerEvent>;
+  }) => {
+    // Store room id
+    clickStartRoomRef.current = roomId;
     // Store the screen coordinates
     clickStartPositionRef.current = {
       x: event.nativeEvent.clientX,
@@ -90,9 +112,11 @@ export default function WorldMap({
           <group
             key={`${roomData.name}-${roomData.id.toString()}`}
             onPointerUp={(event) => {
-              handleRoomClick(roomData.id.toString(), event);
+              handleRoomClick({ event, roomId: roomData.id.toString() });
             }}
-            onPointerDown={handlePointerDown}
+            onPointerDown={(event) => {
+              handlePointerDown({ event, roomId: roomData.id.toString() });
+            }}
           >
             <RoomShape roomData={roomData} />
             <RoomLabel roomData={roomData} filtersState={filtersState} />
