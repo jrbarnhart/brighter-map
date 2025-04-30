@@ -31,27 +31,27 @@ export default function WeaponDetails() {
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
-      {/* Faction */}(
+      {/* Faction */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>Faction:</InfoLabel>
         <p>{data.faction}</p>
       </div>
-      {/* Element */}(
+      {/* Element */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>Element:</InfoLabel>
         <p>{data.element}</p>
       </div>
-      {/* Ranged */}(
+      {/* Ranged */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>Ranged: {data.isRanged ? "✅ Yes" : "❌ No"}</InfoLabel>
       </div>
-      {/* Two Handed */}(
+      {/* Two Handed */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>
           Two Handed: {data.isTwoHanded ? "✅ Yes" : "❌ No"}
         </InfoLabel>
       </div>
-      ){/* Variants */}
+      {/* Variants */}
       <div>
         <InfoLabel>Variants:</InfoLabel>
         {data.variants.map((v) => (
