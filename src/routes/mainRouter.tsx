@@ -9,6 +9,7 @@ import ResourceDetails from "./ResourceDetails/ResourceDetails";
 import QuestDetails from "./QuestDetails/QuestDetails";
 import MiscItemDetails from "./MiscItemDetails/MiscItemDetails";
 import ConsumableDetails from "./ConsumableDetails/ConsumableDetails";
+import WeaponDetails from "./WeaponDetails/WeaponDetails";
 
 export default function Router() {
   return (
@@ -18,11 +19,12 @@ export default function Router() {
           <Route index element={<InfoPanelIndex />} />
           <Route path="/misc/:id" element={<MiscItemDetails />} />
           <Route path="/consumables/:id" element={<ConsumableDetails />} />
+          <Route path="/resources/:id" element={<ResourceDetails />} />
+          <Route path="/weapons/:id" element={<WeaponDetails />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/monsters/:id" element={<MonsterDetails />} />
           <Route path="/vendors/:id" element={<VendorDetails />} />
           <Route path="/npcs/:id" element={<NpcDetails />} />
-          <Route path="/resources/:id" element={<ResourceDetails />} />
           <Route path="/quests/:id" element={<QuestDetails />} />
         </Route>
       </Routes>
