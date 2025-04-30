@@ -10,6 +10,7 @@ import QuestDetails from "./QuestDetails/QuestDetails";
 import MiscItemDetails from "./MiscItemDetails/MiscItemDetails";
 import ConsumableDetails from "./ConsumableDetails/ConsumableDetails";
 import WeaponDetails from "./WeaponDetails/WeaponDetails";
+import ArmorDetails from "./ArmorDetails/ArmorDetails";
 
 export default function Router() {
   return (
@@ -21,6 +22,7 @@ export default function Router() {
           <Route path="/consumables/:id" element={<ConsumableDetails />} />
           <Route path="/resources/:id" element={<ResourceDetails />} />
           <Route path="/weapons/:id" element={<WeaponDetails />} />
+          <Route path="/armors/:id" element={<ArmorDetails />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/monsters/:id" element={<MonsterDetails />} />
           <Route path="/vendors/:id" element={<VendorDetails />} />
