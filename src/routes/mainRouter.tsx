@@ -7,6 +7,7 @@ import VendorDetails from "@/routes/VendorDetails/VendorDetails";
 import NpcDetails from "@/routes/NpcDetails/NpcDetails";
 import ResourceDetails from "./ResourceDetails/ResourceDetails";
 import QuestDetails from "./QuestDetails/QuestDetails";
+import MiscItemDetails from "./MiscItemDetails/MiscItemDetails";
 
 export default function Router() {
   return (
@@ -14,8 +15,7 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<RootRoute />}>
           <Route index element={<InfoPanelIndex />} />
-          <Route path="/monsters" element={<div>Monster info</div>} />
-          <Route path="/resources" element={<div>Resource info</div>} />
+          <Route path="/misc/:id" element={<MiscItemDetails />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/monsters/:id" element={<MonsterDetails />} />
           <Route path="/vendors/:id" element={<VendorDetails />} />
