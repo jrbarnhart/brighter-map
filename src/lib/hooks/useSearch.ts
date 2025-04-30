@@ -16,6 +16,7 @@ export default function useSearch() {
   const [results, setResults] = useState<FuseResult<SearchableItem>[] | null>(
     null
   );
+  const [query, setQuery] = useState("");
 
   // Query relevant data
   const queries = {
@@ -167,11 +168,13 @@ export default function useSearch() {
   const searchHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!fuse) return;
+      const value = e.target.value;
+      setQuery(value);
       const searchResults = fuse.search(e.target.value).slice(0, 10);
       setResults(searchResults);
     },
     [fuse]
   );
 
-  return { results, searchHandler };
+  return { results, searchHandler, query };
 }
