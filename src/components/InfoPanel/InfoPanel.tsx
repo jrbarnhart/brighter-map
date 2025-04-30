@@ -34,6 +34,7 @@ export default function InfoPanel({
           to={"/"}
           aria-label="Home"
           className="flex items-center gap-1 cursor-pointer text-white py-2 px-3 w-12 h-12 rounded-md bg-gray-700 hover:bg-gray-500"
+          inert={!open ? true : undefined}
         >
           <Home />
         </Link>
