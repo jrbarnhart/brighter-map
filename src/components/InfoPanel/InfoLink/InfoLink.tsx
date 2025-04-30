@@ -22,12 +22,17 @@ export default function InfoLink({
     <Link
       to={to}
       className={cn(
-        "underline font-bold text-orange-300 hover:brightness-125", // Defaults
-        variant === "room" && "", // Room
-        variant === "monster" && "text-monster", // Monster
-        variant === "vendor" && "text-teal-400", // Vendor
-        variant === "npc" && "text-stone-300", // Npc
-        variant === "resource" && "text-green-500", // Resource
+        "underline text-stone-50 font-bold hover:brightness-125", // Defaults
+        variant === "monster" && "text-red-400", // Aggressive, noticeable
+        variant === "vendor" && "text-cyan-400", // Slightly more vibrant
+        variant === "npc" && "text-lime-400", // Warm, conversational
+        variant === "resource" && "text-emerald-400", // Cleaner green
+        variant === "miscItem" && "text-slate-400", // Subtle but not invisible
+        variant === "consumable" && "text-sky-400", // Soft and friendly
+        variant === "weapon" && "text-violet-400", // More saturated
+        variant === "armor" && "text-indigo-400", // Slightly cooler than weapon
+        variant === "quest" && "text-amber-400", // Brighter and more readable
+
         className // User added
       )}
       onClick={
