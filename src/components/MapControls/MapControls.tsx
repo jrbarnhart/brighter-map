@@ -1,7 +1,7 @@
 import { BookOpen, ListFilterPlus, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { type SetStateAction } from "react";
+import { useEffect, useRef, type SetStateAction } from "react";
 import useSearch from "@/lib/hooks/useSearch";
 import InfoLink from "../InfoPanel/InfoLink/InfoLink";
 import { INFO_ICONS } from "@/lib/constants/INFO_ICONS";
@@ -17,7 +17,32 @@ export default function MapControls({
   setInfoOpen,
   searchRef,
 }: MapControlsProps) {
-  const { query, results, searchHandler } = useSearch();
+  const { query, setQuery, results, searchHandler } = useSearch();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Close search results if click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setQuery(""); // Clear the query to hide results
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setQuery]);
+
+  // Reopen search results on focus
+  const handleSearchFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 0) {
+      searchHandler(e);
+    }
+  };
 
   return (
     <div
@@ -33,7 +58,7 @@ export default function MapControls({
       >
         <ListFilterPlus aria-hidden />
       </Button>
-      <div className="relative">
+      <div className="relative" ref={searchContainerRef}>
         <div className="flex items-center bg-background/90 border border-border rounded-lg overflow-hidden pointer-events-auto focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1">
           <div className="pl-3 text-muted-foreground">
             <Search aria-hidden />
@@ -46,6 +71,7 @@ export default function MapControls({
             onChange={(e) => {
               searchHandler(e);
             }}
+            onFocus={handleSearchFocus}
             className="flex-1 bg-transparent border-0 focus-visible:outline-none focus-visible:ring-0 placeholder:text-muted-foreground"
           />
         </div>
