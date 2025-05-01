@@ -17,6 +17,7 @@ export default function InfoPanel({
   searchRef,
 }: InfoPanelProps) {
   const infoPanelContext: InfoPanelIndexContext = {
+    open,
     searchRef,
     setInfoOpen: setOpen,
   };

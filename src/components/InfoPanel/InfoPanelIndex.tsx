@@ -3,13 +3,15 @@ import { Button } from "../ui/button";
 import { SetStateAction } from "react";
 
 export type InfoPanelIndexContext = {
+  open: boolean;
   searchRef: React.RefObject<HTMLInputElement | null> | undefined;
   setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
 };
 
 export default function InfoPanelIndex() {
   const context: InfoPanelIndexContext | undefined = useOutletContext();
-  const { searchRef, setInfoOpen } = context || {
+  const { open, searchRef, setInfoOpen } = context || {
+    open: false,
     searchRef: undefined,
     setInfoOpen: undefined,
   };
@@ -30,6 +32,7 @@ export default function InfoPanelIndex() {
           variant={"link"}
           onClick={onSearchClick}
           className="p-0 pr-1.5 text-sky-400 hover:brightness-125 text-base font-bold cursor-pointer"
+          inert={!open ? true : undefined}
         >
           Search
         </Button>
