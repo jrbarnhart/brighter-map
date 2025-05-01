@@ -32,9 +32,7 @@ export default function useCombinedData({ ...props }: UseCombinedDataProps) {
           ...baseRoomData,
         };
       }
-      console.error(
-        `Base data not found for room: ${renderData.name}. Check this room in roomRenderData.ts for mismatch with api room name.`
-      );
+      console.error("Missing or mismatched room data.");
       const emptyBaseData: components["schemas"]["RoomEntity"] = {
         banks: [],
         craftingSkills: [],
