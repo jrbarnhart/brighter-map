@@ -1,8 +1,10 @@
-type RoomRenderData = Array<{
-  name: string
-  originOffset: [number, number]
-  points: Array<[number, number]>
-  fillColor: string
-  borderColor: string
-  labelOffset?: [number, number]
-}>
+type RoomRenderData = Array<RoomRenderItem>;
+
+type RoomRenderItem = {
+  name: string;
+  originOffset: [number, number];
+  points: Array<[number, number]>;
+  fillColor: string;
+  borderColor: string;
+  labelOffset?: [number, number];
+};
