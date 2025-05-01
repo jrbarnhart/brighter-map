@@ -44,7 +44,7 @@ export default function MapControls({
   const handleSearchKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement | HTMLAnchorElement>
   ) => {
-    if (e.key === "Escape" && query.length > 0) {
+    if (e.key === "Escape") {
       e.preventDefault();
       setQuery("");
       e.stopPropagation(); // Don't close other stuff
