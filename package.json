@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "get-api-types": "pnpx openapi-typescript https://brshapi.com/api-json -o ./src/lib/types/apiTypes.d.ts"
+    "get-api-types": "pnpx openapi-typescript https://brshapi.com/api-json -o ./src/lib/types/apiTypes.d.ts",
+    "validate-room-data": "tsx ./scripts/validateRoomData.ts"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.2.3",
@@ -46,6 +47,7 @@
     "eslint-plugin-react-x": "^1.48.2",
     "globals": "^16.0.0",
     "openapi-typescript": "^7.6.1",
+    "tsx": "^4.19.4",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.0"
