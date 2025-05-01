@@ -1,7 +1,7 @@
 import { BookOpen, ListFilterPlus, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useEffect, useRef, type SetStateAction } from "react";
+import { useRef, type SetStateAction } from "react";
 import useSearch from "@/lib/hooks/useSearch";
 import InfoLink from "../InfoPanel/InfoLink/InfoLink";
 import { INFO_ICONS } from "@/lib/constants/INFO_ICONS";
@@ -19,28 +19,36 @@ export default function MapControls({
 }: MapControlsProps) {
   const { query, setQuery, results, searchHandler } = useSearch();
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
 
-  // Close search results if click outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchContainerRef.current &&
-        !searchContainerRef.current.contains(event.target as Node)
-      ) {
-        setQuery(""); // Clear the query to hide results
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [setQuery]);
+  // Close search on blur of input or results
+  const handleSearchBlur = (e: React.FocusEvent<HTMLElement>) => {
+    if (resultsRef.current && !resultsRef.current.contains(e.relatedTarget)) {
+      setQuery("");
+    }
+  };
 
   // Reopen search results on focus
   const handleSearchFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.target.value.length > 0) {
       searchHandler(e);
+    }
+  };
+
+  // Prevent mousedown on search result divs
+  const handleResultMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+  };
+
+  // Close results on escape key
+  const handleSearchKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLAnchorElement>
+  ) => {
+    if (e.key === "Escape" && query.length > 0) {
+      e.preventDefault();
+      setQuery("");
+      e.stopPropagation(); // Don't close other stuff
+      e.currentTarget.blur();
     }
   };
 
@@ -72,22 +80,30 @@ export default function MapControls({
               searchHandler(e);
             }}
             onFocus={handleSearchFocus}
+            onBlur={handleSearchBlur}
+            onKeyDown={handleSearchKeyDown}
             className="flex-1 bg-transparent border-0 focus-visible:outline-none focus-visible:ring-0 placeholder:text-muted-foreground"
           />
         </div>
 
         {query.length > 0 && results && results.length > 0 && (
-          <div className="absolute z-50 mt-1 w-full rounded-md shadow-lg ring-1 ring-border bg-stone-900/80 backdrop-blur-md overflow-y-auto max-h-52 border border-muted pointer-events-auto">
+          <div
+            ref={resultsRef}
+            className="absolute z-50 mt-1 w-full rounded-md shadow-lg ring-1 ring-border bg-stone-900/80 backdrop-blur-md overflow-y-auto max-h-52 border border-muted pointer-events-auto"
+          >
             {results.map((result) => (
               <div
                 key={`${result.item.type}-${result.item.id.toString()}`}
                 className="flex items-center gap-2 px-3 py-1.5 hover:bg-stone-700 cursor-pointer transition"
+                onMouseDown={handleResultMouseDown}
               >
                 <span>{INFO_ICONS[result.item.type]}</span>
                 <InfoLink
                   to={result.item.url}
                   variant={result.item.type}
                   setInfoOpen={setInfoOpen}
+                  onBlur={handleSearchBlur}
+                  onKeyDown={handleSearchKeyDown}
                 >
                   {result.item.name}
                 </InfoLink>
