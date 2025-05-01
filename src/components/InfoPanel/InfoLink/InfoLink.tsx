@@ -1,7 +1,7 @@
 import { SearchDataType } from "@/lib/types/searchTypes";
 import { cn } from "@/lib/utils";
 import { SetStateAction } from "react";
-import { Link } from "react-router";
+import { Link, LinkProps } from "react-router";
 
 type InfoLinkProps = {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ type InfoLinkProps = {
   variant: SearchDataType;
   className?: string;
   setInfoOpen?: React.Dispatch<SetStateAction<boolean>>;
-};
+} & LinkProps;
 
 export default function InfoLink({
   children,
@@ -17,6 +17,7 @@ export default function InfoLink({
   variant,
   className,
   setInfoOpen,
+  ...rest
 }: InfoLinkProps) {
   return (
     <Link
@@ -42,6 +43,7 @@ export default function InfoLink({
             }
           : undefined
       }
+      {...rest}
     >
       {children}
     </Link>
