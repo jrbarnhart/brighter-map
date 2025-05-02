@@ -8,3 +8,9 @@ type RoomRenderItem = {
   borderColor: string;
   labelOffset?: [number, number];
 };
+
+type Position = {
+  x: number;
+  y: number;
+  z?: number;
+};
