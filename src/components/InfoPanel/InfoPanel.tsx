@@ -3,7 +3,6 @@ import { Button } from "../ui/button";
 import { type SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 import { Link, Outlet } from "react-router";
-import { InfoPanelIndexContext } from "./InfoPanelIndex";
 import { CombinedRoomData } from "@/lib/hooks/useCombinedData";
 
 type InfoPanelProps = {
@@ -13,13 +12,20 @@ type InfoPanelProps = {
   combinedRoomData: CombinedRoomData;
 };
 
+export type InfoPanelContext = {
+  open: boolean;
+  searchRef: React.RefObject<HTMLInputElement | null> | undefined;
+  setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
+  combinedRoomData: CombinedRoomData;
+};
+
 export default function InfoPanel({
   open,
   setOpen,
   searchRef,
   combinedRoomData,
 }: InfoPanelProps) {
-  const infoPanelContext: InfoPanelIndexContext = {
+  const infoPanelContext: InfoPanelContext = {
     open,
     searchRef,
     setInfoOpen: setOpen,

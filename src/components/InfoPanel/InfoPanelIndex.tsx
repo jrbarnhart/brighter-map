@@ -1,17 +1,9 @@
 import { useOutletContext } from "react-router";
 import { Button } from "../ui/button";
-import { SetStateAction } from "react";
-import { CombinedRoomData } from "@/lib/hooks/useCombinedData";
-
-export type InfoPanelIndexContext = {
-  open: boolean;
-  searchRef: React.RefObject<HTMLInputElement | null> | undefined;
-  setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
-  combinedRoomData: CombinedRoomData;
-};
+import { InfoPanelContext } from "./InfoPanel";
 
 export default function InfoPanelIndex() {
-  const context: InfoPanelIndexContext | undefined = useOutletContext();
+  const context: InfoPanelContext | undefined = useOutletContext();
   const { open, searchRef, setInfoOpen } = context || {
     open: false,
     searchRef: undefined,
