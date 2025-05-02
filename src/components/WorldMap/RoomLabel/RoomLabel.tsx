@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { calculateCentroid } from "../geometryHelpers";
+import { calculateCentroid } from "../../../lib/geometryHelpers";
 import InfoLines from "./InfoLines";
 import RoomTitle from "./RoomTitle";
 import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";

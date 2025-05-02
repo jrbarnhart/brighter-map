@@ -1,5 +1,8 @@
 import { useMemo } from "react";
-import { createLinePoints, createShapePath } from "../geometryHelpers";
+import {
+  createLinePoints,
+  createShapePath,
+} from "../../../lib/geometryHelpers";
 import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
 
 type RoomShapeProps = {
