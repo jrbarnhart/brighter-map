@@ -5,7 +5,7 @@ type MapLinkProps = {
   x: number;
   y: number;
   z?: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 
@@ -25,7 +25,7 @@ const MapLink: React.FC<MapLinkProps> = ({
 
   return (
     <span onClick={handleClick} className={cn("cursor-pointer", className)}>
-      {children}
+      🗺️{children}
     </span>
   );
 };
