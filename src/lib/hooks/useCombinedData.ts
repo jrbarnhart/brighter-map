@@ -8,6 +8,8 @@ import type { components } from "../types/apiTypes";
 export type CombinedRoomItem = RoomRenderData[number] &
   components["schemas"]["RoomEntity"];
 
+export type CombinedRoomData = Array<CombinedRoomItem>;
+
 type UseCombinedDataProps = {
   baseMapData: BaseMapData;
 };
