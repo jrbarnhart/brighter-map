@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { createLinePoints, createShapePath } from "../geometryHelpers";
-import type { CombinedRoomData } from "@/lib/hooks/useCombinedData";
+import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
 
 type RoomShapeProps = {
-  roomData: CombinedRoomData;
+  roomData: CombinedRoomItem;
 };
 
 export default function RoomShape({ ...props }: RoomShapeProps) {

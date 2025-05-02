@@ -1,14 +1,14 @@
 import { Canvas, ThreeEvent } from "@react-three/fiber";
 import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
-import { CombinedRoomData } from "@/lib/hooks/useCombinedData";
+import { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
 import { useNavigate } from "react-router";
 import { SetStateAction, useRef, useState } from "react";
 import CanvasControls from "./CanvasControls/CanvasControls";
 
 type WorldMapProps = {
-  combinedRoomData: CombinedRoomData[];
+  combinedRoomData: CombinedRoomItem[];
   filtersState: FiltersState;
   setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
 };

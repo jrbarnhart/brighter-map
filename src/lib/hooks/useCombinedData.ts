@@ -5,7 +5,7 @@ import roomRenderData from "../mapData/roomRenderData";
 import type { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import type { components } from "../types/apiTypes";
 
-export type CombinedRoomData = RoomRenderData[number] &
+export type CombinedRoomItem = RoomRenderData[number] &
   components["schemas"]["RoomEntity"];
 
 type UseCombinedDataProps = {

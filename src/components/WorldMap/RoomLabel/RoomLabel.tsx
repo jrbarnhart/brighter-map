@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { calculateCentroid } from "../geometryHelpers";
 import InfoLines from "./InfoLines";
 import RoomTitle from "./RoomTitle";
-import type { CombinedRoomData } from "@/lib/hooks/useCombinedData";
+import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 type RoomLabelProps = {
-  roomData: CombinedRoomData;
+  roomData: CombinedRoomItem;
   filtersState: FiltersState;
 };
 
