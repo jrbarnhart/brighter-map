@@ -1,5 +1,4 @@
-import { Canvas, ThreeEvent, useThree } from "@react-three/fiber";
-import { MapControls } from "@react-three/drei";
+import { Canvas, ThreeEvent } from "@react-three/fiber";
 import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
 import type { BaseMapData } from "@/queries/baseMapData/baseMapData";
@@ -7,30 +6,13 @@ import useCombinedData from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
 import { useNavigate } from "react-router";
 import { SetStateAction, useRef, useState } from "react";
+import CanvasControls from "./CanvasControls/CanvasControls";
 
 type WorldMapProps = {
   baseMapData: BaseMapData;
   filtersState: FiltersState;
   setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
 };
-
-function Controls() {
-  const { invalidate } = useThree();
-
-  return (
-    <MapControls
-      screenSpacePanning={true}
-      panSpeed={1.5}
-      zoomSpeed={1.5}
-      minDistance={20}
-      maxDistance={180}
-      enableRotate={false}
-      onChange={() => {
-        invalidate();
-      }}
-    />
-  );
-}
 
 export default function WorldMap({
   baseMapData,
@@ -107,7 +89,7 @@ export default function WorldMap({
         frameloop="demand"
       >
         <ambientLight />
-        <Controls />
+        <CanvasControls />
         {combinedRoomData.map((roomData) => (
           <group
             key={`${roomData.name}-${roomData.id.toString()}`}
