@@ -48,7 +48,12 @@ export default function MapApp({
         filtersState={filtersState}
         setInfoOpen={setInfoOpen}
       />
-      <InfoPanel open={infoOpen} setOpen={setInfoOpen} searchRef={searchRef} />
+      <InfoPanel
+        open={infoOpen}
+        setOpen={setInfoOpen}
+        searchRef={searchRef}
+        combinedRoomData={combinedRoomData}
+      />
     </div>
   );
 }
