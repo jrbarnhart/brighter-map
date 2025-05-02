@@ -1,12 +1,14 @@
+import { useMapControls } from "@/contexts/MapControls/useMapControls";
 import { SearchDataType } from "@/lib/types/searchTypes";
 import { cn } from "@/lib/utils";
 import { SetStateAction } from "react";
 import { Link, LinkProps } from "react-router";
 
 type InfoLinkProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   to: string;
   variant: SearchDataType;
+  panMap?: Position;
   className?: string;
   setInfoOpen?: React.Dispatch<SetStateAction<boolean>>;
 } & LinkProps;
@@ -15,10 +17,22 @@ export default function InfoLink({
   children,
   to,
   variant,
+  panMap,
   className,
   setInfoOpen,
   ...rest
 }: InfoLinkProps) {
+  const { setTargetPosition } = useMapControls();
+
+  const handleClick = () => {
+    if (panMap) {
+      setTargetPosition(panMap);
+    }
+    if (setInfoOpen) {
+      setInfoOpen(true);
+    }
+  };
+
   return (
     <Link
       to={to}
@@ -36,13 +50,7 @@ export default function InfoLink({
 
         className // User added
       )}
-      onClick={
-        setInfoOpen
-          ? () => {
-              setInfoOpen(true);
-            }
-          : undefined
-      }
+      onClick={handleClick}
       {...rest}
     >
       {children}
