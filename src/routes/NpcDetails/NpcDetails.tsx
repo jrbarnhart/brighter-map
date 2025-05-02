@@ -45,13 +45,13 @@ export default function NpcDetails() {
                 to={`/rooms/${room.id.toString()}`}
                 variant="room"
                 panMap={() => {
-                  const originOffset = combinedRoomData.find(
+                  const center = combinedRoomData.find(
                     (data) => data.id === room.id
-                  )?.originOffset;
-                  if (originOffset) {
+                  )?.center;
+                  if (center) {
                     return {
-                      x: originOffset[0],
-                      y: -originOffset[1],
+                      x: center[0],
+                      y: center[1],
                       z: undefined,
                     };
                   }
