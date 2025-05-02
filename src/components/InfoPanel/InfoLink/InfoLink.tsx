@@ -8,7 +8,7 @@ type InfoLinkProps = {
   children?: React.ReactNode;
   to: string;
   variant: SearchDataType;
-  panMap?: Position;
+  panMap?: Position | (() => Position | null) | null;
   className?: string;
   setInfoOpen?: React.Dispatch<SetStateAction<boolean>>;
 } & LinkProps;
@@ -25,9 +25,15 @@ export default function InfoLink({
   const { setTargetPosition } = useMapControls();
 
   const handleClick = () => {
+    // Pan the map by setting context
+    let targetPosition: Position | null = null;
     if (panMap) {
-      setTargetPosition(panMap);
+      targetPosition = typeof panMap === "function" ? panMap() : panMap;
+      if (targetPosition) {
+        setTargetPosition(targetPosition);
+      }
     }
+    // Set info panel to open
     if (setInfoOpen) {
       setInfoOpen(true);
     }
