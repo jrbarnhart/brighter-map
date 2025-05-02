@@ -1,15 +1,18 @@
 import { npcByIdQueryOptions } from "@/queries/npcs/npcsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import React from "react";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
+import { InfoPanelContext } from "@/components/InfoPanel/InfoPanel";
 
 export default function NpcDetails() {
   const { id } = useParams();
   const idNum = Number(id);
+  const context: InfoPanelContext | undefined = useOutletContext();
+  const combinedRoomData = context?.combinedRoomData || [];
 
   const { data, isLoading, error } = useQuery(npcByIdQueryOptions(idNum));
 
@@ -36,10 +39,26 @@ export default function NpcDetails() {
       {data.rooms.length > 0 && (
         <div>
           <InfoLabel>Rooms:</InfoLabel>
-          {data.rooms.map((r, index) => (
-            <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-              <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-                {r.name}
+          {data.rooms.map((room, index) => (
+            <React.Fragment key={`${room.name}-${room.id.toString()}`}>
+              <InfoLink
+                to={`/rooms/${room.id.toString()}`}
+                variant="room"
+                panMap={() => {
+                  const originOffset = combinedRoomData.find(
+                    (data) => data.id === room.id
+                  )?.originOffset;
+                  if (originOffset) {
+                    return {
+                      x: originOffset[0],
+                      y: -originOffset[1],
+                      z: undefined,
+                    };
+                  }
+                  return null;
+                }}
+              >
+                {room.name}
               </InfoLink>
               {index !== data.rooms.length - 1 && ", "}
             </React.Fragment>
@@ -50,9 +69,9 @@ export default function NpcDetails() {
       {data.questSteps.length > 0 && (
         <div>
           <InfoLabel>Quest Steps</InfoLabel>
-          {data.questSteps.map((s) => (
-            <p key={`${s.questId.toString()}-${s.id.toString()}`}>
-              {s.description} - Quest Name{" "}
+          {data.questSteps.map((step) => (
+            <p key={`${step.questId.toString()}-${step.id.toString()}`}>
+              {step.description} - Quest Name{" "}
               {/* TODO: Replace with actual quest name after API update */}
             </p>
           ))}
