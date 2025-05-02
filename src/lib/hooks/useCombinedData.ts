@@ -4,9 +4,10 @@ import { useMemo } from "react";
 import roomRenderData from "../mapData/roomRenderData";
 import type { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import type { components } from "../types/apiTypes";
+import { calculateCentroid } from "../geometryHelpers";
 
 export type CombinedRoomItem = RoomRenderData[number] &
-  components["schemas"]["RoomEntity"];
+  components["schemas"]["RoomEntity"] & { center: [number, number] };
 
 export type CombinedRoomData = Array<CombinedRoomItem>;
 
@@ -25,13 +26,23 @@ export default function useCombinedData({ ...props }: UseCombinedDataProps) {
   }
 
   // Combine base data from api and render data
-  const combinedRoomData = useMemo(() => {
+  const combinedRoomData: CombinedRoomData = useMemo(() => {
     return roomRenderData.map((renderData) => {
       const baseRoomData = baseDataMap.get(renderData.name);
       if (baseRoomData) {
+        const adjustedPoints: Array<[number, number]> = renderData.points.map(
+          ([x, y]) => [
+            x + renderData.originOffset[0],
+            (y + renderData.originOffset[1]) * -1, // Y axis increases in downward direction
+          ]
+        );
+
+        const center = calculateCentroid(adjustedPoints);
+
         return {
           ...renderData,
           ...baseRoomData,
+          center,
         };
       }
       console.error("Missing or mismatched room data.");
@@ -50,7 +61,7 @@ export default function useCombinedData({ ...props }: UseCombinedDataProps) {
         region: { id: -100, name: "ERROR" },
         regionId: -100,
       };
-      return { ...renderData, ...emptyBaseData };
+      return { ...renderData, ...emptyBaseData, center: [0, 0] };
     });
   }, [baseDataMap]);
 

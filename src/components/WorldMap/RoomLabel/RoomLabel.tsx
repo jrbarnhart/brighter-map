@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { calculateCentroid } from "../../../lib/geometryHelpers";
 import InfoLines from "./InfoLines";
 import RoomTitle from "./RoomTitle";
 import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
@@ -11,22 +10,10 @@ type RoomLabelProps = {
 };
 
 export default function RoomLabel({ roomData, filtersState }: RoomLabelProps) {
-  const { name, id, originOffset, points, labelOffset } = roomData;
+  const { name, id, originOffset, labelOffset } = roomData;
   const { showLabels } = filtersState;
 
-  // Calculate lable position
-  const adjustedPoints: Array<[number, number]> = useMemo(() => {
-    return points.map(([x, y]) => [
-      x + originOffset[0],
-      (y + originOffset[1]) * -1, // Y axis increases in downward direction
-    ]);
-  }, [points, originOffset]);
-
-  const defaultLabelPosition = useMemo(
-    () => calculateCentroid(adjustedPoints),
-    [adjustedPoints]
-  );
-
+  const defaultLabelPosition = roomData.center;
   const labelPosition: [number, number] = useMemo(
     () =>
       labelOffset
