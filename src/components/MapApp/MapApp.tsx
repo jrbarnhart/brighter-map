@@ -4,7 +4,7 @@ import InfoPanel from "../InfoPanel/InfoPanel";
 import MapControls from "../MapControls/MapControls";
 import WorldMap from "../WorldMap/WorldMap";
 import { BaseMapData } from "@/queries/baseMapData/baseMapData";
-import useCombinedData from "@/lib/hooks/useCombinedData";
+import useCombinedRoomMap from "@/lib/hooks/useCombinedData";
 
 type MapAppProps = {
   filtersOpen: boolean;
@@ -24,7 +24,7 @@ export default function MapApp({
   baseMapData,
 }: MapAppProps) {
   const searchRef = useRef<HTMLInputElement>(null);
-  const combinedRoomData = useCombinedData({ baseMapData });
+  const combinedRoomMap = useCombinedRoomMap({ baseMapData });
 
   return (
     <div
@@ -44,7 +44,7 @@ export default function MapApp({
         />
       </div>
       <WorldMap
-        combinedRoomData={combinedRoomData}
+        combinedRoomMap={combinedRoomMap}
         filtersState={filtersState}
         setInfoOpen={setInfoOpen}
       />
@@ -52,7 +52,7 @@ export default function MapApp({
         open={infoOpen}
         setOpen={setInfoOpen}
         searchRef={searchRef}
-        combinedRoomData={combinedRoomData}
+        combinedRoomMap={combinedRoomMap}
       />
     </div>
   );

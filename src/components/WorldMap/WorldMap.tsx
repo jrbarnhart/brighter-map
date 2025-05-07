@@ -1,20 +1,20 @@
 import { Canvas, ThreeEvent } from "@react-three/fiber";
 import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
-import { CombinedRoomData } from "@/lib/hooks/useCombinedData";
+import { CombinedRoomMap } from "@/lib/hooks/useCombinedData";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
 import { useNavigate } from "react-router";
 import { SetStateAction, useRef, useState } from "react";
 import CanvasControls from "./CanvasControls/CanvasControls";
 
 type WorldMapProps = {
-  combinedRoomData: CombinedRoomData;
+  combinedRoomMap: CombinedRoomMap;
   filtersState: FiltersState;
   setInfoOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export default function WorldMap({
-  combinedRoomData,
+  combinedRoomMap,
   filtersState,
   setInfoOpen,
 }: WorldMapProps) {
@@ -88,7 +88,7 @@ export default function WorldMap({
       >
         <ambientLight />
         <CanvasControls />
-        {combinedRoomData.map((roomData) => (
+        {[...combinedRoomMap.values()].map((roomData) => (
           <group
             key={`${roomData.name}-${roomData.id.toString()}`}
             onPointerUp={(event) => {

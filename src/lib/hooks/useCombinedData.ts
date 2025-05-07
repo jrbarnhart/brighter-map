@@ -9,13 +9,13 @@ import { calculateCentroid } from "../geometryHelpers";
 export type CombinedRoomItem = RoomRenderData[number] &
   components["schemas"]["RoomEntity"] & { center: [number, number] };
 
-export type CombinedRoomData = Array<CombinedRoomItem>;
+export type CombinedRoomMap = Map<number, CombinedRoomItem>;
 
-type UseCombinedDataProps = {
+type UseRoomDataMapProps = {
   baseMapData: BaseMapData;
 };
 
-export default function useCombinedData({ ...props }: UseCombinedDataProps) {
+export default function useCombinedRoomMap({ ...props }: UseRoomDataMapProps) {
   const { baseMapData } = props;
   // Create a lookup map of the base data rooms
   const baseDataMap = useMemo(() => {
@@ -26,44 +26,36 @@ export default function useCombinedData({ ...props }: UseCombinedDataProps) {
   }
 
   // Combine base data from api and render data
-  const combinedRoomData: CombinedRoomData = useMemo(() => {
-    return roomRenderData.map((renderData) => {
+  const combinedRoomMap: CombinedRoomMap = useMemo(() => {
+    const combinedRoomMap = new Map<number, CombinedRoomItem>();
+
+    for (const renderData of roomRenderData) {
+      // Get the matching base data from the API based on room name
       const baseRoomData = baseDataMap.get(renderData.name);
+
+      // If a match is found add entry to combinedRoomMap
       if (baseRoomData) {
+        // Calculate the center
         const adjustedPoints: Array<[number, number]> = renderData.points.map(
           ([x, y]) => [
             x + renderData.originOffset[0],
             (y + renderData.originOffset[1]) * -1, // Y axis increases in downward direction
           ]
         );
-
         const center = calculateCentroid(adjustedPoints);
 
-        return {
-          ...renderData,
+        const combinedRoomItem: CombinedRoomItem = {
           ...baseRoomData,
+          ...renderData,
           center,
         };
+
+        combinedRoomMap.set(combinedRoomItem.id, combinedRoomItem);
       }
-      console.error("Missing or mismatched room data.");
-      const emptyBaseData: components["schemas"]["RoomEntity"] = {
-        banks: [],
-        craftingSkills: [],
-        id: -100,
-        resources: [],
-        monsters: [],
-        name: "ERROR",
-        npcs: [],
-        obelisk: false,
-        portal: false,
-        rift: false,
-        questSteps: [],
-        region: { id: -100, name: "ERROR" },
-        regionId: -100,
-      };
-      return { ...renderData, ...emptyBaseData, center: [0, 0] };
-    });
+    }
+
+    return combinedRoomMap;
   }, [baseDataMap]);
 
-  return combinedRoomData;
+  return combinedRoomMap;
 }
