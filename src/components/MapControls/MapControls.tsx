@@ -59,7 +59,8 @@ export default function MapControls({
     >
       <Button
         aria-label="Open Filters Panel"
-        className="cursor-pointer bg-sky-800 hover:bg-sky-600 md:h-14 md:w-14 pointer-events-auto"
+        title="Open Filters Panel"
+        className="cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500 md:h-14 md:w-14 pointer-events-auto"
         onClick={() => {
           setFiltersOpen(true);
         }}
@@ -120,7 +121,8 @@ export default function MapControls({
       </div>
       <Button
         aria-label="Open Info Panel"
-        className="cursor-pointer bg-green-800 hover:bg-green-600 md:h-14 md:w-14 pointer-events-auto"
+        title="Open Info Panel"
+        className="cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500 md:h-14 md:w-14 pointer-events-auto"
         onClick={() => {
           setInfoOpen(true);
         }}

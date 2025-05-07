@@ -45,14 +45,14 @@ export default function InfoPanel({
         <Link
           to={"/"}
           aria-label="Home"
-          className="flex items-center gap-1 cursor-pointer text-white py-2 px-3 w-12 h-12 rounded-md bg-gray-700 hover:bg-gray-500"
+          className="flex items-center gap-1 cursor-pointer text-white py-2 px-3 w-12 h-12 rounded-md border border-stone-400 bg-gray-700 hover:bg-gray-500"
           inert={!open ? true : undefined}
         >
           <Home />
         </Link>
         <Button
           aria-label="Close Info Panel"
-          className="self-end w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-gray-700 hover:bg-gray-500"
+          className="self-end w-10 h-10 md:w-12 md:h-12 cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500"
           onClick={() => {
             setOpen(false);
           }}
