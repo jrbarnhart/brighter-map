@@ -1,18 +1,17 @@
 import { npcByIdQueryOptions } from "@/queries/npcs/npcsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import { useOutletContext, useParams } from "react-router";
+import { useParams } from "react-router";
 import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import React from "react";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
-import { InfoPanelContext } from "@/components/InfoPanel/InfoPanel";
 
 export default function NpcDetails() {
   const { id } = useParams();
   const idNum = Number(id);
-  const context: InfoPanelContext | undefined = useOutletContext();
-  const combinedRoomData = context?.combinedRoomData || [];
+  // const context: InfoPanelContext | undefined = useOutletContext();
+  // const combinedRoomData = context?.combinedRoomData || [];
 
   const { data, isLoading, error } = useQuery(npcByIdQueryOptions(idNum));
 
@@ -44,19 +43,19 @@ export default function NpcDetails() {
               <InfoLink
                 to={`/rooms/${room.id.toString()}`}
                 variant="room"
-                panMap={() => {
-                  const center = combinedRoomData.find(
-                    (data) => data.id === room.id
-                  )?.center;
-                  if (center) {
-                    return {
-                      x: center[0],
-                      y: center[1],
-                      z: undefined,
-                    };
-                  }
-                  return null;
-                }}
+                // panMap={() => {
+                //   const center = combinedRoomData.find(
+                //     (data) => data.id === room.id
+                //   )?.center;
+                //   if (center) {
+                //     return {
+                //       x: center[0],
+                //       y: center[1],
+                //       z: undefined,
+                //     };
+                //   }
+                //   return null;
+                // }}
               >
                 {room.name}
               </InfoLink>
