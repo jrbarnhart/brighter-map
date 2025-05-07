@@ -1,7 +1,7 @@
 import { Canvas, ThreeEvent } from "@react-three/fiber";
 import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
-import { CombinedRoomMap } from "@/lib/hooks/useCombinedData";
+import { CombinedRoomMap } from "@/lib/hooks/useCombinedMap";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
 import { useNavigate } from "react-router";
 import { SetStateAction, useRef, useState } from "react";

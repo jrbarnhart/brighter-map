@@ -3,7 +3,7 @@
 
 import { Text } from "@react-three/drei";
 import { useMemo } from "react";
-import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
+import type { CombinedRoomItem } from "@/lib/hooks/useCombinedMap";
 import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 import { INFO_ICONS } from "@/lib/constants/INFO_ICONS";
 

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import InfoLines from "./InfoLines";
 import RoomTitle from "./RoomTitle";
-import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
+import type { CombinedRoomItem } from "@/lib/hooks/useCombinedMap";
 import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 
 type RoomLabelProps = {

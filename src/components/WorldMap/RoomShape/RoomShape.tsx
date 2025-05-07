@@ -3,7 +3,7 @@ import {
   createLinePoints,
   createShapePath,
 } from "../../../lib/geometryHelpers";
-import type { CombinedRoomItem } from "@/lib/hooks/useCombinedData";
+import type { CombinedRoomItem } from "@/lib/hooks/useCombinedMap";
 
 type RoomShapeProps = {
   roomData: CombinedRoomItem;

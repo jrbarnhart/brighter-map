@@ -4,7 +4,7 @@ import InfoPanel from "../InfoPanel/InfoPanel";
 import MapControls from "../MapControls/MapControls";
 import WorldMap from "../WorldMap/WorldMap";
 import { BaseMapData } from "@/queries/baseMapData/baseMapData";
-import useCombinedRoomMap from "@/lib/hooks/useCombinedData";
+import useCombinedRoomMap from "@/lib/hooks/useCombinedMap";
 
 type MapAppProps = {
   filtersOpen: boolean;

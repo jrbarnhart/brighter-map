@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { type SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 import { Link, Outlet } from "react-router";
-import { CombinedRoomMap } from "@/lib/hooks/useCombinedData";
+import { CombinedRoomMap } from "@/lib/hooks/useCombinedMap";
 
 type InfoPanelProps = {
   open: boolean;
