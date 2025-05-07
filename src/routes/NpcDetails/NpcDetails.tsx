@@ -10,8 +10,6 @@ import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 export default function NpcDetails() {
   const { id } = useParams();
   const idNum = Number(id);
-  // const context: InfoPanelContext | undefined = useOutletContext();
-  // const combinedRoomData = context?.combinedRoomData || [];
 
   const { data, isLoading, error } = useQuery(npcByIdQueryOptions(idNum));
 
@@ -40,23 +38,7 @@ export default function NpcDetails() {
           <InfoLabel>Rooms:</InfoLabel>
           {data.rooms.map((room, index) => (
             <React.Fragment key={`${room.name}-${room.id.toString()}`}>
-              <InfoLink
-                to={`/rooms/${room.id.toString()}`}
-                variant="room"
-                // panMap={() => {
-                //   const center = combinedRoomData.find(
-                //     (data) => data.id === room.id
-                //   )?.center;
-                //   if (center) {
-                //     return {
-                //       x: center[0],
-                //       y: center[1],
-                //       z: undefined,
-                //     };
-                //   }
-                //   return null;
-                // }}
-              >
+              <InfoLink to={`/rooms/${room.id.toString()}`} variant="room">
                 {room.name}
               </InfoLink>
               {index !== data.rooms.length - 1 && ", "}
