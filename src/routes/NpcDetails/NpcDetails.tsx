@@ -4,8 +4,8 @@ import { useParams } from "react-router";
 import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
-import React from "react";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
+import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 
 export default function NpcDetails() {
   const { id } = useParams();
@@ -33,19 +33,7 @@ export default function NpcDetails() {
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>
       {/* Rooms */}
-      {data.rooms.length > 0 && (
-        <div>
-          <InfoLabel>Rooms:</InfoLabel>
-          {data.rooms.map((room, index) => (
-            <React.Fragment key={`${room.name}-${room.id.toString()}`}>
-              <InfoLink to={`/rooms/${room.id.toString()}`} variant="room">
-                {room.name}
-              </InfoLink>
-              {index !== data.rooms.length - 1 && ", "}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      <InfoRoomLinks data={data} />
       {/* Quest Steps */}
       {data.questSteps.length > 0 && (
         <div>
