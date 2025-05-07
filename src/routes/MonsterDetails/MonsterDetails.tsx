@@ -12,11 +12,11 @@ import { monsterByIdQueryOptions } from "@/queries/monsters/monstersQueryOptions
 import { useQuery } from "@tanstack/react-query";
 import { XCircle } from "lucide-react";
 import { useParams } from "react-router";
-import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import React from "react";
 import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
+import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 
 export default function MonsterDetails() {
   const { id } = useParams();
@@ -70,19 +70,7 @@ export default function MonsterDetails() {
         <p>{data.region.name}</p>
       </div>
       {/* Rooms */}
-      {data.rooms.length > 0 && (
-        <div>
-          <InfoLabel>Rooms:</InfoLabel>
-          {data.rooms.map((r, index) => (
-            <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-              <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-                {r.name}
-              </InfoLink>
-              {index < data.rooms.length - 1 && ", "}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      <InfoRoomLinks data={data} />
       {/* Elements */}
       <div className="grid grid-cols-[min-content_min-content_1fr] gap-4 items-center whitespace-nowrap">
         <InfoLabel>Attacks: </InfoLabel>

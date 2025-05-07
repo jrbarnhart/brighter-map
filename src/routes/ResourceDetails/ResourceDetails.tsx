@@ -1,8 +1,8 @@
 import { Passive } from "@/assets/gameIcons";
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
+import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 import InfoTitle from "@/components/InfoPanel/infoContents/InfoTitle";
-import InfoLink from "@/components/InfoPanel/InfoLink/InfoLink";
 import { resourceByIdQueryOptions } from "@/queries/resources/resourcesQueryOptions";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -46,19 +46,7 @@ export default function ResourceDetails() {
         <p>{data.skill.name}</p>
       </div>
       {/* Rooms */}
-      {data.rooms.length > 0 && (
-        <div>
-          <InfoLabel>Rooms:</InfoLabel>
-          {data.rooms.map((r, index) => (
-            <React.Fragment key={`${r.name}-${r.id.toString()}`}>
-              <InfoLink to={`/rooms/${r.id.toString()}`} variant="room">
-                {r.name}
-              </InfoLink>
-              {index !== data.rooms.length - 1 && ", "}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      <InfoRoomLinks data={data} />
       {/* Variants */}
       <div>
         <InfoLabel>Variants:</InfoLabel>
