@@ -20,7 +20,9 @@ export default function DirectionalControls() {
           handlePan("up");
         }}
         onMouseLeave={stopPan}
+        onMouseUp={stopPan}
         aria-label="Pan Up"
+        className="pointer-events-auto"
       >
         ↑
       </Button>
@@ -31,7 +33,9 @@ export default function DirectionalControls() {
             handlePan("left");
           }}
           onMouseLeave={stopPan}
+          onMouseUp={stopPan}
           aria-label="Pan Left"
+          className="pointer-events-auto"
         >
           ←
         </Button>
@@ -41,7 +45,9 @@ export default function DirectionalControls() {
             handlePan("right");
           }}
           onMouseLeave={stopPan}
+          onMouseUp={stopPan}
           aria-label="Pan Right"
+          className="pointer-events-auto"
         >
           →
         </Button>
@@ -52,7 +58,9 @@ export default function DirectionalControls() {
           handlePan("down");
         }}
         onMouseLeave={stopPan}
+        onMouseUp={stopPan}
         aria-label="Pan Down"
+        className="pointer-events-auto"
       >
         ↓
       </Button>
