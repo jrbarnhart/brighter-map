@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
-import { MapControlsContext } from "./MapControlsContext";
+import { MapControlsContext, PanDirections } from "./MapControlsContext";
 
 export const MapControlsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [targetPosition, setTargetPosition] = useState<Position | null>(null);
+  const [panDirection, setPanDirection] = useState<PanDirections | null>(null);
 
   const panToPosition = useCallback(
     ({ x, y, z }: { x: number; y: number; z?: number }) => {
@@ -14,8 +15,13 @@ export const MapControlsProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const contextValue = useMemo(
-    () => ({ targetPosition, setTargetPosition: panToPosition }),
-    [panToPosition, targetPosition]
+    () => ({
+      targetPosition,
+      setTargetPosition: panToPosition,
+      panDirection,
+      setPanDirection,
+    }),
+    [panDirection, panToPosition, targetPosition]
   );
 
   return (
