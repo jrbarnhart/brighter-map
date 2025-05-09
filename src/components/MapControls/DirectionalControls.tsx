@@ -1,82 +1,61 @@
-import { useThree } from "@react-three/fiber";
 import { useMapControls } from "@/contexts/MapControls/useMapControls";
+import { Button } from "../ui/button";
 
 export default function DirectionalControls() {
-  const { camera, invalidate } = useThree();
-  const { targetPosition, setTargetPosition } = useMapControls(); // Assuming your context has a setter
-
-  // Pan distance for each button press
-  const panStep = 10;
+  const { setPanDirection } = useMapControls(); // Assuming your context has a setter
 
   const handlePan = (direction: "up" | "down" | "left" | "right") => {
-    // Get current position
-    const currentX = targetPosition ? targetPosition.x : camera.position.x;
-    const currentY = targetPosition ? targetPosition.y : camera.position.y;
+    setPanDirection(direction);
+  };
 
-    // Calculate new position based on direction
-    let newX = currentX;
-    let newY = currentY;
-
-    switch (direction) {
-      case "up":
-        newY += panStep;
-        break;
-      case "down":
-        newY -= panStep;
-        break;
-      case "left":
-        newX -= panStep;
-        break;
-      case "right":
-        newX += panStep;
-        break;
-    }
-
-    // Update the target position
-    setTargetPosition({ x: newX, y: newY });
-    invalidate();
+  const stopPan = () => {
+    setPanDirection(null);
   };
 
   return (
     <div>
-      <button
+      <Button
         type="button"
-        onClick={() => {
+        onMouseDown={() => {
           handlePan("up");
         }}
+        onMouseLeave={stopPan}
         aria-label="Pan Up"
       >
         ↑
-      </button>
+      </Button>
       <div>
-        <button
+        <Button
           type="button"
-          onClick={() => {
+          onMouseDown={() => {
             handlePan("left");
           }}
+          onMouseLeave={stopPan}
           aria-label="Pan Left"
         >
           ←
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          onClick={() => {
+          onMouseDown={() => {
             handlePan("right");
           }}
+          onMouseLeave={stopPan}
           aria-label="Pan Right"
         >
           →
-        </button>
+        </Button>
       </div>
-      <button
+      <Button
         type="button"
-        onClick={() => {
+        onMouseDown={() => {
           handlePan("down");
         }}
+        onMouseLeave={stopPan}
         aria-label="Pan Down"
       >
         ↓
-      </button>
+      </Button>
     </div>
   );
 }
