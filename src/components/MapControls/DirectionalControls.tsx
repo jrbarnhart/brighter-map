@@ -1,6 +1,54 @@
 import { useMapControls } from "@/contexts/MapControls/useMapControls";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { PanDirections } from "@/contexts/MapControls/MapControlsContext";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+
+function DirectionButton({
+  direction,
+  handlePan,
+  stopPan,
+  className,
+}: {
+  direction: PanDirections;
+  handlePan: (direction: PanDirections) => void;
+  stopPan: () => void;
+  className?: string;
+}) {
+  let icon = <ArrowUp />;
+
+  switch (direction) {
+    case "up":
+      icon = <ArrowUp />;
+      break;
+    case "down":
+      icon = <ArrowDown />;
+      break;
+    case "left":
+      icon = <ArrowLeft />;
+      break;
+    case "right":
+      icon = <ArrowRight />;
+      break;
+  }
+  return (
+    <Button
+      type="button"
+      onMouseDown={() => {
+        handlePan(direction);
+      }}
+      onMouseLeave={stopPan}
+      onMouseUp={stopPan}
+      aria-label={`Pan ${direction}`}
+      className={cn(
+        className,
+        "select-none pointer-events-auto h-10 w-10 border border-stone-400 bg-gray-700 hover:bg-gray-500"
+      )}
+    >
+      {icon}
+    </Button>
+  );
+}
 
 export default function DirectionalControls({
   ...props
@@ -17,57 +65,37 @@ export default function DirectionalControls({
   };
 
   return (
-    <div className={cn(className, "")} {...rest}>
-      <Button
-        type="button"
-        onMouseDown={() => {
-          handlePan("up");
-        }}
-        onMouseLeave={stopPan}
-        onMouseUp={stopPan}
-        aria-label="Pan Up"
-        className="pointer-events-auto"
-      >
-        ↑
-      </Button>
-      <div>
-        <Button
-          type="button"
-          onMouseDown={() => {
-            handlePan("left");
-          }}
-          onMouseLeave={stopPan}
-          onMouseUp={stopPan}
-          aria-label="Pan Left"
-          className="pointer-events-auto"
-        >
-          ←
-        </Button>
-        <Button
-          type="button"
-          onMouseDown={() => {
-            handlePan("right");
-          }}
-          onMouseLeave={stopPan}
-          onMouseUp={stopPan}
-          aria-label="Pan Right"
-          className="pointer-events-auto"
-        >
-          →
-        </Button>
-      </div>
-      <Button
-        type="button"
-        onMouseDown={() => {
-          handlePan("down");
-        }}
-        onMouseLeave={stopPan}
-        onMouseUp={stopPan}
-        aria-label="Pan Down"
-        className="pointer-events-auto"
-      >
-        ↓
-      </Button>
+    <div
+      className={cn(
+        className,
+        "grid grid-cols-[repeat(3,min-content)] grid-rows-3"
+      )}
+      {...rest}
+    >
+      <DirectionButton
+        direction="up"
+        handlePan={handlePan}
+        stopPan={stopPan}
+        className="col-start-2"
+      />
+      <DirectionButton
+        direction="left"
+        handlePan={handlePan}
+        stopPan={stopPan}
+        className="row-start-2"
+      />
+      <DirectionButton
+        direction="right"
+        handlePan={handlePan}
+        stopPan={stopPan}
+        className="row-start-2 col-start-3"
+      />
+      <DirectionButton
+        direction="down"
+        handlePan={handlePan}
+        stopPan={stopPan}
+        className="row-start-3 col-start-2"
+      />
     </div>
   );
 }
