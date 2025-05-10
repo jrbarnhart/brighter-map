@@ -12,12 +12,12 @@ type MapLinkProps = {
   showIcon?: boolean;
 };
 
-const MapLink: React.FC<MapLinkProps> = ({
+const MapLink = ({
   roomId,
   children,
   className = "",
   showIcon = true,
-}) => {
+}: MapLinkProps) => {
   const { setTargetPosition } = useMapControls();
   const context: InfoPanelContext = useOutletContext();
   const combinedRoomMap = context.combinedRoomMap;
