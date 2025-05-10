@@ -7,6 +7,7 @@ import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
+import InfoQuestSteps from "@/components/InfoPanel/infoContents/InfoQuestSteps";
 
 export default function RoomDetails() {
   const { id } = useParams();
@@ -109,19 +110,8 @@ export default function RoomDetails() {
           ))}
         </div>
       )}
-      {/* Quest Steps TODO: Eventually use .quest.name to reduce this to quest info links */}
-      {data.questSteps.length > 0 && (
-        <div>
-          <InfoLabel>Quest Steps:</InfoLabel>
-          {data.questSteps.map((step) => (
-            <p
-              key={`quest-step-${step.index.toString()}-${step.id.toString()}`}
-            >
-              {step.description}
-            </p>
-          ))}
-        </div>
-      )}
+      {/* Quest Steps */}
+      <InfoQuestSteps data={data} />
     </InfoContainer>
   );
 }

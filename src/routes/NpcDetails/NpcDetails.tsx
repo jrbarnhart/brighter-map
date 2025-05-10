@@ -7,6 +7,7 @@ import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
+import InfoQuestSteps from "@/components/InfoPanel/infoContents/InfoQuestSteps";
 
 export default function NpcDetails() {
   const { id } = useParams();
@@ -32,17 +33,7 @@ export default function NpcDetails() {
       {/* Rooms */}
       <InfoRoomLinks data={data} />
       {/* Quest Steps */}
-      {data.questSteps.length > 0 && (
-        <div>
-          <InfoLabel>Quest Steps</InfoLabel>
-          {data.questSteps.map((step) => (
-            <p key={`${step.questId.toString()}-${step.id.toString()}`}>
-              {step.description} - Quest Name{" "}
-              {/* TODO: Replace with actual quest name after API update */}
-            </p>
-          ))}
-        </div>
-      )}
+      <InfoQuestSteps data={data} />
       {/* Vendor */}
       {data.vendor && (
         <div>
