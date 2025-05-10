@@ -8,6 +8,7 @@ import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoQuestSteps from "@/components/InfoPanel/infoContents/InfoQuestSteps";
+import InfoError from "@/components/InfoPanel/infoContents/InfoError";
 
 export default function NpcDetails() {
   const { id } = useParams();
@@ -19,12 +20,12 @@ export default function NpcDetails() {
     return <InfoSkeleton />;
   }
 
-  if (error || !data) {
-    return (
-      <div>
-        <p>There was an error while fetching the data.</p>
-      </div>
-    );
+  if (error) {
+    return <InfoError error={error} />;
+  }
+
+  if (!data) {
+    return <InfoError error={new Error("Data not found.")} />;
   }
 
   return (

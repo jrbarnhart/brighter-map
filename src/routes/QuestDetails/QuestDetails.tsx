@@ -1,4 +1,5 @@
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
+import InfoError from "@/components/InfoPanel/infoContents/InfoError";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoTitle from "@/components/InfoPanel/infoContents/InfoTitle";
@@ -22,12 +23,12 @@ export default function QuestDetails() {
     return <InfoSkeleton />;
   }
 
-  if (error || !data) {
-    return (
-      <div>
-        <p>There was an error while fetching the data.</p>
-      </div>
-    );
+  if (error) {
+    return <InfoError error={error} />;
+  }
+
+  if (!data) {
+    return <InfoError error={new Error("Data not found.")} />;
   }
 
   return (

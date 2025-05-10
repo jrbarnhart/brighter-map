@@ -1,5 +1,6 @@
 import { Passive } from "@/assets/gameIcons";
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
+import InfoError from "@/components/InfoPanel/infoContents/InfoError";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
@@ -19,14 +20,13 @@ export default function ResourceDetails() {
     return <InfoSkeleton />;
   }
 
-  if (error || !data) {
-    return (
-      <div>
-        <p>There was an error while fetching the data.</p>
-      </div>
-    );
+  if (error) {
+    return <InfoError error={error} />;
   }
 
+  if (!data) {
+    return <InfoError error={new Error("Data not found.")} />;
+  }
   return (
     <InfoContainer>
       <InfoTitle>{data.name}</InfoTitle>

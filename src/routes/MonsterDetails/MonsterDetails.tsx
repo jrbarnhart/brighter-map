@@ -18,6 +18,7 @@ import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
+import InfoError from "@/components/InfoPanel/infoContents/InfoError";
 
 export default function MonsterDetails() {
   const { id } = useParams();
@@ -29,12 +30,12 @@ export default function MonsterDetails() {
     return <InfoSkeleton />;
   }
 
-  if (error || !data) {
-    return (
-      <div>
-        <p>There was an error while fetching the data.</p>
-      </div>
-    );
+  if (error) {
+    return <InfoError error={error} />;
+  }
+
+  if (!data) {
+    return <InfoError error={new Error("Data not found.")} />;
   }
 
   type IconMap = {
