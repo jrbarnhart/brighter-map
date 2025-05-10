@@ -4,11 +4,7 @@ import { InfoPanelContext } from "./InfoPanel";
 
 export default function InfoPanelIndex() {
   const context: InfoPanelContext | undefined = useOutletContext();
-  const { searchRef, setInfoOpen } = context || {
-    open: false,
-    searchRef: undefined,
-    setInfoOpen: undefined,
-  };
+  const { searchRef, setInfoOpen } = context || {};
 
   const onSearchClick = () => {
     if (context && searchRef && searchRef.current && setInfoOpen) {
