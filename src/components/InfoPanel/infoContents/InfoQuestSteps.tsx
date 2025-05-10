@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useState } from "react";
 import { Eye, EyeClosed } from "lucide-react";
+import InfoLink from "../InfoLink/InfoLink";
 
 type InfoQuestStepsProps = {
   data: {
@@ -35,15 +36,18 @@ export default function InfoQuestSteps({ data }: InfoQuestStepsProps) {
               </CollapsibleTrigger>
             </div>
             <CollapsibleContent>
-              <div className="grid gap-4">
+              <div className="grid gap-3">
                 {data.questSteps.map((step) => (
-                  <p
-                    key={`${step.questId.toString()}-${step.id.toString()}`}
-                    className="font-bold flex flex-col"
-                  >
-                    {`${step.quest.name} #${step.index.toString()}:`}
+                  <div key={`${step.questId.toString()}-${step.id.toString()}`}>
+                    <InfoLink
+                      to={`/quests/${step.questId.toString()}`}
+                      variant="quest"
+                      className="font-bold flex flex-col"
+                    >
+                      {`${step.quest.name} #${step.index.toString()}:`}
+                    </InfoLink>
                     <span className="font-normal">{step.description}</span>
-                  </p>
+                  </div>
                 ))}
               </div>
             </CollapsibleContent>
