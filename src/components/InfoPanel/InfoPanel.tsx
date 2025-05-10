@@ -44,7 +44,9 @@ export default function InfoPanel({
       className={cn(
         "flex flex-col gap-3 p-6 shrink-0 transition-transform duration-300 ease-in-out z-20 absolute top-0 bottom-0 right-0 bg-stone-900 w-full", // Mobile
         open ? "translate-x-0" : "translate-x-full", // Translate if open
-        "md:border-l md:w-96" // Desktop
+        "md:border-l md:max-w-[20rem]", // 768px
+        "lg:max-w-[32rem]", // 1024px
+        "xl:max-w-[40rem]" // 1280px
       )}
     >
       <div className="flex items-center justify-between">
