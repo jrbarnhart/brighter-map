@@ -4,12 +4,14 @@ import { type SetStateAction } from "react";
 import { cn } from "@/lib/utils";
 import { Link, Outlet } from "react-router";
 import { CombinedRoomMap } from "@/lib/hooks/useCombinedMap";
+import { ScreenSize } from "@/lib/hooks/useScreenSize";
 
 type InfoPanelProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   searchRef: React.RefObject<HTMLInputElement | null>;
   combinedRoomMap: CombinedRoomMap;
+  screenSize: ScreenSize;
 };
 
 export type InfoPanelContext = {
@@ -17,6 +19,7 @@ export type InfoPanelContext = {
   searchRef: React.RefObject<HTMLInputElement | null> | undefined;
   setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
   combinedRoomMap: CombinedRoomMap;
+  screenSize: ScreenSize;
 };
 
 export default function InfoPanel({
@@ -24,6 +27,7 @@ export default function InfoPanel({
   setOpen,
   searchRef,
   combinedRoomMap,
+  screenSize,
 }: InfoPanelProps) {
   // Context for info panel outlet details routes
   const infoPanelContext: InfoPanelContext = {
@@ -31,6 +35,7 @@ export default function InfoPanel({
     searchRef,
     setInfoOpen: setOpen,
     combinedRoomMap,
+    screenSize,
   };
 
   return (

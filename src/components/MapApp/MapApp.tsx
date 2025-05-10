@@ -6,6 +6,7 @@ import WorldMap from "../WorldMap/WorldMap";
 import { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import useCombinedRoomMap from "@/lib/hooks/useCombinedMap";
 import DirectionalControls from "../MapControls/DirectionalControls";
+import useScreenSize from "@/lib/hooks/useScreenSize";
 
 type MapAppProps = {
   filtersOpen: boolean;
@@ -26,6 +27,7 @@ export default function MapApp({
 }: MapAppProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const combinedRoomMap = useCombinedRoomMap({ baseMapData });
+  const screenSize = useScreenSize();
 
   return (
     <div
@@ -57,6 +59,7 @@ export default function MapApp({
         setOpen={setInfoOpen}
         searchRef={searchRef}
         combinedRoomMap={combinedRoomMap}
+        screenSize={screenSize}
       />
     </div>
   );
