@@ -7,8 +7,9 @@ import { Vector3, MathUtils } from "three"; // Import Vector3 and MathUtils
 export default function CanvasControls() {
   const controlsRef = useRef<React.ComponentRef<typeof MapControls>>(null);
   const { camera, invalidate } = useThree();
-  const { targetPosition } = useMapControls();
+  const { targetPosition, panDirection } = useMapControls();
 
+  // Effect responds to targetPosition changes in map controls context
   useEffect(() => {
     if (targetPosition && controlsRef.current) {
       const newPosition = new Vector3(
@@ -28,6 +29,57 @@ export default function CanvasControls() {
       invalidate();
     }
   }, [camera, invalidate, targetPosition]);
+
+  // Effect responds to panDiretion changes in map controls context
+  useEffect(() => {
+    let panInterval = null;
+
+    const handlePan = () => {
+      if (!panDirection || !controlsRef.current) return;
+
+      const panStep = 1.5;
+      const newPosition = new Vector3(
+        camera.position.x,
+        camera.position.y,
+        camera.position.z
+      );
+
+      switch (panDirection) {
+        case "up":
+          newPosition.y -= panStep;
+          break;
+        case "down":
+          newPosition.y += panStep;
+          break;
+        case "left":
+          newPosition.x += panStep;
+          break;
+        case "right":
+          newPosition.x -= panStep;
+      }
+
+      camera.position.copy(newPosition);
+      camera.rotation.set(MathUtils.degToRad(-90), 0, 0);
+      controlsRef.current.target.set(newPosition.x, newPosition.y, 0);
+      controlsRef.current.update();
+      invalidate();
+    };
+
+    // Execute immediately once if panDirection exists
+    if (panDirection) {
+      handlePan();
+
+      // Set up interval for continuous panning
+      panInterval = setInterval(handlePan, 50);
+    }
+
+    // Clean up on unmount or when panDirection changes
+    return () => {
+      if (panInterval) {
+        clearInterval(panInterval);
+      }
+    };
+  }, [camera.position, camera.rotation, invalidate, panDirection]);
 
   return (
     <MapControls
