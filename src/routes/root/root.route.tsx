@@ -1,3 +1,4 @@
+import ErrorScreen from "@/components/ErrorScreen/ErrorScreen";
 import { FiltersState } from "@/components/FiltersPanel/FiltersPanel";
 import MapApp from "@/components/MapApp/MapApp";
 import SplashScreen from "@/components/SplashScreen/SplashScreen";
@@ -9,7 +10,7 @@ import { useState } from "react";
 
 function RootRoute() {
   // Base map data comes from loader
-  const { data, isLoading, isError } = useQuery(baseMapDataQueryOptions);
+  const { data, isLoading, error } = useQuery(baseMapDataQueryOptions);
 
   // Side panel state
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -42,8 +43,9 @@ function RootRoute() {
 
   if (isLoading) return <SplashScreen />;
 
-  // TODO: Throw an error after error boundary established with react router
-  if (isError || !data) return <p>Error!</p>;
+  if (error) return <ErrorScreen error={error} />;
+
+  if (!data) return <ErrorScreen error={new Error("Data not found.")} />;
 
   return (
     <MapApp
