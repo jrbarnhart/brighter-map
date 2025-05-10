@@ -1,11 +1,16 @@
 import { useCallback, useMemo, useState } from "react";
-import { MapControlsContext, PanDirections } from "./MapControlsContext";
+import {
+  MapControlsContext,
+  PanDirections,
+  ZoomValues,
+} from "./MapControlsContext";
 
 export const MapControlsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [targetPosition, setTargetPosition] = useState<Position | null>(null);
   const [panDirection, setPanDirection] = useState<PanDirections | null>(null);
+  const [zoom, setZoom] = useState<ZoomValues | null>(null);
 
   const panToPosition = useCallback(
     ({ x, y, z }: { x: number; y: number; z?: number }) => {
@@ -20,8 +25,10 @@ export const MapControlsProvider: React.FC<{ children: React.ReactNode }> = ({
       setTargetPosition: panToPosition,
       panDirection,
       setPanDirection,
+      zoom,
+      setZoom,
     }),
-    [panDirection, panToPosition, targetPosition]
+    [panDirection, panToPosition, targetPosition, zoom]
   );
 
   return (
