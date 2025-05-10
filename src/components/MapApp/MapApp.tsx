@@ -5,7 +5,7 @@ import MapControls from "../MapControls/MapControls";
 import WorldMap from "../WorldMap/WorldMap";
 import { BaseMapData } from "@/queries/baseMapData/baseMapData";
 import useCombinedRoomMap from "@/lib/hooks/useCombinedMap";
-import DirectionalControls from "../MapControls/DirectionalControls";
+import PanZoomControls from "../MapControls/PanZoomControls";
 import useScreenSize from "@/lib/hooks/useScreenSize";
 
 type MapAppProps = {
@@ -47,7 +47,7 @@ export default function MapApp({
         />
       </div>
       <div className="w-full h-full absolute top-0 right-0 z-10 p-8 pointer-events-none grid items-end">
-        <DirectionalControls />
+        <PanZoomControls />
       </div>
       <WorldMap
         combinedRoomMap={combinedRoomMap}

@@ -80,7 +80,7 @@ function DirectionButton({
   );
 }
 
-export default function DirectionalControls({
+export default function PanZoomControls({
   ...props
 }: Omit<React.HTMLAttributes<HTMLDivElement>, "children">) {
   const { className, ...rest } = props;
