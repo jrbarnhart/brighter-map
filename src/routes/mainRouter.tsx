@@ -15,10 +15,11 @@ import MiscItemDetails from "./MiscItemDetails/MiscItemDetails";
 import ConsumableDetails from "./ConsumableDetails/ConsumableDetails";
 import WeaponDetails from "./WeaponDetails/WeaponDetails";
 import ArmorDetails from "./ArmorDetails/ArmorDetails";
+import ErrorScreen from "@/components/ErrorScreen/ErrorScreen";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootRoute />}>
+    <Route path="/" element={<RootRoute />} errorElement={<ErrorScreen />}>
       <Route index element={<InfoPanelIndex />} />
       <Route path="/misc/:id" element={<MiscItemDetails />} />
       <Route path="/consumables/:id" element={<ConsumableDetails />} />
