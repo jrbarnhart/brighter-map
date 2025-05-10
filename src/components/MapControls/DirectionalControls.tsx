@@ -1,7 +1,11 @@
 import { useMapControls } from "@/contexts/MapControls/useMapControls";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
-export default function DirectionalControls() {
+export default function DirectionalControls({
+  ...props
+}: Omit<React.HTMLAttributes<HTMLDivElement>, "children">) {
+  const { className, ...rest } = props;
   const { setPanDirection } = useMapControls(); // Assuming your context has a setter
 
   const handlePan = (direction: "up" | "down" | "left" | "right") => {
@@ -13,7 +17,7 @@ export default function DirectionalControls() {
   };
 
   return (
-    <div>
+    <div className={cn(className, "")} {...rest}>
       <Button
         type="button"
         onMouseDown={() => {
