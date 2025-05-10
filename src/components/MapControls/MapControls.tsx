@@ -5,7 +5,6 @@ import { useRef, type SetStateAction } from "react";
 import useSearch from "@/lib/hooks/useSearch";
 import InfoLink from "../InfoPanel/InfoLink/InfoLink";
 import { INFO_ICONS } from "@/lib/constants/INFO_ICONS";
-import DirectionalControls from "./DirectionalControls";
 
 type MapControlsProps = {
   setFiltersOpen: React.Dispatch<SetStateAction<boolean>>;
@@ -56,19 +55,22 @@ export default function MapControls({
   return (
     <div
       id="map-controls-container"
-      className="w-full h-full grid grid-cols-3 grid-rows-2 pointer-events-none"
+      className="w-full grid items-center grid-cols-[min-content_1fr_min-content] pointer-events-none"
     >
       <Button
         aria-label="Open Filters Panel"
         title="Open Filters Panel"
-        className="cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500 md:h-14 md:w-14 pointer-events-auto"
+        className="cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500 h-10 md:h-14 w-10 md:w-14 pointer-events-auto"
         onClick={() => {
           setFiltersOpen(true);
         }}
       >
         <ListFilterPlus aria-hidden />
       </Button>
-      <div className="justify-self-center relative" ref={searchContainerRef}>
+      <div
+        className="justify-self-center w-full max-w-96 px-4 relative"
+        ref={searchContainerRef}
+      >
         <div className="flex items-center bg-background/90 border border-border rounded-lg overflow-hidden pointer-events-auto focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1">
           <div className="pl-3 text-muted-foreground">
             <Search aria-hidden />
@@ -123,14 +125,13 @@ export default function MapControls({
       <Button
         aria-label="Open Info Panel"
         title="Open Info Panel"
-        className="justify-self-end cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500 md:h-14 md:w-14 pointer-events-auto"
+        className="justify-self-end cursor-pointer border border-stone-400 bg-gray-700 hover:bg-gray-500 h-10 md:h-14 w-10 md:w-14 pointer-events-auto"
         onClick={() => {
           setInfoOpen(true);
         }}
       >
         <BookOpen aria-hidden />
       </Button>
-      <DirectionalControls className="self-end" />
     </div>
   );
 }
