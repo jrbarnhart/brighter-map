@@ -6,6 +6,7 @@ import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import React from "react";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 
 function InfoLinkContainer({ children }: { children: React.ReactNode }) {
   return (
@@ -22,11 +23,7 @@ export default function VendorDetails() {
   const { data, isLoading, error } = useQuery(vendorByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

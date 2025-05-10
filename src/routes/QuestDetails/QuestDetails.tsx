@@ -1,5 +1,6 @@
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoTitle from "@/components/InfoPanel/infoContents/InfoTitle";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -14,11 +15,7 @@ export default function QuestDetails() {
   const { data, isLoading, error } = useQuery(questByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

@@ -2,6 +2,7 @@ import { Passive } from "@/assets/gameIcons";
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoTitle from "@/components/InfoPanel/infoContents/InfoTitle";
 import { resourceByIdQueryOptions } from "@/queries/resources/resourcesQueryOptions";
 import { useQuery } from "@tanstack/react-query";
@@ -15,11 +16,7 @@ export default function ResourceDetails() {
   const { data, isLoading, error } = useQuery(resourceByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

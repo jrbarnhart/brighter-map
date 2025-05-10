@@ -1,5 +1,6 @@
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoTitle from "@/components/InfoPanel/infoContents/InfoTitle";
 import { armorByIdQueryOptions } from "@/queries/armors/armorsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
@@ -13,11 +14,7 @@ export default function ArmorDetails() {
   const { data, isLoading, error } = useQuery(armorByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

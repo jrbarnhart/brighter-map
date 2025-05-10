@@ -17,6 +17,7 @@ import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 
 export default function MonsterDetails() {
   const { id } = useParams();
@@ -25,11 +26,7 @@ export default function MonsterDetails() {
   const { data, isLoading, error } = useQuery(monsterByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

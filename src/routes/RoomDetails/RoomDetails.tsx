@@ -6,17 +6,14 @@ import React from "react";
 import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
 import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 
 export default function RoomDetails() {
   const { id } = useParams();
   const { data, isLoading, error } = useQuery(roomByIdQueryOptions(id || -1)); // -1 b/c all real ids are +
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading room data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

@@ -6,6 +6,7 @@ import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import InfoRoomLinks from "@/components/InfoPanel/infoContents/InfoRoomLinks";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 
 export default function NpcDetails() {
   const { id } = useParams();
@@ -14,11 +15,7 @@ export default function NpcDetails() {
   const { data, isLoading, error } = useQuery(npcByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {

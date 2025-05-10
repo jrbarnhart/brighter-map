@@ -1,5 +1,6 @@
 import InfoContainer from "@/components/InfoPanel/infoContents/InfoContainer";
 import InfoLabel from "@/components/InfoPanel/infoContents/InfoLabel";
+import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoTitle from "@/components/InfoPanel/infoContents/InfoTitle";
 import InfoLink from "@/components/InfoPanel/InfoLink/InfoLink";
 import { miscItemByIdQueryOptions } from "@/queries/miscItems/miscItemsQueryOptions";
@@ -13,11 +14,7 @@ export default function MiscItemDetails() {
   const { data, isLoading, error } = useQuery(miscItemByIdQueryOptions(idNum));
 
   if (isLoading) {
-    return (
-      <div>
-        <p>Loading data...</p>
-      </div>
-    );
+    return <InfoSkeleton />;
   }
 
   if (error || !data) {
