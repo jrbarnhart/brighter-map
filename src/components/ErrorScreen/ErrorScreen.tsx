@@ -1,15 +1,22 @@
 import { isRouteErrorResponse, useRouteError } from "react-router";
 
-export default function ErrorScreen() {
-  const error = useRouteError();
+type ErrorScreenProps = {
+  error?: Error;
+};
+
+export default function ErrorScreen({ error }: ErrorScreenProps) {
+  const routeError = useRouteError();
 
   let title = "Unknown Error";
   let message = "Something went wrong.";
 
-  if (isRouteErrorResponse(error)) {
-    title = `Error ${error.status.toString()}`;
-    message = error.statusText;
-  } else if (error instanceof Error) {
+  if (isRouteErrorResponse(routeError)) {
+    title = `Error ${routeError.status.toString()}`;
+    message = routeError.statusText;
+  } else if (routeError instanceof Error) {
+    title = "Application Error";
+    message = routeError.message;
+  } else if (error) {
     title = "Application Error";
     message = error.message;
   }
