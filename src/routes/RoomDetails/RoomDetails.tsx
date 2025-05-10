@@ -1,6 +1,6 @@
 import { roomByIdQueryOptions } from "@/queries/rooms/roomsQueryOptions";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import InfoLink from "../../components/InfoPanel/InfoLink/InfoLink";
 import React from "react";
 import InfoContainer from "../../components/InfoPanel/infoContents/InfoContainer";
@@ -8,10 +8,16 @@ import InfoTitle from "../../components/InfoPanel/infoContents/InfoTitle";
 import InfoLabel from "../../components/InfoPanel/infoContents/InfoLabel";
 import InfoSkeleton from "@/components/InfoPanel/infoContents/InfoSkeleton";
 import InfoQuestSteps from "@/components/InfoPanel/infoContents/InfoQuestSteps";
+import MapLink from "@/components/MapLink/MapLink";
+import { InfoPanelContext } from "@/components/InfoPanel/InfoPanel";
 
 export default function RoomDetails() {
   const { id } = useParams();
   const { data, isLoading, error } = useQuery(roomByIdQueryOptions(id || -1)); // -1 b/c all real ids are +
+  const context: InfoPanelContext | undefined = useOutletContext();
+  const { setInfoOpen } = context || {
+    setInfoOpen: undefined,
+  };
 
   if (isLoading) {
     return <InfoSkeleton />;
@@ -27,7 +33,10 @@ export default function RoomDetails() {
 
   return (
     <InfoContainer>
-      <InfoTitle>{data.name}</InfoTitle>
+      <div className="flex items-center gap-3">
+        <InfoTitle>{data.name}</InfoTitle>
+        <MapLink roomId={data.id} setInfoOpen={setInfoOpen} />
+      </div>
       {/* Region */}
       <div className="flex items-baseline gap-2">
         <InfoLabel>Region: </InfoLabel>
