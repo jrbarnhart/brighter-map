@@ -37,7 +37,8 @@ export default function CanvasControls() {
     const handlePan = () => {
       if (!panDirection || !controlsRef.current) return;
 
-      const panStep = 1.5;
+      const panStep = 1.8;
+
       const newPosition = new Vector3(
         camera.position.x,
         camera.position.y,
