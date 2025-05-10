@@ -35,6 +35,7 @@ export default function InfoPanel({
 
   return (
     <aside
+      inert={!open ? true : undefined}
       className={cn(
         "flex flex-col gap-3 p-6 shrink-0 transition-transform duration-300 ease-in-out z-20 absolute top-0 bottom-0 right-0 bg-stone-900 w-full", // Mobile
         open ? "translate-x-0" : "translate-x-full", // Translate if open
@@ -46,7 +47,6 @@ export default function InfoPanel({
           to={"/"}
           aria-label="Home"
           className="flex items-center gap-1 cursor-pointer text-white py-2 px-3 w-12 h-12 rounded-md border border-stone-400 bg-gray-700 hover:bg-gray-500"
-          inert={!open ? true : undefined}
         >
           <Home />
         </Link>
@@ -56,12 +56,11 @@ export default function InfoPanel({
           onClick={() => {
             setOpen(false);
           }}
-          inert={!open ? true : undefined}
         >
           <ArrowRightToLine />
         </Button>
       </div>
-      <div className="overflow-y-auto" inert={!open ? true : undefined}>
+      <div className="overflow-y-auto">
         <Outlet context={infoPanelContext} />
       </div>
     </aside>

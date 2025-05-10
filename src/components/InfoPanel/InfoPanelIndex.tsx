@@ -4,7 +4,7 @@ import { InfoPanelContext } from "./InfoPanel";
 
 export default function InfoPanelIndex() {
   const context: InfoPanelContext | undefined = useOutletContext();
-  const { open, searchRef, setInfoOpen } = context || {
+  const { searchRef, setInfoOpen } = context || {
     open: false,
     searchRef: undefined,
     setInfoOpen: undefined,
@@ -26,7 +26,6 @@ export default function InfoPanelIndex() {
           variant={"link"}
           onClick={onSearchClick}
           className="p-0 pr-1.5 text-sky-400 hover:brightness-125 text-base font-bold cursor-pointer"
-          inert={!open ? true : undefined}
         >
           Search
         </Button>
