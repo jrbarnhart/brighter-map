@@ -4,12 +4,14 @@ import { InfoPanelContext } from "../InfoPanel/InfoPanel";
 import { useOutletContext } from "react-router";
 import { Button } from "../ui/button";
 import { Map } from "lucide-react";
+import { SetStateAction } from "react";
 
 type MapLinkProps = {
   roomId: number;
   children?: React.ReactNode;
   className?: string;
   showIcon?: boolean;
+  setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
 };
 
 const MapLink = ({
@@ -17,6 +19,7 @@ const MapLink = ({
   children,
   className = "",
   showIcon = true,
+  setInfoOpen,
 }: MapLinkProps) => {
   const { setTargetPosition } = useMapControls();
   const context: InfoPanelContext = useOutletContext();
@@ -29,6 +32,9 @@ const MapLink = ({
     if (room) {
       const [x, y] = room.center;
       setTargetPosition({ x, y });
+    }
+    if (setInfoOpen) {
+      setInfoOpen(false);
     }
   };
 
