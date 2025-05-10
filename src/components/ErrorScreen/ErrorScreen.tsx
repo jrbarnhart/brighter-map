@@ -16,7 +16,7 @@ export default function ErrorScreen() {
 
   return (
     <div className="grid content-center justify-center h-svh w-svw bg-stone-800 text-stone-50">
-      <div className="flex flex-col items-center justify-center gap-10 p-10 bg-stone-700 border border-amber-300 rounded-2xl">
+      <div className="flex flex-col items-center justify-center gap-10 p-10 bg-stone-700 border border-red-400 rounded-2xl">
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="text-lg">{message}</p>
       </div>
