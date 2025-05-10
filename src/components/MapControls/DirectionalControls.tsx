@@ -42,7 +42,7 @@ function DirectionButton({
       aria-label={`Pan ${direction}`}
       className={cn(
         className,
-        "select-none pointer-events-auto h-10 w-10 border border-stone-400 bg-gray-700 hover:bg-gray-500"
+        "select-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
       )}
     >
       {icon}
