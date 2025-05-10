@@ -2,7 +2,14 @@ import { useMapControls } from "@/contexts/MapControls/useMapControls";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { PanDirections } from "@/contexts/MapControls/MapControlsContext";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  Minus,
+  Plus,
+} from "lucide-react";
 import { SetStateAction } from "react";
 
 function DirectionButton({
@@ -14,7 +21,7 @@ function DirectionButton({
   setPanDirection: React.Dispatch<SetStateAction<PanDirections | null>>;
   className?: string;
 }) {
-  const handlePan = (direction: "up" | "down" | "left" | "right") => {
+  const handlePan = (direction: PanDirections) => {
     setPanDirection(direction);
   };
 
@@ -62,6 +69,7 @@ function DirectionButton({
       onKeyUp={stopPan}
       onBlur={stopPan}
       aria-label={`Pan ${direction}`}
+      title={`Pan ${direction}`}
       className={cn(
         className,
         "select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
@@ -79,33 +87,57 @@ export default function DirectionalControls({
   const { setPanDirection } = useMapControls(); // Assuming your context has a setter
 
   return (
-    <div
-      className={cn(
-        className,
-        "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none"
-      )}
-      {...rest}
-    >
-      <DirectionButton
-        direction="up"
-        setPanDirection={setPanDirection}
-        className="col-start-2"
-      />
-      <DirectionButton
-        direction="left"
-        setPanDirection={setPanDirection}
-        className="row-start-2"
-      />
-      <DirectionButton
-        direction="right"
-        setPanDirection={setPanDirection}
-        className="row-start-2 col-start-3"
-      />
-      <DirectionButton
-        direction="down"
-        setPanDirection={setPanDirection}
-        className="row-start-3 col-start-2"
-      />
+    <div className=" flex justify-between">
+      <div
+        className={cn(
+          className,
+          "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none"
+        )}
+        {...rest}
+      >
+        <DirectionButton
+          direction="up"
+          setPanDirection={setPanDirection}
+          className="col-start-2"
+        />
+        <DirectionButton
+          direction="left"
+          setPanDirection={setPanDirection}
+          className="row-start-2"
+        />
+        <DirectionButton
+          direction="right"
+          setPanDirection={setPanDirection}
+          className="row-start-2 col-start-3"
+        />
+        <DirectionButton
+          direction="down"
+          setPanDirection={setPanDirection}
+          className="row-start-3 col-start-2"
+        />
+      </div>
+      <div
+        className={cn(
+          className,
+          "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none"
+        )}
+        {...rest}
+      >
+        <Button
+          aria-label="Zoom In"
+          title="Zoom In"
+          className="col-start-2 select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
+        >
+          <Plus />
+        </Button>
+        <Button
+          aria-label="Zoom Out"
+          title="Zoom Out"
+          className="row-start-3 col-start-2 select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
+        >
+          <Minus />
+        </Button>
+      </div>
     </div>
   );
 }
