@@ -3,18 +3,31 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { PanDirections } from "@/contexts/MapControls/MapControlsContext";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import { SetStateAction } from "react";
 
 function DirectionButton({
   direction,
-  handlePan,
-  stopPan,
+  setPanDirection,
   className,
 }: {
   direction: PanDirections;
-  handlePan: (direction: PanDirections) => void;
-  stopPan: () => void;
+  setPanDirection: React.Dispatch<SetStateAction<PanDirections | null>>;
   className?: string;
 }) {
+  const handlePan = (direction: "up" | "down" | "left" | "right") => {
+    setPanDirection(direction);
+  };
+
+  const stopPan = () => {
+    setPanDirection(null);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === " " || e.key === "Enter") {
+      setPanDirection(direction);
+    }
+  };
+
   const preventContextMenu = (e: React.TouchEvent | React.MouseEvent) => {
     e.preventDefault();
     return false;
@@ -45,6 +58,9 @@ function DirectionButton({
       }}
       onPointerLeave={stopPan}
       onPointerUp={stopPan}
+      onKeyDown={handleKeyDown}
+      onKeyUp={stopPan}
+      onBlur={stopPan}
       aria-label={`Pan ${direction}`}
       className={cn(
         className,
@@ -62,14 +78,6 @@ export default function DirectionalControls({
   const { className, ...rest } = props;
   const { setPanDirection } = useMapControls(); // Assuming your context has a setter
 
-  const handlePan = (direction: "up" | "down" | "left" | "right") => {
-    setPanDirection(direction);
-  };
-
-  const stopPan = () => {
-    setPanDirection(null);
-  };
-
   return (
     <div
       className={cn(
@@ -80,26 +88,22 @@ export default function DirectionalControls({
     >
       <DirectionButton
         direction="up"
-        handlePan={handlePan}
-        stopPan={stopPan}
+        setPanDirection={setPanDirection}
         className="col-start-2"
       />
       <DirectionButton
         direction="left"
-        handlePan={handlePan}
-        stopPan={stopPan}
+        setPanDirection={setPanDirection}
         className="row-start-2"
       />
       <DirectionButton
         direction="right"
-        handlePan={handlePan}
-        stopPan={stopPan}
+        setPanDirection={setPanDirection}
         className="row-start-2 col-start-3"
       />
       <DirectionButton
         direction="down"
-        handlePan={handlePan}
-        stopPan={stopPan}
+        setPanDirection={setPanDirection}
         className="row-start-3 col-start-2"
       />
     </div>
