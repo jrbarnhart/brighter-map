@@ -61,7 +61,7 @@ export default function InfoPanel({
           <ArrowRightToLine />
         </Button>
       </div>
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto" inert={!open ? true : undefined}>
         <Outlet context={infoPanelContext} />
       </div>
     </aside>
