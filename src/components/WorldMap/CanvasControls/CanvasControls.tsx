@@ -46,16 +46,16 @@ export default function CanvasControls() {
 
       switch (panDirection) {
         case "up":
-          newPosition.y -= panStep;
-          break;
-        case "down":
           newPosition.y += panStep;
           break;
+        case "down":
+          newPosition.y -= panStep;
+          break;
         case "left":
-          newPosition.x += panStep;
+          newPosition.x -= panStep;
           break;
         case "right":
-          newPosition.x -= panStep;
+          newPosition.x += panStep;
       }
 
       camera.position.copy(newPosition);
