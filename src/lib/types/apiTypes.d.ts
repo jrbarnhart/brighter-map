@@ -1525,11 +1525,12 @@ export interface components {
             skillId: number;
             passive: boolean;
         };
-        QuestStepBaseEntity: {
+        QuestStepBaseEntityWithQuest: {
             id: number;
             index: number;
             description: string;
             questId: number;
+            quest: components["schemas"]["QuestBaseEntity"];
             roomId: number | null;
             npcId: number | null;
         };
@@ -1547,7 +1548,7 @@ export interface components {
             monsters: components["schemas"]["MonsterBaseEntity"][];
             npcs: components["schemas"]["NpcBaseEntityWithVendor"][];
             resources: components["schemas"]["ResourceBaseEntity"][];
-            questSteps: components["schemas"]["QuestStepBaseEntity"][];
+            questSteps: components["schemas"]["QuestStepBaseEntityWithQuest"][];
         };
         UpdateRoomDto: {
             /** @description The array of types of bank in this room */
@@ -2249,7 +2250,7 @@ export interface components {
             id: number;
             name: string;
             vendor?: components["schemas"]["VendorBaseEntity"];
-            questSteps: components["schemas"]["QuestStepBaseEntity"][];
+            questSteps: components["schemas"]["QuestStepBaseEntityWithQuest"][];
             rooms: components["schemas"]["RoomBaseEntity"][];
         };
         UpdateNpcDto: {
@@ -2261,6 +2262,14 @@ export interface components {
             questId: number;
             roomId?: number | null;
             npcId?: number | null;
+        };
+        QuestStepBaseEntity: {
+            id: number;
+            index: number;
+            description: string;
+            questId: number;
+            roomId: number | null;
+            npcId: number | null;
         };
         QuestStepEntity: {
             id: number;
