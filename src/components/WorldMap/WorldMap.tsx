@@ -3,7 +3,7 @@ import RoomShape from "./RoomShape/RoomShape";
 import RoomLabel from "./RoomLabel/RoomLabel";
 import { CombinedRoomMap } from "@/lib/hooks/useCombinedMap";
 import { FiltersState } from "../FiltersPanel/FiltersPanel";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { SetStateAction, useRef, useState } from "react";
 import CanvasControls from "./CanvasControls/CanvasControls";
 
@@ -19,6 +19,7 @@ export default function WorldMap({
   setInfoOpen,
 }: WorldMapProps) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [blockEvents, setBlockEvents] = useState(false);
   const clickStartRoomRef = useRef<string | null>(null);
@@ -56,7 +57,9 @@ export default function WorldMap({
 
     setBlockEvents(true);
     setInfoOpen(true);
-    void navigate(`/rooms/${roomId}`);
+    if (location.pathname !== `/rooms/${roomId}`) {
+      void navigate(`/rooms/${roomId}`);
+    }
 
     setTimeout(() => {
       setBlockEvents(false);
