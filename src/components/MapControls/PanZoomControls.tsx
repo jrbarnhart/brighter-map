@@ -1,7 +1,10 @@
 import { useMapControls } from "@/contexts/MapControls/useMapControls";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { PanDirections } from "@/contexts/MapControls/MapControlsContext";
+import {
+  PanDirections,
+  ZoomValues,
+} from "@/contexts/MapControls/MapControlsContext";
 import {
   ArrowDown,
   ArrowLeft,
@@ -11,6 +14,58 @@ import {
   Plus,
 } from "lucide-react";
 import { SetStateAction } from "react";
+
+function ZoomButton({
+  zoom,
+  setZoom,
+  className,
+}: {
+  zoom: ZoomValues;
+  setZoom: React.Dispatch<SetStateAction<ZoomValues | null>>;
+  className?: string;
+}) {
+  const handleZoom = () => {
+    setZoom(zoom);
+  };
+
+  const stopZoom = () => {
+    setZoom(null);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === " " || e.key === "Enter") {
+      setZoom(zoom);
+    }
+  };
+
+  const preventContextMenu = (e: React.TouchEvent | React.MouseEvent) => {
+    e.preventDefault();
+    return false;
+  };
+
+  return (
+    <Button
+      aria-label={`Zoom ${zoom === "in" ? "In" : "Out"}`}
+      title={`Zoom ${zoom === "in" ? "In" : "Out"}`}
+      className={cn(
+        className,
+        "select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
+      )}
+      onContextMenu={preventContextMenu}
+      onPointerDown={(e) => {
+        e.preventDefault();
+        handleZoom();
+      }}
+      onPointerLeave={stopZoom}
+      onPointerUp={stopZoom}
+      onKeyDown={handleKeyDown}
+      onKeyUp={stopZoom}
+      onBlur={stopZoom}
+    >
+      {zoom === "in" ? <Plus /> : <Minus />}
+    </Button>
+  );
+}
 
 function DirectionButton({
   direction,
@@ -84,7 +139,7 @@ export default function PanZoomControls({
   ...props
 }: Omit<React.HTMLAttributes<HTMLDivElement>, "children">) {
   const { className, ...rest } = props;
-  const { setPanDirection } = useMapControls(); // Assuming your context has a setter
+  const { setPanDirection, setZoom } = useMapControls(); // Assuming your context has a setter
 
   return (
     <div className=" flex justify-between">
@@ -123,20 +178,12 @@ export default function PanZoomControls({
         )}
         {...rest}
       >
-        <Button
-          aria-label="Zoom In"
-          title="Zoom In"
-          className="col-start-2 select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
-        >
-          <Plus />
-        </Button>
-        <Button
-          aria-label="Zoom Out"
-          title="Zoom Out"
-          className="row-start-3 col-start-2 select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
-        >
-          <Minus />
-        </Button>
+        <ZoomButton zoom="in" setZoom={setZoom} className="col-start-2" />
+        <ZoomButton
+          zoom="out"
+          setZoom={setZoom}
+          className="row-start-3 col-start-2"
+        />
       </div>
     </div>
   );
