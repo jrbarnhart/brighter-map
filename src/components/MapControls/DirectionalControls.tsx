@@ -15,6 +15,11 @@ function DirectionButton({
   stopPan: () => void;
   className?: string;
 }) {
+  const preventContextMenu = (e: React.TouchEvent | React.MouseEvent) => {
+    e.preventDefault();
+    return false;
+  };
+
   let icon = <ArrowUp />;
 
   switch (direction) {
@@ -33,16 +38,17 @@ function DirectionButton({
   }
   return (
     <Button
-      type="button"
-      onMouseDown={() => {
+      onContextMenu={preventContextMenu}
+      onPointerDown={(e) => {
+        e.preventDefault();
         handlePan(direction);
       }}
-      onMouseLeave={stopPan}
-      onMouseUp={stopPan}
+      onPointerLeave={stopPan}
+      onPointerUp={stopPan}
       aria-label={`Pan ${direction}`}
       className={cn(
         className,
-        "select-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
+        "select-none touch-none pointer-events-auto h-10 md:h-14 w-10 md:w-14 border border-stone-400 bg-gray-700 hover:bg-gray-500"
       )}
     >
       {icon}
@@ -68,7 +74,7 @@ export default function DirectionalControls({
     <div
       className={cn(
         className,
-        "grid grid-cols-[repeat(3,min-content)] grid-rows-3"
+        "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none"
       )}
       {...rest}
     >

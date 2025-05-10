@@ -37,7 +37,7 @@ export default function MapApp({
         setOpen={setFiltersOpen}
         filtersState={filtersState}
       />
-      <div className="w-full h-full absolute top-0 right-0 z-10 p-8 pointer-events-none">
+      <div className="w-full absolute top-0 right-0 z-10 p-8 pointer-events-none">
         <MapControls
           setFiltersOpen={setFiltersOpen}
           setInfoOpen={setInfoOpen}
