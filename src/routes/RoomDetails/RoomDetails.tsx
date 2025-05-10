@@ -15,9 +15,7 @@ export default function RoomDetails() {
   const { id } = useParams();
   const { data, isLoading, error } = useQuery(roomByIdQueryOptions(id || -1)); // -1 b/c all real ids are +
   const context: InfoPanelContext | undefined = useOutletContext();
-  const { setInfoOpen } = context || {
-    setInfoOpen: undefined,
-  };
+  const { setInfoOpen, screenSize } = context || {};
 
   if (isLoading) {
     return <InfoSkeleton />;
@@ -35,7 +33,11 @@ export default function RoomDetails() {
     <InfoContainer>
       <div className="flex items-center gap-3">
         <InfoTitle>{data.name}</InfoTitle>
-        <MapLink roomId={data.id} setInfoOpen={setInfoOpen} />
+        <MapLink
+          roomId={data.id}
+          setInfoOpen={setInfoOpen}
+          closeInfo={screenSize && screenSize.width <= 768}
+        />
       </div>
       {/* Region */}
       <div className="flex items-baseline gap-2">

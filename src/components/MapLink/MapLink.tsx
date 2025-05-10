@@ -8,18 +8,20 @@ import { SetStateAction } from "react";
 
 type MapLinkProps = {
   roomId: number;
+  setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
   children?: React.ReactNode;
   className?: string;
   showIcon?: boolean;
-  setInfoOpen: React.Dispatch<SetStateAction<boolean>> | undefined;
+  closeInfo?: boolean;
 };
 
 const MapLink = ({
   roomId,
+  setInfoOpen,
   children,
   className = "",
   showIcon = true,
-  setInfoOpen,
+  closeInfo = true,
 }: MapLinkProps) => {
   const { setTargetPosition } = useMapControls();
   const context: InfoPanelContext = useOutletContext();
@@ -33,7 +35,7 @@ const MapLink = ({
       const [x, y] = room.center;
       setTargetPosition({ x, y });
     }
-    if (setInfoOpen) {
+    if (setInfoOpen && closeInfo) {
       setInfoOpen(false);
     }
   };

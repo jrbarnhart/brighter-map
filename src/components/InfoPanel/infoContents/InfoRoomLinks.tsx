@@ -10,9 +10,7 @@ type InfoRoomLinksProps = {
 
 export default function InfoRoomLinks({ data }: InfoRoomLinksProps) {
   const context: InfoPanelContext | undefined = useOutletContext();
-  const { setInfoOpen } = context || {
-    setInfoOpen: undefined,
-  };
+  const { setInfoOpen, screenSize } = context || {};
 
   return (
     <div className="grid gap-2">
@@ -25,7 +23,11 @@ export default function InfoRoomLinks({ data }: InfoRoomLinksProps) {
           <InfoLink to={`/rooms/${room.id.toString()}`} variant="room">
             {room.name}
           </InfoLink>
-          <MapLink roomId={room.id} setInfoOpen={setInfoOpen} />
+          <MapLink
+            roomId={room.id}
+            setInfoOpen={setInfoOpen}
+            closeInfo={screenSize && screenSize.width <= 768}
+          />
         </div>
       ))}
     </div>
