@@ -7,7 +7,45 @@ import { Vector3, MathUtils } from "three"; // Import Vector3 and MathUtils
 export default function CanvasControls() {
   const controlsRef = useRef<React.ComponentRef<typeof MapControls>>(null);
   const { camera, invalidate } = useThree();
-  const { targetPosition, panDirection } = useMapControls();
+  const { targetPosition, panDirection, zoom } = useMapControls();
+  const ZOOM_MIN = 20;
+  const ZOOM_MAX = 180;
+
+  // Effect responds to zoom in map controls context
+  useEffect(() => {
+    let zoomInterval: NodeJS.Timeout | null = null;
+
+    const handleZoom = () => {
+      if (!zoom || !controlsRef.current) return;
+
+      const zoomStep = 3;
+      const newPosition = camera.position.clone();
+
+      switch (zoom) {
+        case "in":
+          newPosition.z = Math.max(newPosition.z - zoomStep, ZOOM_MIN);
+          break;
+        case "out":
+          newPosition.z = Math.min(newPosition.z + zoomStep, ZOOM_MAX);
+          break;
+      }
+
+      camera.position.copy(newPosition);
+      controlsRef.current.update();
+      invalidate();
+    };
+
+    if (zoom) {
+      handleZoom();
+      zoomInterval = setInterval(handleZoom, 50);
+    }
+
+    return () => {
+      if (zoomInterval) {
+        clearInterval(zoomInterval);
+      }
+    };
+  }, [zoom, camera.position, invalidate]);
 
   // Effect responds to targetPosition changes in map controls context
   useEffect(() => {
@@ -88,8 +126,8 @@ export default function CanvasControls() {
       screenSpacePanning={true}
       panSpeed={1.5}
       zoomSpeed={1.5}
-      minDistance={20}
-      maxDistance={180}
+      minDistance={ZOOM_MIN}
+      maxDistance={ZOOM_MAX}
       enableRotate={false}
       enableZoom={true}
       onChange={() => {
