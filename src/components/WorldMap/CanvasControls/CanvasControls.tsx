@@ -49,23 +49,54 @@ export default function CanvasControls() {
 
   // Effect responds to targetPosition changes in map controls context
   useEffect(() => {
+    let animationFrameId: number | null = null;
+    const animationDuration = 500;
+    let startTime: number | null = null;
+    let startPosition: Vector3 | null = null;
+    let targetVector: Vector3 | null = null;
+    let startTarget: Vector3 | null = null;
+
+    const animatePanToTarget = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / animationDuration, 1);
+
+      if (startPosition && targetVector && startTarget && controlsRef.current) {
+        camera.position.lerpVectors(startPosition, targetVector, progress);
+        controlsRef.current.target.lerpVectors(
+          startTarget,
+          new Vector3(targetVector.x, targetVector.y, 0),
+          progress
+        );
+        controlsRef.current.update();
+        invalidate();
+      }
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animatePanToTarget);
+      } else {
+        animationFrameId = null;
+      }
+    };
+
     if (targetPosition && controlsRef.current) {
-      const newPosition = new Vector3(
+      targetVector = new Vector3(
         targetPosition.x,
         targetPosition.y,
         camera.position.z
       );
+      startPosition = camera.position.clone();
+      startTarget = controlsRef.current.target.clone();
+      startTime = null;
 
-      // Directly set the camera's position
-      camera.position.copy(newPosition);
-
-      // Ensure the camera is looking straight down (no rotation)
-      camera.rotation.set(MathUtils.degToRad(-90), 0, 0); // -90 degrees on the X-axis
-
-      controlsRef.current.target.set(targetPosition.x, targetPosition.y, 0);
-      controlsRef.current.update();
-      invalidate();
+      animationFrameId = requestAnimationFrame(animatePanToTarget);
     }
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [camera, invalidate, targetPosition]);
 
   // Effect responds to panDiretion changes in map controls context
