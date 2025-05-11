@@ -18,7 +18,7 @@ This project is built using the following key technologies:
 - **Interactive Map Exploration**: Browse the Brighter Shores game world with pan and zoom capabilities.
 - **Search Functionality**: Quickly find specific locations, NPCs, items, or other data points on the map.
 - **Filtering Options**: Filter displayed information based on various categories (e.g., quest givers, resource nodes, points of interest).
-- **Data Integration**: Fetches real-time (or near real-time) game data from the [Brighter API](https://brshapi.com).
+- **Data Integration**: Fetches game data from the [Brighter API](https://brshapi.com).
 - **Responsive Design**: Provides a seamless experience across different devices and screen sizes.
 - **2D Map Representation**: Leverages React Three Fiber for performant, component-based rendering of the map.
 
