@@ -135,10 +135,17 @@ function DirectionButton({
   );
 }
 
+type PanZoomControlsProps = Omit<
+  React.HtmlHTMLAttributes<HTMLDivElement>,
+  "children"
+> & { infoOpen: boolean; filtersOpen: boolean };
+
 export default function PanZoomControls({
-  ...props
-}: Omit<React.HTMLAttributes<HTMLDivElement>, "children">) {
-  const { className, ...rest } = props;
+  className,
+  infoOpen,
+  filtersOpen,
+  ...rest
+}: PanZoomControlsProps) {
   const { setPanDirection, setZoom } = useMapControls(); // Assuming your context has a setter
 
   return (
@@ -146,7 +153,8 @@ export default function PanZoomControls({
       <div
         className={cn(
           className,
-          "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none"
+          "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none transition-transform duration-300 ease-in-out",
+          filtersOpen && "md:translate-x-60"
         )}
         {...rest}
       >
@@ -174,7 +182,9 @@ export default function PanZoomControls({
       <div
         className={cn(
           className,
-          "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none"
+          "grid grid-cols-[repeat(3,min-content)] grid-rows-3 pointer-events-none transition-transform duration-300 ease-in-out",
+          infoOpen &&
+            "md:-translate-x-[20rem] lg:-translate-x-[32rem] xl:-translate-x-[40rem]"
         )}
         {...rest}
       >

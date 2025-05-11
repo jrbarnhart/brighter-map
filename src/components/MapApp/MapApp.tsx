@@ -47,7 +47,7 @@ export default function MapApp({
         />
       </div>
       <div className="w-full h-full absolute top-0 right-0 z-10 p-8 pointer-events-none grid items-end">
-        <PanZoomControls />
+        <PanZoomControls infoOpen={infoOpen} filtersOpen={filtersOpen} />
       </div>
       <WorldMap
         combinedRoomMap={combinedRoomMap}
