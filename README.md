@@ -60,9 +60,9 @@ To run Brighter Map locally, follow these steps:
 Once the application is running, you can:
 
 - **Pan and Zoom:** Use your mouse or touch gestures to navigate the Brighter Shores map.
-- **Search:** Enter keywords into the search bar to find specific entities on the map.
+- **Search:** Enter keywords into the search bar to find specific things on the map.
 - **Filter:** Use the provided filter options to display only the types of information you are interested in.
-- **Interact:** Click on map markers or points of interest to view detailed information fetched from the Brighter API.
+- **Interact:** Click on rooms to view detailed information fetched from the Brighter API.
 
 ## License
 
