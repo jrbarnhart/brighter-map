@@ -32,5 +32,6 @@ export const router = createBrowserRouter(
       <Route path="/npcs/:id" element={<NpcDetails />} />
       <Route path="/quests/:id" element={<QuestDetails />} />
     </Route>
-  )
+  ),
+  { basename: "/brighter-map" }
 );
