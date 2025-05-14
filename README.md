@@ -2,6 +2,8 @@
 
 **Brighter Map** is a web application that allows users to explore, search, and filter information displayed on the game map from the massively multiplayer online role-playing game (MMO) _Brighter Shores_. Built with modern web technologies, it provides an interactive and intuitive way to access game data.
 
+Try the [Live Demo](https://jrbarnhart.github.io/brighter-map/)
+
 ## Technologies Used
 
 This project is built using the following key technologies:
